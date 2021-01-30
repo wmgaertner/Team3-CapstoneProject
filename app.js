@@ -11,7 +11,7 @@ mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false); 
 mongoose.set('useCreateIndex', true); 
 mongoose.set('useUnifiedTopology', true); 
-mongoose.connect("mongodb+srv://abc:4wUVhqBxIBUswvQX@cluster0.7bifm.mongodb.net/Cluster0?retryWrites=true&w=majority"); 
+mongoose.connect("mongodb+srv://abc:test123@cluster0.7bifm.mongodb.net/Cluster0?retryWrites=true&w=majority"); 
   
 var app = express(); 
 app.set("view engine", "ejs"); 
