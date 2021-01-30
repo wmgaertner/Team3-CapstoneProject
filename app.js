@@ -11,7 +11,7 @@ mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false); 
 mongoose.set('useCreateIndex', true); 
 mongoose.set('useUnifiedTopology', true); 
-mongoose.connect("mongodb://64.98.113.213/auth_demo_app"); 
+mongoose.connect("mongodb+srv://abc:<password>@cluster0.7bifm.mongodb.net/<dbname>?retryWrites=true&w=majority"); 
   
 var app = express(); 
 app.set("view engine", "ejs"); 
