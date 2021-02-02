@@ -1,9 +1,10 @@
-var express = require("express"), 
-    mongoose = require("mongoose"), 
-    passport = require("passport"), 
-    bodyParser = require("body-parser"), 
-    LocalStrategy = require("passport-local"), 
-    passportLocalMongoose =  
+const express = require("express")
+const mongoose = require("mongoose")
+const passport = require("passport")
+const bodyParser = require("body-parser")
+const LocalStrategy = require("passport-local"), 
+
+passportLocalMongoose =  
         require("passport-local-mongoose");
         User = require("./models/user"); 
 
@@ -15,10 +16,11 @@ mongoose.connect("mongodb+srv://abc:test123@cluster0.7bifm.mongodb.net/Cluster0?
   
 var app = express(); 
 app.set("view engine", "ejs"); 
+app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true })); 
-  
+
 app.use(require("express-session")({ 
-    secret: "Rusty is a dog", 
+    secret: "session secret code", 
     resave: false, 
     saveUninitialized: false
 })); 
