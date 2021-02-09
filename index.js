@@ -54,10 +54,10 @@ app.get("/secret", isLoggedIn, function (req, res) {
 }); 
 
 //glocuselevel update to database 
-app.post("/secret", isLoggedIn, async function (req, res){
+app.post("/secret", isLoggedIn, function (req, res){
     var glocuselevel = req.body.glucoselevel
     var username = req.user.username 
-    await User.findOneAndUpdate({username:username},  
+    User.findOneAndUpdate({username:username},  
         {glucoselevel:glocuselevel}, null, function (err, docs) { 
         if (err){ 
             console.log(err) 
@@ -66,7 +66,7 @@ app.post("/secret", isLoggedIn, async function (req, res){
             console.log("Updated Docs : ", docs); 
         } 
     }); 
-
+    res.render("secret"); 
 });
 
 
