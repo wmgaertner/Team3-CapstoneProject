@@ -6,7 +6,7 @@ const LocalStrategy = require("passport-local"),
 
 passportLocalMongoose =  
         require("passport-local-mongoose");
-        User = require("./models/user"); 
+        User = require("./models/user.js"); 
 
 mongoose.set('useNewUrlParser', true); 
 mongoose.set('useFindAndModify', false); 
@@ -24,6 +24,13 @@ app.use(require("express-session")({
     resave: false, 
     saveUninitialized: false
 })); 
+
+app.get('*', function(req, res,next){
+    res.locals.user = req.user;
+    next();
+});
+
+
   
 app.use(passport.initialize()); 
 app.use(passport.session()); 
@@ -45,7 +52,24 @@ app.get("/", function (req, res) {
 app.get("/secret", isLoggedIn, function (req, res) { 
     res.render("secret"); 
 }); 
-  
+
+//glocuselevel update to database 
+app.post("/secret", isLoggedIn, async function (req, res){
+    var glocuselevel = req.body.glucoselevel
+    var username = req.user.username 
+    await User.findOneAndUpdate({username:username},  
+        {glucoselevel:glocuselevel}, null, function (err, docs) { 
+        if (err){ 
+            console.log(err) 
+        } 
+        else{ 
+            console.log("Updated Docs : ", docs); 
+        } 
+    }); 
+
+});
+
+
 // Showing register form 
 app.get("/register", function (req, res) { 
     res.render("register"); 
@@ -55,7 +79,7 @@ app.get("/register", function (req, res) {
 app.post("/register", function (req, res) { 
     var username = req.body.username 
     var password = req.body.password 
-    User.register(new User({ username: username }), 
+    User.register(new User({username: username, glucoselevel: "0"}), 
             password, function (err, user) { 
         if (err) { 
             console.log(err); 
@@ -68,6 +92,8 @@ app.post("/register", function (req, res) {
         }); 
     }); 
 }); 
+
+
   
 //Showing login form 
 app.get("/login", function (req, res) { 
@@ -92,7 +118,7 @@ function isLoggedIn(req, res, next) {
     res.redirect("/login"); 
 } 
   
-var port = process.env.PORT || 3000; 
+var port = 3000; 
 app.listen(port, function () { 
     console.log("Server Has Started!"); 
 }); 
