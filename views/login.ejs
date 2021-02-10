@@ -1,14 +1,37 @@
-<h1>login</h1> 
-  
-<form action="/login" method="POST"> 
-    <input type="text" name="username"
-        placeholder="username"> 
-    <input type="password" name="password" 
-        placeholder="password"> 
-    <button>login</button> 
-</form> 
-  
-<h1>This is home page</h1> 
-  
-<li><a href="/register">Sign up!!</a></li> 
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta
+      charset="utf-8"
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
 
+    <!-- CSS Stylesheet -->
+    <link href="/bulma/css/bulma.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div class="content is-max-desktop">
+      <h1>Login</h1>
+      <div class="container" style="width: 50%;">
+        <form action="/login" method="POST">
+          <input
+            class="input"
+            type="text"
+            name="username"
+            placeholder="username"
+          />
+          <input
+            class="input"
+            type="password"
+            name="password"
+            placeholder="password"
+          />
+          <button class="button">Login</button>
+        </form>
+      </div>
+    </div>
+
+    <li><a href="/register">Register</a></li>
+  </body>
+</html>
