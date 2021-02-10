@@ -17,7 +17,7 @@ mongoose.connect("mongodb+srv://abc:test123@cluster0.7bifm.mongodb.net/Cluster0?
 var app = express(); 
 app.set("view engine", "ejs"); 
 app.use(express.static(__dirname + '/public'));
-app.use(express.static('node_modules'))
+app.use(express.static('node_modules'));
 app.use(bodyParser.urlencoded({ extended: true })); 
 
 app.use(require("express-session")({ 
