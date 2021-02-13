@@ -8,7 +8,7 @@ var UserSchema=mongoose.Schema({
     weight: Number,
     height: Number,
     bmi: Number,
-    glucoselevel: Number,
+    glucoselevels: [Number],
     insulinlevel: Number,
     yearofdiagnosis: Number,
     diabetestype: String,
