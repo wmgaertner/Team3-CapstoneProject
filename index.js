@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const LocalStrategy = require("passport-local"),
   passportLocalMongoose = require("passport-local-mongoose");
 User = require("./models/user.js");
+timestamp = require("./public/scripts/main.js")
 
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useFindAndModify", false);
@@ -56,13 +57,26 @@ app.get("/secret", isLoggedIn, function (req, res) {
   res.render("secret");
 });
 
-//glocuselevel update to database
+//push data to the database
 app.post("/secret", isLoggedIn, function (req, res) {
   var glocuselevel = req.body.glucoselevel;
   var username = req.user.username;
+
+  // maybe a function on moogoose that allows you to update multiple variables on one user?
   User.findOneAndUpdate(
     { username: username },
     { $push: { glucoselevels: glocuselevel } },
+    null,
+    function (err, docs) {
+      if (err) {
+        throw new Error("Error finding and updating")
+      }
+    }
+  );
+
+  User.findOneAndUpdate(
+    { username: username },
+    { $push: { timestamps: timestamp } },
     null,
     function (err, docs) {
       if (err) {
@@ -79,8 +93,11 @@ app.post("/secret", isLoggedIn, function (req, res) {
           console.log("Result: ", result);
           res.render("secret", { glucose: result });
         });
+
     }
   );
+
+
 });
 
 // Showing register form
@@ -95,12 +112,14 @@ app.post("/register", function (req, res) {
   var firstname = req.body.firstname;
   var lastname = req.body.lastname;
   var email = req.body.email;
+  
   User.register(
     new User({
       firstname: firstname,
       lastname: lastname,
       email: email,
       glucoselevel: [0],
+      timestamps: undefined,
       username: username,
     }),
     password,
