@@ -6,14 +6,22 @@
       name="viewport"
       content="width=device-width, initial-scale=1"
     />
+      
+    <!-- CSS Stylesheets -->
+    <link href="/bulma/css/bulma.css" rel="stylesheet" type="text/css" /> 
+    <link href="/css/login.css" rel="stylesheet" type="text/css"/>
 
-    <!-- CSS Stylesheet -->
-    <link href="/bulma/css/bulma.css" rel="stylesheet" type="text/css" />
   </head>
-  <body>
+  <body><center>
+
+  <div class="imgbox">
+    <img class="center-fit" src='/images/BloodDrop.png'>
+  </div>  
+
+      <div class="container" style="position:fixed;left:80px;top:350px;right:80px;"></div>
     <div class="content is-max-desktop">
-      <h1>Login</h1>
-      <div class="container" style="width: 50%;">
+      
+      <div class="container" style="width: 23%;">
         <form action="/login" method="POST">
           <input
             class="input"
@@ -21,18 +29,31 @@
             name="username"
             placeholder="username"
           />
+          <br>
+          <br>
           <input
             class="input"
             type="password"
             name="password"
             placeholder="password"
           />
+          <br>
+          <br>
           <button class="button">Login</button>
         </form>
       </div>
     </div>
+    
+    <button class=“button”><a href="/register">Sign Up</a></button>
+    <button class=“button”><a href="/">Back</a></button>
 
-    <button type=“button”><a href="/register">Sign Up</a></button>
-    <button type=“button”><a href="/">Back</a></button>
+
+    
+    <br>
+    
+    <div id="container">          
+        <div id="footer">Not Copyrighted © 2021. </div> 
+
+
   </body>
 </html>
