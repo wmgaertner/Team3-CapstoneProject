@@ -4,8 +4,8 @@ const passport = require("passport");
 const bodyParser = require("body-parser");
 const LocalStrategy = require("passport-local"),
   passportLocalMongoose = require("passport-local-mongoose");
-User = require("./models/user.js");
-timestamp = require("./public/scripts/main.js")
+const User = require("./models/user.js"); //model object 
+const main = require('./public/scripts/main.js'); 
 
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useFindAndModify", false);
@@ -61,7 +61,8 @@ app.get("/secret", isLoggedIn, function (req, res) {
 app.post("/secret", isLoggedIn, function (req, res) {
   var glocuselevel = req.body.glucoselevel;
   var username = req.user.username;
-
+  var timestamp = main.maketimestamp(); 
+  
   // maybe a function on moogoose that allows you to update multiple variables on one user?
   User.findOneAndUpdate(
     { username: username },

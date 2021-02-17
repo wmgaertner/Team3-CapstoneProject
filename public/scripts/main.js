@@ -1,14 +1,16 @@
-// Get timestamp when submit button is hit
-var now = new Date();
 
-//make time format 
-var hours = now.getHours(now)
-var minutes = now.getMinutes(now);
-hours = hours % 12;
-hours = hours ? hours : 12;
-minutes = minutes < 10 ? '0' + minutes : minutes;
+//Function creates a timestamp
+function maketimestamp(){
+    var now = new Date();
+    var hours = now.getHours(now)
+    var minutes = now.getMinutes(now);
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
 
-var timestamp = hours.toString() + ':' + minutes.toString();
+    timestamp = hours.toString() + ':' + minutes.toString();
+    return timestamp;
+}
 
 
 // Function applied on form to prevent a POST if input is invalid
@@ -28,6 +30,9 @@ function required() {
     }
 }
 
-module.exports = timestamp;
 
-   
+
+
+
+// exports functions/variables 
+module.exports = { maketimestamp } 
