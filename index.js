@@ -82,8 +82,7 @@ app.post("/secret", isLoggedIn, function (req, res) {
       }
 
       
-      User.collection("users")
-        .findOne({ username: username })
+      User.findOne({ username: username })
         .then(function (result) {
           if (!result) {
             throw new Error("Not found");
