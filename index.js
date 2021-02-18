@@ -54,7 +54,15 @@ app.get("/", function (req, res) {
 
 // Showing secret page
 app.get("/secret", isLoggedIn, function (req, res) {
-  res.render("secret");
+  db.collection("users")
+    .findOne({ username: req.user.username })
+    .then(function (result) {
+      if (!result) {
+        throw new Error("Not found");
+      }
+      console.log("Result: ", result);
+      res.render("secret", { data: result });
+    });
 });
 
 //push data to the database
@@ -92,7 +100,7 @@ app.post("/secret", isLoggedIn, function (req, res) {
             throw new Error("Not found");
           }
           console.log("Result: ", result);
-          res.render("secret", { glucose: result });
+          res.render("secret", { data: result });
         });
 
     }
@@ -130,7 +138,15 @@ app.post("/register", function (req, res) {
         return res.render("register");
       } else {
         passport.authenticate("local")(req, res, function () {
-          res.render("secret");
+          db.collection("users")
+          .findOne({ username: req.user.username })
+          .then(function (result) {
+            if (!result) {
+              throw new Error("Not found");
+            }
+            console.log("Result: ", result);
+            res.render("secret", { data: result });
+          });
         });
       }
     }
