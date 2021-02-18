@@ -1,0 +1,21 @@
+
+
+body, html {
+  background-color: white; 
+  height: 100%;
+}
+
+* {
+    margin: 0;
+    padding: 0;   
+}
+.imgbox {
+    display: grid;
+    height: 100%;
+}
+.center-fit {
+    max-width: 50%;
+    max-height: 50vh;
+    margin: auto;
+}
+		
