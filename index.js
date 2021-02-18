@@ -51,8 +51,7 @@ app.get("/", function (req, res) {
 
 // Showing secret page
 app.get("/secret", isLoggedIn, function (req, res) {
-  db.collection("users")
-    .findOne({ username: req.user.username })
+  User.findOne({ username: req.user.username })
     .then(function (result) {
       if (!result) {
         throw new Error("Not found");
@@ -134,8 +133,7 @@ app.post("/register", function (req, res) {
         return res.render("register");
       } else {
         passport.authenticate("local")(req, res, function () {
-          db.collection("users")
-          .findOne({ username: req.user.username })
+          User.findOne({ username: req.user.username })
           .then(function (result) {
             if (!result) {
               throw new Error("Not found");
