@@ -14,9 +14,6 @@ mongoose.set("useUnifiedTopology", true);
 mongoose.connect("mongodb+srv://abc:test123@cluster0.7bifm.mongodb.net/Cluster0?retryWrites=true&w=majority");
 
 
-//! Change this to utilize local passport
-const db = mongoose.connection;
-
 var app = express();
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
@@ -92,9 +89,8 @@ app.post("/secret", isLoggedIn, function (req, res) {
         throw new Error("Error finding and updating")
       }
 
-      //! Change this to utilize passport
-      db.collection("users")
-        .findOne({ username: username })
+      
+      User.findOne({ username: username })
         .then(function (result) {
           if (!result) {
             throw new Error("Not found");
