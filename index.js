@@ -57,7 +57,7 @@ app.get("/secret", isLoggedIn, function (req, res) {
         throw new Error("Not found");
       }
       console.log("Result: ", result);
-      res.render("secret", { data: result });
+      res.render("secret", { data: result, username: req.user.username });
     });
 });
 
@@ -95,7 +95,7 @@ app.post("/secret", isLoggedIn, function (req, res) {
             throw new Error("Not found");
           }
           console.log("Result: ", result);
-          res.render("secret", { data: result });
+          res.render("secret", { data: result, username: req.user.username });
         });
 
     }
@@ -139,7 +139,7 @@ app.post("/register", function (req, res) {
               throw new Error("Not found");
             }
             console.log("Result: ", result);
-            res.render("secret", { data: result });
+            res.render("secret", { data: result, username: req.user.username });
           });
         });
       }
