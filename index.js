@@ -7,6 +7,8 @@ const LocalStrategy = require("passport-local"),
 const User = require("./models/user.js"); //model object 
 const main = require('./public/scripts/main.js'); 
 
+
+
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useFindAndModify", false);
 mongoose.set("useCreateIndex", true);
@@ -56,7 +58,7 @@ app.get("/secret", isLoggedIn, function (req, res) {
       if (!result) {
         throw new Error("Not found");
       }
-      console.log("Result: ", result);
+      console.log("Login: ", result);
       res.render("secret", { data: result, username: req.user.username });
     });
 });
@@ -64,14 +66,10 @@ app.get("/secret", isLoggedIn, function (req, res) {
 //push data to the database
 app.post("/secret", isLoggedIn, function (req, res) {
   var glocuselevel = req.body.glucoselevel;
-  var username = req.user.username;
   var timestamp = main.maketimestamp(); 
   
   // maybe a function on moogoose that allows you to update multiple variables on one user?
-  User.findOneAndUpdate(
-    { username: username },
-    { $push: { glucoselevels: glocuselevel } },
-    null,
+  User.findOneAndUpdate({ username: req.user.username },{ $push: { glucoselevels: glocuselevel } },null,
     function (err, docs) {
       if (err) {
         throw new Error("Error finding and updating")
@@ -79,27 +77,22 @@ app.post("/secret", isLoggedIn, function (req, res) {
     }
   );
 
-  User.findOneAndUpdate(
-    { username: username },
-    { $push: { timestamps: timestamp } },
-    null,
+  User.findOneAndUpdate({ username: req.user.username },{ $push: { timestamps: timestamp } },null,
     function (err, docs) {
       if (err) {
         throw new Error("Error finding and updating")
       }
-
-      
-      User.findOne({ username: username })
-        .then(function (result) {
-          if (!result) {
-            throw new Error("Not found");
-          }
-          console.log("Result: ", result);
-          res.render("secret", { data: result, username: req.user.username });
-        });
-
     }
   );
+
+  User.findOne({ username: req.user.username })
+      .then(function (result) {
+      if (!result) {
+        throw new Error("Not found");
+      }
+      console.log("Result: ", result);
+      res.render("secret", { data: result, username: req.user.username });
+  });
 
 
 });
@@ -138,7 +131,7 @@ app.post("/register", function (req, res) {
             if (!result) {
               throw new Error("Not found");
             }
-            console.log("Result: ", result);
+            console.log("Login: ", result);
             res.render("secret", { data: result, username: req.user.username });
           });
         });

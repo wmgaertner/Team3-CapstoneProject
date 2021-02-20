@@ -4,11 +4,12 @@ function maketimestamp(){
     var now = new Date();
     var hours = now.getHours(now)
     var minutes = now.getMinutes(now);
+    var ampm = hours >= 12 ? 'pm' : 'am';
     hours = hours % 12;
     hours = hours ? hours : 12;
     minutes = minutes < 10 ? '0' + minutes : minutes;
 
-    timestamp = hours.toString() + ':' + minutes.toString();
+    timestamp = hours.toString() + ':' + minutes.toString + ampm();
     return timestamp;
 }
 
