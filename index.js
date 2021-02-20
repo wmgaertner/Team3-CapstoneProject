@@ -66,7 +66,7 @@ app.get("/secret", isLoggedIn, function (req, res) {
 //push data to the database
 app.post("/secret", isLoggedIn, function (req, res) {
   var glocuselevel = req.body.glucoselevel;
-  var timestamp = main.maketimestamp(); 
+  var timestamp = main.maketimestamp(new Date()); 
   
   // maybe a function on moogoose that allows you to update multiple variables on one user?
   User.findOneAndUpdate({ username: req.user.username },{ $push: { glucoselevels: glocuselevel } },null,

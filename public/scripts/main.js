@@ -1,7 +1,6 @@
 
 //Function creates a timestamp
-function maketimestamp(){
-    var now = new Date();
+function maketimestamp(now){
     var hours = now.getHours(now)
     var minutes = now.getMinutes(now);
     var ampm = hours >= 12 ? 'pm' : 'am';
