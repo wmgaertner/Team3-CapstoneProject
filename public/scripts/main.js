@@ -5,7 +5,7 @@ function maketimestamp(now){
     var minutes = now.getMinutes(now);
     var ampm = hours >= 12 ? 'pm' : 'am';
     hours = hours % 12;
-    hours = hours ? hours : 12;
+    hours = hours != 0 ? hours : 12;
     minutes = minutes < 10 ? '0' + minutes : minutes;
 
     timestamp = hours.toString() + ':' + minutes.toString() + ampm;
