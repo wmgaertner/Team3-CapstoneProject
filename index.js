@@ -51,20 +51,20 @@ app.get("/", function (req, res) {
   res.render("home");
 });
 
-// Showing secret page
-app.get("/secret", isLoggedIn, function (req, res) {
+// Showing dashboard page
+app.get("/dashboard", isLoggedIn, function (req, res) {
   User.findOne({ username: req.user.username })
     .then(function (result) {
       if (!result) {
         throw new Error("Not found");
       }
       console.log("Login: ", result);
-      res.render("secret", { data: result, username: req.user.username });
+      res.render("dashboard", { data: result, username: req.user.username });
     });
 });
 
 //push data to the database
-app.post("/secret", isLoggedIn, function (req, res) {
+app.post("/dashboard", isLoggedIn, function (req, res) {
   var glocuselevel = req.body.glucoselevel;
   var timestamp = main.maketimestamp(new Date()); 
   
@@ -91,7 +91,7 @@ app.post("/secret", isLoggedIn, function (req, res) {
         throw new Error("Not found");
       }
       console.log("Result: ", result);
-      res.render("secret", { data: result, username: req.user.username });
+      res.render("dashboard", { data: result, username: req.user.username });
   });
 
 
@@ -132,7 +132,7 @@ app.post("/register", function (req, res) {
               throw new Error("Not found");
             }
             console.log("Login: ", result);
-            res.render("secret", { data: result, username: req.user.username });
+            res.render("dashboard", { data: result, username: req.user.username });
           });
         });
       }
@@ -149,7 +149,7 @@ app.get("/login", function (req, res) {
 app.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/secret",
+    successRedirect: "/dashboard",
     failureRedirect: "/login",
   }),
   function (req, res) {}

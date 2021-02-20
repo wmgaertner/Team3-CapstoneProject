@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta
+      charset="utf-8"
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
+
+    <!-- Scripts -->
+    <script src="/chart.js/dist/Chart.min.js"></script>
+
+    <!-- CSS Stylesheets -->
+    <link href="css/dashboard.css" rel="stylesheet" type="text/css" />
+    <link href="/bulma/css/bulma.css" rel="stylesheet" type="text/css" />
+  
+  
+  </head>
+  
+  <div class="navbar1">
+    
+    <div class="dropdown1">
+      
+      <button class="dropbtn1" ><%= username %> </button>
+      <div class="dropdown-content1">
+          <a href="/logout">Sign Out</a>
+          
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <body>
+    <div class="content is-max-desktop">
+      <div class="container" style="width: 50%">
+        <form action="/dashboard" method="POST" onsubmit="required()">
+          <input
+            class="input"
+            id="glucoseInput"
+            type="text"
+            name="glucoselevel"
+            placeholder="glucoselevel"
+          />
+
+          <button class="button" >Submit</button>
+        </form>
+
+        <canvas id="myChart"></canvas>
+      </div>
+    </div>
+
+    <img src="images/BloodDrop.png" />
+
+
+    <script src="scripts/main.js"></script>
+    
+    <script >
+    
+      // ChartJS only works inside of script tags in the html/ejs annoying
+      // Get JSON data being sent back on POST
+    
+      var timestamps = [];
+      var jsonObject =  '<%- JSON.stringify(data, null, 0)%>';
+      jsonObject = JSON.parse(jsonObject);
+      var jsonFirstName = jsonObject['firstname'];
+      var jsonGluLength = jsonObject['glucoselevels'].length;
+      var jsonGlucose = [];
+
+      for (i = 0; i < jsonGluLength; i++) {
+        jsonGlucose.push(parseFloat(jsonObject['glucoselevels'][i]));
+        timestamps.push(jsonObject['timestamps'][i]);
+      }
+      //Display chart
+      var ctx = document.getElementById("myChart").getContext("2d");
+      var myChart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: "line",
+        // The data for our dataset
+        data: {
+          labels: timestamps,
+          datasets: [
+            {
+              label: "Glucose mg/dL",
+              fill: false,
+              borderColor: "rgb(255, 99, 132)",
+              data: jsonGlucose,
+            },
+          ],
+        },
+        // Configuration options go here
+        options: {},
+      });
+      
+    </script>
+
+
+
+
+  </body>
+</html>
+
