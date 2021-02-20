@@ -9,7 +9,7 @@ function maketimestamp(){
     hours = hours ? hours : 12;
     minutes = minutes < 10 ? '0' + minutes : minutes;
 
-    timestamp = hours.toString() + ':' + minutes.toString + ampm();
+    timestamp = hours.toString() + ':' + minutes.toString + ampm;
     return timestamp;
 }
 
