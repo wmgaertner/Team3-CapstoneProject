@@ -9,49 +9,73 @@
 
     <!-- CSS Stylesheet -->
     <link href="/bulma/css/bulma.css" rel="stylesheet" type="text/css" />
+
+    <!-- Icons -->
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
   </head>
 
   <body>
     <div class="content is-max-desktop">
       <h1>Sign up form</h1>
-      <div class="container" style="width: 50%;">
+      <div class="container" style="width: 50%">
         <form action="/register" method="POST">
-          <input
-            class="input"
-            type="text"
-            name="firstname"
-            placeholder="firstname"
-          />
-          <input
-            class="input"
-            type="text"
-            name="lastname"
-            placeholder="lastname"
-          />
-          <input
-            class="input"
-            type="text"
-            name="email"
-            placeholder="email"
-          />
-          <input
-            class="input"
-            type="text"
-            name="username"
-            placeholder="username"
-          />
-          <input
-            class="input"
-            type="password"
-            name="password"
-            placeholder="password"
-          />
-          <button class="button">Submit</button>
+          <p class="control has-icons-left">
+            <input
+              class="input"
+              type="text"
+              name="firstname"
+              placeholder="firstname"
+            />
+            <span class="icon is-left">
+              <iconify-icon data-icon="mdi:account-circle"></iconify-icon>
+            </span>
+          </p>
+          <p class="control has-icons-left">
+            <input
+              class="input"
+              type="text"
+              name="lastname"
+              placeholder="lastname"
+            />
+            <span class="icon is-left">
+              <iconify-icon data-icon="mdi:account-circle-outline"></iconify-icon>
+            </span>
+          </p>
+          <p class="control has-icons-left">
+            <input class="input" type="text" name="email" placeholder="email" />
+            <span class="icon is-left">
+              <iconify-icon data-icon="mdi:email-outline"></iconify-icon>
+            </span>
+          </p>
+          <p class="control has-icons-left">
+            <input
+              class="input"
+              type="text"
+              name="username"
+              placeholder="username"
+            />
+            <span class="icon is-left">
+              <iconify-icon data-icon="mdi:rename-box"></iconify-icon>
+            </span>
+          </p>
+          <p class="control has-icons-left">
+            <input
+              class="input"
+              type="password"
+              name="password"
+              placeholder="password"
+            />
+            <span class="icon is-left">
+              <iconify-icon data-icon="mdi:key-variant"></iconify-icon>
+            </span>
+          </p>
+
+          <button class="button is-primary is-rounded">Create Account</button>
         </form>
       </div>
     </div>
 
-    <button type=“button”><a href="/login">Login</a></button>
-    <button type=“button”><a href="/">Back</a></button>
+    <a href="/login"><button class="button">Login</button></a>
+    <a href="/"></a><button class="button">Back</button></a>
   </body>
 </html>

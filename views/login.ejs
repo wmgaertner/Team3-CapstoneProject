@@ -11,6 +11,8 @@
     <link href="/css/login.css" rel="stylesheet" type="text/css"/>
     <link href="/bulma/css/bulma.css" rel="stylesheet" type="text/css" /> 
     
+    <!-- Icons -->
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
 
   </head>
   <body><center>
@@ -24,23 +26,32 @@
       
       <div class="container" style="width: 23%;">
         <form action="/login" method="POST">
-          <input
-            class="input"
-            type="text"
-            name="username"
-            placeholder="username"
-          />
+          <p class="control has-icons-left">
+            <input
+              class="input"
+              type="text"
+              name="username"
+              placeholder="username"
+            />
+            <span class="icon is-left">
+              <iconify-icon data-icon="mdi:rename-box"></iconify-icon>
+            </span>
+          </p>
+          <br>
+          <p class="control has-icons-left">
+            <input
+              class="input"
+              type="password"
+              name="password"
+              placeholder="password"
+            />
+            <span class="icon is-left">
+              <iconify-icon data-icon="mdi:key-variant"></iconify-icon>
+            </span>
+          </p>
           <br>
           <br>
-          <input
-            class="input"
-            type="password"
-            name="password"
-            placeholder="password"
-          />
-          <br>
-          <br>
-          <button class="button">Login</button>
+          <button class="button is-primary is-rounded">Login</button>
         </form>
       </div>
     </div>
