@@ -8,13 +8,11 @@ const User = require("./models/user.js"); //model object
 const main = require('./public/scripts/main.js'); 
 
 
-
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useFindAndModify", false);
 mongoose.set("useCreateIndex", true);
 mongoose.set("useUnifiedTopology", true);
 mongoose.connect("mongodb+srv://abc:test123@cluster0.7bifm.mongodb.net/Cluster0?retryWrites=true&w=majority");
-
 
 var app = express();
 app.set("view engine", "ejs");
@@ -29,11 +27,6 @@ app.use(
     saveUninitialized: false,
   })
 );
-
-app.get("*", function (req, res, next) {
-  res.locals.user = req.user;
-  next();
-});
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -91,7 +84,7 @@ app.post("/dashboard", isLoggedIn, function (req, res) {
         throw new Error("Not found");
       }
       console.log("Result: ", result);
-      res.render("dashboard", { data: result, username: req.user.username });
+      res.render("dashboard", { data: result, username: req.user.username});
   });
 
 
@@ -116,7 +109,7 @@ app.post("/register", function (req, res) {
       lastname: lastname,
       email: email,
       glucoselevel: [0],
-      timestamps: undefined,
+      timestamps: [],
       username: username,
     }),
     password,
