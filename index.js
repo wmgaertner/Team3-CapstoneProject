@@ -61,31 +61,28 @@ app.post("/dashboard", isLoggedIn, function (req, res) {
   var glocuselevel = req.body.glucoselevel;
   var timestamp = main.maketimestamp(new Date()); 
   
-  // maybe a function on moogoose that allows you to update multiple variables on one user?
-  User.findOneAndUpdate({ username: req.user.username },{ $push: { glucoselevels: glocuselevel } },null,
+  //TODO findoneandupdatemany?
+  User.findOneAndUpdate({ username: req.user.username },{ $push: { glucoselevels: glocuselevel } },
     function (err, docs) {
       if (err) {
         throw new Error("Error finding and updating")
       }
+      
     }
   );
 
-  User.findOneAndUpdate({ username: req.user.username },{ $push: { timestamps: timestamp } },null,
+  User.findOneAndUpdate({ username: req.user.username },{ $push: { timestamps: timestamp } },
     function (err, docs) {
       if (err) {
         throw new Error("Error finding and updating")
       }
+
+      console.log("Result: ", docs);
+      res.render("dashboard", { data: docs, username: req.user.username});
     }
+
   );
 
-  User.findOne({ username: req.user.username })
-      .then(function (result) {
-      if (!result) {
-        throw new Error("Not found");
-      }
-      console.log("Result: ", result);
-      res.render("dashboard", { data: result, username: req.user.username});
-  });
 
 
 });
@@ -108,7 +105,7 @@ app.post("/register", function (req, res) {
       firstname: firstname,
       lastname: lastname,
       email: email,
-      glucoselevel: [0],
+      glucoselevel: [],
       timestamps: [],
       username: username,
     }),
