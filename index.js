@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const LocalStrategy = require("passport-local"),
   passportLocalMongoose = require("passport-local-mongoose");
 const User = require("./models/user.js"); //model object 
-const main = require('./public/scripts/main.js'); 
+const timestamps = require('./public/scripts/timestamps.js'); 
 
 
 mongoose.set("useNewUrlParser", true);
@@ -59,7 +59,7 @@ app.get("/dashboard", isLoggedIn, function (req, res) {
 //push data to the database
 app.post("/dashboard", isLoggedIn, function (req, res) {
   var glocuselevel = req.body.glucoselevel;
-  var timestamp = main.maketimestamp(new Date()); 
+  var timestamp = timestamps.maketimestamp(new Date()); 
   
   //TODO findoneandupdatemany?
   User.findOneAndUpdate({ username: req.user.username },{ $push: { glucoselevels: glocuselevel } },
