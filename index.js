@@ -57,12 +57,12 @@ app.get("/dashboard", isLoggedIn, function (req, res) {
 });
 
 //push data to the database
-app.post("/dashboard", isLoggedIn, function (req, res) {
+app.post("/dashboard", isLoggedIn, async function (req, res) {
   var glocuselevel = req.body.glucoselevel;
   var timestamp = timestamps.maketimestamp(new Date()); 
   
   //TODO findoneandupdatemany?
-  User.findOneAndUpdate({ username: req.user.username },{ $push: { glucoselevels: glocuselevel } },
+  await User.findOneAndUpdate({ username: req.user.username },{ $push: { glucoselevels: glocuselevel } },
     function (err, docs) {
       if (err) {
         throw new Error("Error finding and updating")
@@ -71,7 +71,7 @@ app.post("/dashboard", isLoggedIn, function (req, res) {
     }
   );
 
-  User.findOneAndUpdate({ username: req.user.username },{ $push: { timestamps: timestamp } },
+  await User.findOneAndUpdate({ username: req.user.username },{ $push: { timestamps: timestamp } },
     function (err, docs) {
       if (err) {
         throw new Error("Error finding and updating")
