@@ -60,30 +60,17 @@ app.get("/dashboard", isLoggedIn, function (req, res) {
 app.post("/dashboard", isLoggedIn, async function (req, res) {
   var glocuselevel = req.body.glucoselevel;
   var timestamp = timestamps.maketimestamp(new Date()); 
-  
-  //TODO findoneandupdatemany?
-  await User.findOneAndUpdate({ username: req.user.username },{ $push: { glucoselevels: glocuselevel } },
-    function (err, docs) {
-      if (err) {
-        throw new Error("Error finding and updating")
-      }
-      
-    }
-  );
+  await User.findOneAndUpdate({ username: req.user.username },{ $push: { glucoselevels: glocuselevel } });
+  await User.findOneAndUpdate({ username: req.user.username },{ $push: { timestamps: timestamp } });
 
-  await User.findOneAndUpdate({ username: req.user.username },{ $push: { timestamps: timestamp } },
-    function (err, docs) {
+  await User.findOne({ username: req.user.username }, 
+    function (err,docs) {
       if (err) {
-        throw new Error("Error finding and updating")
+        throw new Error("Not found");
       }
-
       console.log("Result: ", docs);
-      res.render("dashboard", { data: docs, username: req.user.username});
-    }
-
-  );
-
-
+      res.render("dashboard", { data: docs, username: req.user.username });
+  });     
 
 });
 
