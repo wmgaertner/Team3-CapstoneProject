@@ -4,7 +4,10 @@ const passport = require("passport");
 const bodyParser = require("body-parser");
 const LocalStrategy = require("passport-local"),
   passportLocalMongoose = require("passport-local-mongoose");
-const User = require("./models/user.js"); //model object 
+const User = require("./models/user.js"); //user model object 
+const UserData = require("./models/userdata.js"); //userdata model object
+
+
 const timestamps = require('./public/scripts/timestamps.js'); 
 
 
@@ -46,32 +49,52 @@ app.get("/", function (req, res) {
 
 // Showing dashboard page
 app.get("/dashboard", isLoggedIn, function (req, res) {
-  User.findOne({ username: req.user.username })
-    .then(function (result) {
-      if (!result) {
-        throw new Error("Not found");
-      }
-      console.log("Login: ", result);
-      res.render("dashboard", { data: result, username: req.user.username });
-    });
-});
-
-//push data to the database
-app.post("/dashboard", isLoggedIn, async function (req, res) {
-  var glocuselevel = req.body.glucoselevel;
-  var timestamp = timestamps.maketimestamp(new Date()); 
-  await User.findOneAndUpdate({ username: req.user.username },{ $push: { glucoselevels: glocuselevel } });
-  await User.findOneAndUpdate({ username: req.user.username },{ $push: { timestamps: timestamp } });
-
-  await User.findOne({ username: req.user.username }, 
+  
+  UserData.findById(req.user._id, 
     function (err,docs) {
       if (err) {
         throw new Error("Not found");
       }
-      console.log("Result: ", docs);
       res.render("dashboard", { data: docs, username: req.user.username });
-  });     
+  });  
 
+});
+
+//push data to the database
+app.post("/dashboard", isLoggedIn, function (req, res) {
+  var userid = req.user._id;
+  var glucoselevel = req.body.glucoselevel;
+  var timestamp = timestamps.maketimestamp(new Date()); 
+
+
+  UserData.findByIdAndUpdate(userid,{ $push: {timestamps:timestamp} }, 
+    function (err,docs) { 
+    if (err) {
+      console.log(err);
+    }
+
+    UserData.findByIdAndUpdate(userid,{$push: {glucoselevels:glucoselevel} },
+      function (err,docs) { 
+        if (err) {
+          console.log(err);
+        }
+
+        //send data to page
+        UserData.findById(userid, 
+          function (err,docs) { 
+          if (err) {
+            console.log(err);
+          }
+          console.log("Result: ", docs);
+          res.render("dashboard", { data: docs, username: req.user.username });
+
+        });
+
+      });     
+
+   });
+  
+  
 });
 
 // Showing register form
@@ -88,33 +111,40 @@ app.post("/register", function (req, res) {
   var email = req.body.email;
   
   User.register(
-    new User({
-      firstname: firstname,
-      lastname: lastname,
-      email: email,
-      glucoselevel: [],
-      timestamps: [],
-      username: username,
-    }),
-    password,
+    new User({username: username,}),password, 
     function (err, user) {
       if (err) {
         console.log(err);
         return res.render("register");
       } else {
         passport.authenticate("local")(req, res, function () {
-          User.findOne({ username: req.user.username })
-          .then(function (result) {
-            if (!result) {
-              throw new Error("Not found");
-            }
-            console.log("Login: ", result);
-            res.render("dashboard", { data: result, username: req.user.username });
-          });
+
+          var Data = new UserData({
+              _id: req.user._id,
+              firstname: firstname,
+              lastname: lastname, 
+              email: email,  
+              glucoselevels: [], 
+              timestamps: []
+
+          })
+          
+      
+          Data.save();
+          
+          
+          res.render("dashboard", { data: Data, username: req.user.username });
+
+
         });
       }
     }
   );
+  
+  
+
+
+
 });
 
 //Showing login form
