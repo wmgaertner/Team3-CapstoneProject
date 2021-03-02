@@ -1,14 +1,14 @@
 const express = require("express");
-const mongoose = require("mongoose");
-const passport = require("passport");
-const bodyParser = require("body-parser");
-const LocalStrategy = require("passport-local"),
-  passportLocalMongoose = require("passport-local-mongoose");
-const User = require("./models/user.js"); //user model object 
-const UserData = require("./models/userdata.js"); //userdata model object
-const timestamps = require('./public/scripts/timestamps.js'); 
-const emailverification = require('./public/scripts/emailverification');
-
+ mongoose = require("mongoose");
+ passport = require("passport");
+ bodyParser = require("body-parser");
+ LocalStrategy = require("passport-local"),
+ passportLocalMongoose = require("passport-local-mongoose");
+ User = require("./models/user.js"); //user model object 
+ UserData = require("./models/userdata.js"); //userdata model object
+ timestamps = require('./public/scripts/timestamps.js'); 
+ emailverification = require('./public/scripts/emailverification');
+ flash = require('connect-flash');
 
 
 mongoose.set("useNewUrlParser", true);
@@ -22,6 +22,7 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(express.static("node_modules"));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(flash());
 
 app.use(
   require("express-session")({
@@ -97,35 +98,43 @@ app.post("/register", function (req, res) {
   var lastname = req.body.lastname;
   var email = req.body.email;
   
-  User.register(
-    new User({username: username,}),password, 
-    function (err, user) {
-      if (err) {
-        console.log(err);
-        return res.render("register");
-      } else {
-        passport.authenticate("local")(req, res, function () {
+  UserData.exists({email: email}).then(answer => {
+    if (answer == false){
 
-        
-          var Data = new UserData({
-              _id: req.user._id,
-              firstname: firstname,
-              lastname: lastname, 
-              email: email,  
-              glucoselevels: [], 
-              timestamps: []
-          })
-          Data.save();
-      
-
-          //emailverification.VerifyEmail();
-
-          res.render("dashboard", { data: Data, username: req.user.username });
-
-        });
-      }
+      User.register(
+        new User({username: username}),password, 
+        function (err, user) {
+          if (err) {
+            console.log(err);
+            return res.render("register");
+          } else {
+            passport.authenticate("local")(req, res, function () {
+    
+              var Data = new UserData({
+                _id: req.user._id,
+                firstname: firstname,
+                lastname: lastname, 
+                email: email,  
+                glucoselevels: [], 
+                timestamps: []
+              })
+              Data.save();
+              res.render("login");
+    
+            });
+          }
+        }
+      );
     }
-  );
+
+    else{
+      console.log("email in use")
+      res.redirect("/register");
+    }
+
+  })
+  
+
   
 });
 
