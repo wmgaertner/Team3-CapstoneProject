@@ -9,6 +9,7 @@
 
     <!-- Scripts -->
     <script src="/chart.js/dist/Chart.min.js"></script>
+    <script src="/chartjs-plugin-annotation/chartjs-plugin-annotation.min.js"></script>
 
     <!-- CSS Stylesheets -->
     <link href="css/dashboard.css" rel="stylesheet" type="text/css" />
@@ -89,7 +90,47 @@
           ],
         },
         // Configuration options go here
-        options: {},
+        options: {
+          title: {
+            display: true,
+            text: "Blood Glucose Chart"
+          },
+          annotation: {
+            annotations: [
+              {
+                id: 'btmLine',
+                type: 'line',
+                mode: 'horizontal',
+                scaleID: 'y-axis-0',
+                value: 60,
+                borderColor: 'red',
+                borderWidth: 2, 
+                borderDash: [4, 8], 
+                label: {
+                  backgroundColor: "red",
+                  content: "Low Value (non-diabetic)",
+                  enabled: true,
+                  yAdjust: -10
+                }
+              }, {
+                id: 'topLine',
+                type: 'line',
+                mode: 'horizontal',
+                scaleID: 'y-axis-0',
+                value: 100,
+                borderColor: 'red',
+                borderWidth: 2,
+                borderDash: [4, 8],
+                label: {
+                  backgroundColor: "red",
+                  content: "High Value (non-diabetic)",
+                  enabled: true,
+                  yAdjust: 10
+                }
+              }
+            ]
+          }
+        },
       });
       
     </script>
