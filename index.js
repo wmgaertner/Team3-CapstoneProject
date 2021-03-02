@@ -6,9 +6,9 @@ const LocalStrategy = require("passport-local"),
   passportLocalMongoose = require("passport-local-mongoose");
 const User = require("./models/user.js"); //user model object 
 const UserData = require("./models/userdata.js"); //userdata model object
-
-
 const timestamps = require('./public/scripts/timestamps.js'); 
+const emailverification = require('./public/scripts/emailverification');
+
 
 
 mongoose.set("useNewUrlParser", true);
@@ -66,36 +66,23 @@ app.post("/dashboard", isLoggedIn, function (req, res) {
   var glucoselevel = req.body.glucoselevel;
   var timestamp = timestamps.maketimestamp(new Date()); 
 
+  UserData.findByIdAndUpdate(userid,{$push: {
+    //add data to push to database
+    glucoselevels:glucoselevel,
+    timestamps:timestamp
 
-  UserData.findByIdAndUpdate(userid,{ $push: {timestamps:timestamp} }, 
-    function (err,docs) { 
-    if (err) {
-      console.log(err);
-    }
-
-    UserData.findByIdAndUpdate(userid,{$push: {glucoselevels:glucoselevel} },
-      function (err,docs) { 
-        if (err) {
-          console.log(err);
+    } },
+    { new: true },
+    function (err,docs){
+      if (err) {
+        console.log(err);
         }
+        console.log("Result: ", docs);
+        res.render("dashboard", { data: docs, username: req.user.username });
+    });
 
-        //send data to page
-        UserData.findById(userid, 
-          function (err,docs) { 
-          if (err) {
-            console.log(err);
-          }
-          console.log("Result: ", docs);
-          res.render("dashboard", { data: docs, username: req.user.username });
-
-        });
-
-      });     
-
-   });
-  
-  
 });
+
 
 // Showing register form
 app.get("/register", function (req, res) {
@@ -119,6 +106,7 @@ app.post("/register", function (req, res) {
       } else {
         passport.authenticate("local")(req, res, function () {
 
+        
           var Data = new UserData({
               _id: req.user._id,
               firstname: firstname,
@@ -126,25 +114,19 @@ app.post("/register", function (req, res) {
               email: email,  
               glucoselevels: [], 
               timestamps: []
-
           })
-          
-      
           Data.save();
-          
-          
-          res.render("dashboard", { data: Data, username: req.user.username });
+      
 
+          //emailverification.VerifyEmail();
+
+          res.render("dashboard", { data: Data, username: req.user.username });
 
         });
       }
     }
   );
   
-  
-
-
-
 });
 
 //Showing login form
@@ -172,6 +154,8 @@ function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) return next();
   res.redirect("/login");
 }
+
+
 
 var port = process.env.PORT || 3000;
 app.listen(port, function () {
