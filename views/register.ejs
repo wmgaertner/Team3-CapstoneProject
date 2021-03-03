@@ -11,15 +11,17 @@
     <!-- CSS Stylesheet -->
     <link href="/bulma/css/bulma.css" rel="stylesheet" type="text/css" />
 
-    <!-- Icons -->
+    <!-- Scripts -->
     <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+    <script src="scripts/formchecks.js"></script>
+
   </head>
 
   <body>
     <div class="content is-max-desktop">
       <h1>Sign up form</h1>
       <div class="container" style="width: 50%">
-        <form action="/register" method="POST">
+        <form action="/register" method="POST" onsubmit="required()">
           <p class="control has-icons-left">
             <input
               class="input"
@@ -70,17 +72,29 @@
               <iconify-icon data-icon="mdi:key-variant"></iconify-icon>
             </span>
           </p>
-
+          
+          <div style="color:red;"><%= locals.error %></div>
+          <br>
           <button class="button is-primary is-rounded">Create Account</button>
         </form>
       </div>
     </div>
 
+    
+
+
+
     <a href="/login"><button class="button">Login</button></a>
     <a href="/"><button class="button">Back</button></a>
-  </body>
 
-  
+
+
+
+
+
+
+
+  </body>
 
 
 

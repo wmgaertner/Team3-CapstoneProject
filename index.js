@@ -106,7 +106,7 @@ app.post("/register", function (req, res) {
         function (err, user) {
           if (err) {
             console.log(err);
-            return res.render("register");
+            res.render("register", {error:err});
           } else {
             passport.authenticate("local")(req, res, function () {
     
@@ -128,8 +128,7 @@ app.post("/register", function (req, res) {
     }
 
     else{
-      console.log("email in use")
-      res.redirect("/register");
+      res.render("register",{error:"email already in use"});
     }
 
   })
