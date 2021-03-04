@@ -100,13 +100,13 @@ app.post("/register", function (req, res) {
   
   UserData.exists({email: email}).then(answer => {
     if (answer == false){
-
+      
       User.register(
         new User({username: username}),password, 
         function (err, user) {
           if (err) {
             console.log(err);
-            res.render("register", {error:err});
+            res.render("register");
           } else {
             passport.authenticate("local")(req, res, function () {
     
@@ -128,7 +128,7 @@ app.post("/register", function (req, res) {
     }
 
     else{
-      res.render("register",{error:"email already in use"});
+      res.render("register");
     }
 
   })

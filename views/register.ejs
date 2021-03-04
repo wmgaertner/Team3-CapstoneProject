@@ -21,61 +21,59 @@
     <div class="content is-max-desktop">
       <h1>Sign up form</h1>
       <div class="container" style="width: 50%">
-        <form action="/register" method="POST" onsubmit="required()">
+        <form action="/register" method="POST" onsubmit="registration()">
+
+
           <p class="control has-icons-left">
-            <input
-              class="input"
-              type="text"
-              name="firstname"
-              placeholder="firstname"
-            />
+            <input class="input" type="text" name="firstname" id="firstname" placeholder="firstname"/>
             <span class="icon is-left">
               <iconify-icon data-icon="mdi:account-circle"></iconify-icon>
             </span>
           </p>
+
+          <p id = "errorfirstname" style="color:red;"><%= locals.error %></p>
+
           <p class="control has-icons-left">
-            <input
-              class="input"
-              type="text"
-              name="lastname"
-              placeholder="lastname"
-            />
+            <input class="input" type="text" name="lastname" id="lastname" placeholder="lastname"/>
             <span class="icon is-left">
               <iconify-icon data-icon="mdi:account-circle-outline"></iconify-icon>
             </span>
           </p>
+
+          <p id = "errorlastname" style="color:red;"></p>
+
           <p class="control has-icons-left">
-            <input class="input" type="text"  name="email" placeholder="email" />
+            <input class="input" type="text" name="email" id="email" placeholder="email" />
             <span class="icon is-left">
               <iconify-icon data-icon="mdi:email-outline"></iconify-icon>
             </span>
           </p>
+
+          <p id = "erroremail" style="color:red;"></p>
+             
+
           <p class="control has-icons-left">
-            <input
-              class="input"
-              type="text"
-              name="username"
-              placeholder="username"
-            />
+            <input class="input" type="text" name="username" id="username" placeholder="username"/>
             <span class="icon is-left">
               <iconify-icon data-icon="mdi:rename-box"></iconify-icon>
             </span>
           </p>
+
+          <p id = "errorusername" style="color:red;"></p>
+
           <p class="control has-icons-left">
-            <input
-              class="input"
-              type="password"
-              name="password"
-              placeholder="password"
-            />
+            <input class="input" type="text" name="password" id="password" placeholder="password"/>
             <span class="icon is-left">
               <iconify-icon data-icon="mdi:key-variant"></iconify-icon>
             </span>
           </p>
+
+          <p id = "errorpassword" style="color:red;"></p>
+
           
-          <div style="color:red;"><%= locals.error %></div>
-          <br>
           <button class="button is-primary is-rounded">Create Account</button>
+
+
         </form>
       </div>
     </div>
@@ -88,14 +86,5 @@
     <a href="/"><button class="button">Back</button></a>
 
 
-
-
-
-
-
-
   </body>
-
-
-
 </html>
