@@ -106,7 +106,7 @@ app.post("/register", function (req, res) {
         function (err, user) {
           if (err) {
             console.log(err);
-            res.render("register");
+            res.render("register",{error: err});
           } else {
             passport.authenticate("local")(req, res, function () {
     
@@ -128,7 +128,7 @@ app.post("/register", function (req, res) {
     }
 
     else{
-      res.render("register");
+      res.render("register",{error: "Email is taken."});
     }
 
   })

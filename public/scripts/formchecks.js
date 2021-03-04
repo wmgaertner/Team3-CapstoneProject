@@ -15,7 +15,7 @@ function dashboard() {
     }
 }
 
-function registration(){
+function registration(error){
 
     var firstnameInput = document.getElementById('firstname');
     var lastnameInput = document.getElementById('lastname');
@@ -29,40 +29,95 @@ function registration(){
     var errorusername = document.getElementById("errorusername");
     var errorpassword = document.getElementById("errorpassword")
 
+    
 
     if (firstnameInput.value.length == 0 ){
         event.preventDefault();
         firstnameInput.className = "input is-danger";
         errorfirstname.innerHTML = "Enter first name.";
-        
     }
+    else {
+        firstnameInput.className = "input";
+        errorfirstname.innerHTML = '';
+
+    }
+
+    
+
     if (lastnameInput.value.length == 0 ){
         event.preventDefault();
         lastnameInput.className = "input is-danger";
         errorlastname.innerHTML = "Enter last name.";
         
     }
+    else {
+        lastnameInput.className = "input";
+        errorlastname.innerHTML = '';
 
-    //TODO add a way to get for legit email.
+    }
+
+
+    //email
+    emailregex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
     if (emailInput.value.length == 0 ){
         event.preventDefault();
         emailInput.className = "input is-danger";
         erroremail.innerHTML = "Enter an email address.";  
     }
-    
+    else if(!emailInput.value.match(emailregex)){
+        event.preventDefault();
+        emailInput.className = "input is-danger";
+        errorlastname.innerHTML = "Invalid email.";
+    }
+    else{
+        emailInput.className = "input";
+        erroremail.innerHTML = '';
+    }
+
+
+    //username 
     if (usernameInput.value.length == 0 ){
         event.preventDefault();
         usernameInput.className = "input is-danger";
         errorusername.innerHTML = "Enter a username.";
     }
+    
+    else{
+        usernameInput.className = "input";
+        errorusername.innerHTML = '';
+    }
 
+    
+    //password
     if(passwordInput.value.length == 0){
         event.preventDefault();
         passwordInput.className = "input is-danger";
         errorpassword.innerHTML = "Enter a password."
     }
+    else{
+        passwordInput.className = "input";
+        errorpassword.innerHTML = '';
+    }
 
-   
+    
+
+
+    if (error = "Email is taken."){
+        emailInput.className = "input is-danger";
+        errorlastname.innerHTML = "Email is taken.";
+    }
+
+    if (error = "UserExistsError 'A user with the given username is already registered'"){
+        usernameInput.className = "input is-danger";
+        errorusername.innerHTML = "Username is taken.";
+    }
+    if (error = "MissingUsernameError: No username was given"){
+        usernameInput.className = "input is-danger";
+        errorusername.innerHTML = "Username is taken.";
+    }
+
+
 
 
 

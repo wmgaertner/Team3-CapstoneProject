@@ -21,7 +21,8 @@
     <div class="content is-max-desktop">
       <h1>Sign up form</h1>
       <div class="container" style="width: 50%">
-        <form action="/register" method="POST" onsubmit="registration()">
+
+        <form action="/register" method="POST" onsubmit="registration(<%= locals.error %>)"> <!--this works lol-->
 
 
           <p class="control has-icons-left">
@@ -31,7 +32,7 @@
             </span>
           </p>
 
-          <p id = "errorfirstname" style="color:red;"><%= locals.error %></p>
+          <p id = "errorfirstname" style="color:red;"></p>
 
           <p class="control has-icons-left">
             <input class="input" type="text" name="lastname" id="lastname" placeholder="lastname"/>
