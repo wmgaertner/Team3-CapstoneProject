@@ -13,7 +13,7 @@ var UserDataSchema=mongoose.Schema({
     timestamps: [String],
     insulinlevel: Number,
     yearofdiagnosis: Number,
-    diabetestype: String,
+    diabetic: Boolean,
 });
 
 
