@@ -15,7 +15,7 @@ function dashboard() {
     }
 }
 
-function registration(error){
+function registration(){
 
     var firstnameInput = document.getElementById('firstname');
     var lastnameInput = document.getElementById('lastname');
