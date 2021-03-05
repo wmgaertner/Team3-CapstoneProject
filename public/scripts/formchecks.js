@@ -103,48 +103,6 @@ function registration(error){
 
 
 
-    /*Error Handling
-    IncorrectPasswordError: specifies the error message returned when the password is incorrect. Defaults to 'Incorrect password'.
-    IncorrectUsernameError: specifies the error message returned when the username is incorrect. Defaults to 'Incorrect username'.
-    MissingUsernameError: specifies the error message returned when the username has not been set during registration. Defaults to 'Field %s is not set'.
-    MissingPasswordError: specifies the error message returned when the password has not been set during registration. Defaults to 'Password argument not set!'.
-    UserExistsError: specifies the error message returned when the user already exists during registration. Defaults to 'User already exists with name %s'.
-    NoSaltValueStored: Occurs in case no salt value is stored in the MongoDB collection.
-    AttemptTooSoonError: Occurs if the option limitAttempts is set to true and a login attept occures while the user is still penalized.
-    TooManyAttemptsError: Returned when the user's account is locked due to too many failed login attempts.
-    */
-
-    if (error = "Email is taken."){
-        emailInput.className = "input is-danger";
-        errorlastname.innerHTML = "Email is taken.";
-    }
-    else{
-        emailInput.className = "input";
-        errorlastname.innerHTML = "";
-    }
-
-    
-    if (error = "UserExistsError 'A user with the given username is already registered'"){
-        usernameInput.className = "input is-danger";
-        errorusername.innerHTML = "Username is taken.";
-    }
-    else{
-        usernameInput.className = "input";
-        errorusername.innerHTML = "";
-    }
-
-
-    if (error = "MissingUsernameError: No username was given"){
-        usernameInput.className = "input is-danger";
-        errorusername.innerHTML = "No Username was given.";
-    }
-    else{
-        usernameInput.className = "input";
-        errorusername.innerHTML = "";
-    }
-
-
-
 
 
 

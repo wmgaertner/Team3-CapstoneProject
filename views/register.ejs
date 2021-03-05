@@ -22,7 +22,7 @@
       <h1>Sign up form</h1>
       <div class="container" style="width: 50%">
 
-        <form action="/register" method="POST" onsubmit="registration(<%= locals.error %>)"> <!--this works lol-->
+        <form action="/register" method="POST" onsubmit="registration()"> 
 
 
           <p class="control has-icons-left">
@@ -33,6 +33,7 @@
           </p>
 
           <p id = "errorfirstname" style="color:red;"></p>
+          
 
           <p class="control has-icons-left">
             <input class="input" type="text" name="lastname" id="lastname" placeholder="lastname"/>
@@ -72,9 +73,13 @@
           <p id = "errorpassword" style="color:red;"></p>
 
           
-          <button class="button is-primary is-rounded">Create Account</button>
+          <button class="button is-primary is-rounded">Create Account</button> 
 
+          <br>
+          <br>
 
+          <p id = "errorpassword" style="color:red;">Debug: <%= locals.error %></p> <!--debug-->
+          
         </form>
       </div>
     </div>
@@ -85,6 +90,53 @@
 
     <a href="/login"><button class="button">Login</button></a>
     <a href="/"><button class="button">Back</button></a>
+
+
+
+
+
+
+
+
+    <script>
+
+      /*Server Side Error Handling
+      IncorrectPasswordError: specifies the error message returned when the password is incorrect. Defaults to 'Incorrect password'.
+      IncorrectUsernameError: specifies the error message returned when the username is incorrect. Defaults to 'Incorrect username'.
+      MissingUsernameError: specifies the error message returned when the username has not been set during registration. Defaults to 'Field %s is not set'.
+      MissingPasswordError: specifies the error message returned when the password has not been set during registration. Defaults to 'Password argument not set!'.
+      UserExistsError: specifies the error message returned when the user already exists during registration. Defaults to 'User already exists with name %s'.
+      */
+
+      var error = "<%- locals.error %>";
+      
+      var emailInput = document.getElementById('email');
+      var usernameInput = document.getElementById('username');
+      var passwordInput = document.getElementById('password')
+
+      var erroremail = document.getElementById("erroremail");
+      var errorusername = document.getElementById("errorusername");
+      var errorpassword = document.getElementById("errorpassword")
+
+      //email
+      if (error == "Email is taken."){
+        emailInput.className = "input is-danger";
+        erroremail.innerHTML = "Email is taken.";
+      } 
+      
+
+      //username
+      if (error == "MissingUsernameError: No username was given"){
+        usernameInput.className = "input is-danger";
+        errorusername.innerHTML = "No username was given.";
+      } 
+      if(error == "UserExistsError: A user with the given username is already registered"){
+        usernameInput.className = "input is-danger";
+        errorusername.innerHTML = "Username is already registered."
+      }
+
+
+    </script>
 
 
   </body>
