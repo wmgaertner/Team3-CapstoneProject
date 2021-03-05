@@ -71,9 +71,13 @@
 
       if (jsonObject['diabetic'] == true) {
         var topAnnotation = 180;
+        var topAnnotationText = "High Value (diabetic)";
+        var btmAnnotationText = "Low Value (diabetic)";
       }
       else {
         var topAnnotation = 140;
+        var topAnnotationText = "High Value (non-diabetic)";
+        var btmAnnotationText = "Low Value (non-diabetic)";
       }
 
       for (i = 0; i < jsonGluLength; i++) {
@@ -116,7 +120,7 @@
                 borderDash: [4, 8], 
                 label: {
                   backgroundColor: "red",
-                  content: "Low Value (non-diabetic)",
+                  content: btmAnnotationText,
                   enabled: true,
                   yAdjust: -10
                 }
@@ -131,7 +135,7 @@
                 borderDash: [4, 8],
                 label: {
                   backgroundColor: "red",
-                  content: "High Value (non-diabetic)",
+                  content: topAnnotationText,
                   enabled: true,
                   yAdjust: 10
                 }
