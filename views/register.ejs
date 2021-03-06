@@ -99,13 +99,22 @@
 
 
     <script>
+      /*
+      Passport local mongoose
+      ============================
+      MissingPasswordError 'No password was given'
+      AttemptTooSoonError 'Account is currently locked. Try again later'
+      TooManyAttemptsError 'Account locked due to too many failed login attempts'
+      NoSaltValueStoredError 'Authentication not possible. No salt value stored'
+      IncorrectPasswordError 'Password or username are incorrect'
+      IncorrectUsernameError 'Password or username are incorrect'
+      MissingUsernameError 'No username was given'
+      UserExistsError 'A user with the given username is already registered'
 
-      /*Server Side Error Handling
-      IncorrectPasswordError: specifies the error message returned when the password is incorrect. Defaults to 'Incorrect password'.
-      IncorrectUsernameError: specifies the error message returned when the username is incorrect. Defaults to 'Incorrect username'.
-      MissingUsernameError: specifies the error message returned when the username has not been set during registration. Defaults to 'Field %s is not set'.
-      MissingPasswordError: specifies the error message returned when the password has not been set during registration. Defaults to 'Password argument not set!'.
-      UserExistsError: specifies the error message returned when the user already exists during registration. Defaults to 'User already exists with name %s'.
+
+      custom (email)
+      ===============================
+      Email is taken.
       */
 
       var error = "<%- locals.error %>";

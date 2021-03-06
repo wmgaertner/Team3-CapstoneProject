@@ -68,7 +68,7 @@ function registration(){
     else if(!emailInput.value.match(emailregex)){
         event.preventDefault();
         emailInput.className = "input is-danger";
-        errorlastname.innerHTML = "Invalid email.";
+        erroremail.innerHTML = "Invalid email.";
     }
     else{
         emailInput.className = "input";
