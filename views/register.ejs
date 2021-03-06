@@ -24,7 +24,6 @@
 
         <form action="/register" method="POST" onsubmit="registration()"> 
 
-
           <p class="control has-icons-left">
             <input class="input" type="text" name="firstname" id="firstname" placeholder="firstname"/>
             <span class="icon is-left">
@@ -43,7 +42,7 @@
           </p>
 
           <p id = "errorlastname" style="color:red;"></p>
-
+          
           <p class="control has-icons-left">
             <input class="input" type="text" name="email" id="email" placeholder="email" />
             <span class="icon is-left">
@@ -52,8 +51,26 @@
           </p>
 
           <p id = "erroremail" style="color:red;"></p>
-             
 
+
+          <p class="control has-icons-left">
+            <input class="input" type="number" name="age" id="age" placeholder="age" />
+            <span class="icon is-left">
+              <iconify-icon data-icon="mdi:calendar-month"></iconify-icon>
+            </span>
+          </p>
+          
+          <label class="label" for="diagnosis-dropdown">Select Diagnosis:</label>
+          <div class="select">
+            <select name="diabetic" id="diabetic" required>
+              <option></option>
+              <option value="true">Diabetic</option>
+              <option value="false">Non-Diabetic</option>
+            </select>
+          </div>
+          
+          <p></p>
+          
           <p class="control has-icons-left">
             <input class="input" type="text" name="username" id="username" placeholder="username"/>
             <span class="icon is-left">
@@ -62,7 +79,7 @@
           </p>
 
           <p id = "errorusername" style="color:red;"></p>
-
+          
           <p class="control has-icons-left">
             <input class="input" type="text" name="password" id="password" placeholder="password"/>
             <span class="icon is-left">

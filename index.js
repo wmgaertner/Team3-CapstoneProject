@@ -97,6 +97,8 @@ app.post("/register", function (req, res) {
   var firstname = req.body.firstname;
   var lastname = req.body.lastname;
   var email = req.body.email;
+  var age = parseInt(req.body.age);
+  var diabetic = req.body.diabetic === "true";
   
   UserData.exists({email: email}).then(answer => {
     if (answer == false){
@@ -116,7 +118,9 @@ app.post("/register", function (req, res) {
                 lastname: lastname, 
                 email: email,  
                 glucoselevels: [], 
-                timestamps: []
+                timestamps: [],
+                age: age,
+                diabetic: diabetic
               })
               Data.save();
               res.render("login");

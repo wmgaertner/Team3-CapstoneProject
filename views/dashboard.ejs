@@ -69,6 +69,17 @@
       var jsonGluLength = jsonObject['glucoselevels'].length;
       var jsonGlucose = [];
 
+      if (jsonObject['diabetic'] == true) {
+        var topAnnotation = 180;
+        var topAnnotationText = "High Value (diabetic)";
+        var btmAnnotationText = "Low Value (diabetic)";
+      }
+      else {
+        var topAnnotation = 140;
+        var topAnnotationText = "High Value (non-diabetic)";
+        var btmAnnotationText = "Low Value (non-diabetic)";
+      }
+
       for (i = 0; i < jsonGluLength; i++) {
         jsonGlucose.push(parseFloat(jsonObject['glucoselevels'][i]));
         timestamps.push(jsonObject['timestamps'][i]);
@@ -103,13 +114,13 @@
                 type: 'line',
                 mode: 'horizontal',
                 scaleID: 'y-axis-0',
-                value: 60,
+                value: 50,
                 borderColor: 'red',
                 borderWidth: 2, 
                 borderDash: [4, 8], 
                 label: {
                   backgroundColor: "red",
-                  content: "Low Value (non-diabetic)",
+                  content: btmAnnotationText,
                   enabled: true,
                   yAdjust: -10
                 }
@@ -118,13 +129,13 @@
                 type: 'line',
                 mode: 'horizontal',
                 scaleID: 'y-axis-0',
-                value: 100,
+                value: topAnnotation,
                 borderColor: 'red',
                 borderWidth: 2,
                 borderDash: [4, 8],
                 label: {
                   backgroundColor: "red",
-                  content: "High Value (non-diabetic)",
+                  content: topAnnotationText,
                   enabled: true,
                   yAdjust: 10
                 }
