@@ -1,3 +1,4 @@
+//global constants
 const express = require("express");
  mongoose = require("mongoose");
  passport = require("passport");
@@ -8,21 +9,25 @@ const express = require("express");
  UserData = require("./models/userdata.js"); //userdata model object
  timestamps = require('./public/scripts/timestamps.js'); 
  emailverification = require('./public/scripts/emailverification');
- flash = require('connect-flash');
+
+//global variables
+var app = express();
 
 
+//middleware
+//==========================================================
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useFindAndModify", false);
 mongoose.set("useCreateIndex", true);
 mongoose.set("useUnifiedTopology", true);
 mongoose.connect("mongodb+srv://abc:test123@cluster0.7bifm.mongodb.net/Cluster0?retryWrites=true&w=majority");
 
-var app = express();
+
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(express.static("node_modules"));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(flash());
+
 
 app.use(
   require("express-session")({
@@ -38,6 +43,7 @@ app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
 
 //=====================
 // ROUTES
