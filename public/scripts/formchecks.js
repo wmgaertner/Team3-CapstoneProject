@@ -20,17 +20,19 @@ function registration(){
     var firstnameInput = document.getElementById('firstname');
     var lastnameInput = document.getElementById('lastname');
     var emailInput = document.getElementById('email');
+    var ageInput = document.getElementById('age');
     var usernameInput = document.getElementById('username');
-    var passwordInput = document.getElementById('password')
+    var passwordInput = document.getElementById('password');
 
     var errorfirstname = document.getElementById("errorfirstname");
     var errorlastname = document.getElementById("errorlastname");
     var erroremail = document.getElementById("erroremail");
+    var errorage = document.getElementById("errorage");
     var errorusername = document.getElementById("errorusername");
-    var errorpassword = document.getElementById("errorpassword")
+    var errorpassword = document.getElementById("errorpassword");
 
     
-
+    //firstname
     if (firstnameInput.value.length == 0 ){
         event.preventDefault();
         firstnameInput.className = "input is-danger";
@@ -43,7 +45,7 @@ function registration(){
     }
 
     
-
+    //lastname
     if (lastnameInput.value.length == 0 ){
         event.preventDefault();
         lastnameInput.className = "input is-danger";
@@ -74,6 +76,29 @@ function registration(){
         emailInput.className = "input";
         erroremail.innerHTML = '';
     }
+
+
+    //age
+    if (ageInput.value.length == 0 ){
+        event.preventDefault();
+        ageInput.className = "input is-danger";
+        errorage.innerHTML = "Enter a age.";
+    }
+    else if (isNaN(ageInput.value)) {
+        event.preventDefault();
+        ageInput.className = "input is-danger";
+        errorage.innerHTML = "Age must be a number.";
+    }
+    else if (ageInput.value < 0) {
+        event.preventDefault();
+        ageInput.className = "input is-danger";
+        errorage.innerHTML = "Age must be a postive number.";
+    }
+    else{
+        ageInput.className = "input";
+        errorage.innerHTML = '';
+    }
+
 
 
     //username 
