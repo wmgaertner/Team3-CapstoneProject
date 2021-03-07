@@ -129,6 +129,44 @@ function registration(){
 
 
 
+}
+
+
+function login(){
+
+    var usernameInput = document.getElementById('username');
+    var passwordInput = document.getElementById('password');
+
+    var errorelement = document.getElementById("error");
+    
+
+
+    //username 
+    if (usernameInput.value.length == 0 ){
+        event.preventDefault();
+        usernameInput.className = "input is-danger";
+        errorelement.innerHTML = "Enter a username.";
+    }
+    
+    else{
+        usernameInput.className = "input";
+        errorelement.innerHTML = '';
+    }
+
+
+
+    //password
+    if(passwordInput.value.length == 0){
+        event.preventDefault();
+        passwordInput.className = "input is-danger";
+        errorelement.innerHTML = "Enter a password."
+    }
+    else{
+        passwordInput.className = "input";
+        errorelement.innerHTML = '';
+    }
+
+
 
 
 }

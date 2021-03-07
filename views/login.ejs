@@ -1,82 +1,91 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta
-      charset="utf-8"
-      name="viewport"
-      content="width=device-width, initial-scale=1"
-    />
-      
-    <!-- CSS Stylesheets -->
-    <link href="/css/login.css" rel="stylesheet" type="text/css"/>
-    <link href="/bulma/css/bulma.css" rel="stylesheet" type="text/css" /> 
-    
-    <!-- Icons -->
-    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
 
-  </head>
-  <body><center>
+<head>
+  <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1" />
 
-   
-  <br>
-  <br> <!--room for navbar-->
-  <br>
+  <!-- CSS Stylesheets -->
+  <link href="/css/login.css" rel="stylesheet" type="text/css" />
+  <link href="/bulma/css/bulma.css" rel="stylesheet" type="text/css" />
+
+  <!-- Scripts -->
+  <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+  <script src="scripts/errortranslations.js"></script>
+
+</head>
 
 
-  <div class="imgbox">
-    <img class="center-fit" src='/images/BloodDrop.png'>
-  </div>  
+<body>
+  <center>
 
-      <div class="container" style="position:fixed;left:80px;top:350px;right:80px;"></div>
+
+    <br>
+    <br>
+    <!--room for navbar-->
+    <br>
+
+
+    <div class="imgbox">
+      <img class="center-fit" src='/images/BloodDrop.png'>
+    </div>
+
+    <div class="container" style="position:fixed;left:80px;top:350px;right:80px;"></div>
     <div class="content is-max-desktop">
-      
-      <div class="container" style="width: 23%;">
-        <form action="/login" method="POST">
+
+      <div class="container" style="width: 24%;">
+        <form action="/login" method="POST" onsubmit="login()">
           <p class="control has-icons-left">
-            <input
-              class="input"
-              type="text"
-              name="username"
-              placeholder="username"
-            />
+            <input class="input" type="text" name="username" id="username" placeholder="username" />
             <span class="icon is-left">
               <iconify-icon data-icon="mdi:rename-box"></iconify-icon>
             </span>
           </p>
+
+
           <br>
+
           <p class="control has-icons-left">
-            <input
-              class="input"
-              type="password"
-              name="password"
-              placeholder="password"
-            />
+            <input class="input" type="password" name="password" id="password" placeholder="password" />
             <span class="icon is-left">
               <iconify-icon data-icon="mdi:key-variant"></iconify-icon>
             </span>
           </p>
+
+          <p id="error" style="color:red;"></p>
+
           <br>
           <br>
           <button class="button is-primary is-rounded">Login</button>
+          
         </form>
       </div>
     </div>
-    
+
     <a href="/register">
       <button class="button" style="height:30px;width:70px;">Sign Up</button>
     </a>
-    
-    <a href="/" >
+
+    <a href="/">
       <button class="button" style="height:30px;width:70px;">Back</button>
     </a>
-    
 
-    
+
+
     <br>
-    
-    <div id="container">          
-        <div id="footer">Not Copyrighted © 2021. </div> 
+
+    <div id="container">
+      <div id="footer">Not Copyrighted © 2021. </div>
+    </div>
+
+    <script>
+      var error = '<%- locals.error %>';
+      translatelogin(error);
+    </script>
 
 
-  </body>
+
+
+
+</body>
+
 </html>
