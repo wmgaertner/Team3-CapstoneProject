@@ -145,7 +145,7 @@ function login(){
     if (usernameInput.value.length == 0 ){
         event.preventDefault();
         usernameInput.className = "input is-danger";
-        errorelement.innerHTML = "Enter a username.";
+        errorelement.innerHTML = "Enter a username or password.";
     }
     
     else{
@@ -159,7 +159,7 @@ function login(){
     if(passwordInput.value.length == 0){
         event.preventDefault();
         passwordInput.className = "input is-danger";
-        errorelement.innerHTML = "Enter a password."
+        errorelement.innerHTML = "Enter a username or password."
     }
     else{
         passwordInput.className = "input";
