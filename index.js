@@ -9,6 +9,8 @@ const express = require("express");
  UserData = require("./models/userdata.js"); //userdata model object
  timestamps = require('./public/scripts/timestamps.js'); 
  emailverification = require('./public/scripts/emailverification');
+ flash = require('connect-flash');
+
 
 //global variables
 var app = express();
@@ -27,6 +29,7 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(express.static("node_modules"));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(flash());
 
 
 app.use(
@@ -149,18 +152,15 @@ app.post("/register", function (req, res) {
 
 //Showing login form
 app.get("/login", function (req, res) {
-  res.render("login");
+  res.render('login', {error: req.flash('error')});
 });
 
 //Handling user login
-app.post(
-  "/login",
-  passport.authenticate("local", {
-    successRedirect: "/dashboard",
-    failureRedirect: "/login",
-  }),
-  function (req, res) {}
-);
+app.post('/login', passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), 
+function(req, res) {
+  res.redirect('/dashboard');
+});
+
 
 //Handling user logout
 app.get("/logout", function (req, res) {
