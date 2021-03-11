@@ -27,7 +27,7 @@
         <form action="/register" method="POST" onsubmit="registration()"> 
 
           <p class="control has-icons-left">
-            <input class="input" type="text" name="firstname" id="firstname" placeholder="firstname"/>
+            <input class="input" type="text" name="firstname" id="firstname" placeholder="First name"/>
             <span class="icon is-left">
               <iconify-icon data-icon="mdi:account-circle"></iconify-icon>
             </span>
@@ -37,7 +37,7 @@
           
 
           <p class="control has-icons-left">
-            <input class="input" type="text" name="lastname" id="lastname" placeholder="lastname"/>
+            <input class="input" type="text" name="lastname" id="lastname" placeholder="Last name"/>
             <span class="icon is-left">
               <iconify-icon data-icon="mdi:account-circle-outline"></iconify-icon>
             </span>
@@ -46,7 +46,7 @@
           <p id = "errorlastname" style="color:red;"></p>
           
           <p class="control has-icons-left">
-            <input class="input" type="text" name="email" id="email" placeholder="email" />
+            <input class="input" type="text" name="email" id="email" placeholder="Email" />
             <span class="icon is-left">
               <iconify-icon data-icon="mdi:email-outline"></iconify-icon>
             </span>
@@ -56,7 +56,7 @@
 
 
           <p class="control has-icons-left">
-            <input class="input" type="number" name="age" id="age" placeholder="age" />
+            <input class="input" type="number" name="age" id="age" placeholder="Age" />
             <span class="icon is-left">
               <iconify-icon data-icon="mdi:calendar-month"></iconify-icon>
             </span>
@@ -65,18 +65,19 @@
           <p id = "errorage" style="color:red;"></p>
           
           <label class="label" for="diagnosis-dropdown">Select Diagnosis:</label>
-          <div class="select">
-            <select name="diabetic" id="diabetic" required>
+
+          <div class="select" id="diabeticdiv">
+            <select name="diabetic" id="diabetic">
               <option></option>
               <option value="true">Diabetic</option>
               <option value="false">Non-Diabetic</option>
             </select>
           </div>
           
-          <p></p>
+          <p id = "errordiabetic" style="color:red;"></p>
           
           <p class="control has-icons-left">
-            <input class="input" type="text" name="username" id="username" placeholder="username"/>
+            <input class="input" type="text" name="username" id="username" placeholder="Username"/>
             <span class="icon is-left">
               <iconify-icon data-icon="mdi:rename-box"></iconify-icon>
             </span>
@@ -85,7 +86,7 @@
           <p id = "errorusername" style="color:red;"></p>
           
           <p class="control has-icons-left">
-            <input class="input" type="text" name="password" id="password" placeholder="password"/>
+            <input class="input" type="text" name="password" id="password" placeholder="Password"/>
             <span class="icon is-left">
               <iconify-icon data-icon="mdi:key-variant"></iconify-icon>
             </span>

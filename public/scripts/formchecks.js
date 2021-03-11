@@ -17,17 +17,22 @@ function dashboard() {
 
 function registration(){
 
+    
     var firstnameInput = document.getElementById('firstname');
     var lastnameInput = document.getElementById('lastname');
     var emailInput = document.getElementById('email');
     var ageInput = document.getElementById('age');
+    var diagnosisInput = document.getElementById('diabetic');
+    var diagnosisDiv = document.getElementById('diabeticdiv');
     var usernameInput = document.getElementById('username');
     var passwordInput = document.getElementById('password');
+
 
     var errorfirstname = document.getElementById("errorfirstname");
     var errorlastname = document.getElementById("errorlastname");
     var erroremail = document.getElementById("erroremail");
     var errorage = document.getElementById("errorage");
+    var errordiagnosis = document.getElementById("errordiabetic");
     var errorusername = document.getElementById("errorusername");
     var errorpassword = document.getElementById("errorpassword");
 
@@ -99,7 +104,16 @@ function registration(){
         errorage.innerHTML = '';
     }
 
-
+    //diagnosis
+    if (diagnosisInput.selectedIndex == 0){
+        event.preventDefault();
+        diagnosisDiv.className = "select is-danger";
+        errordiagnosis.innerHTML = "Select an option.";
+    }
+    else{
+        diagnosisDiv.className = "select";
+        errordiagnosis.innerHTML = '';
+    }
 
     //username 
     if (usernameInput.value.length == 0 ){
