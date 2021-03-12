@@ -71,13 +71,13 @@
 
       if (jsonObject['diabetic'] == true) {
         var topAnnotation = 180;
-        var topAnnotationText = "High Value (diabetic)";
-        var btmAnnotationText = "Low Value (diabetic)";
+        var topAnnotationText = "High Value (Hyperglycemia)";
+        var btmAnnotationText = "Low Value (Hyperglycemia)";
       }
       else {
         var topAnnotation = 140;
-        var topAnnotationText = "High Value (non-diabetic)";
-        var btmAnnotationText = "Low Value (non-diabetic)";
+        var topAnnotationText = "High Value (Hypoglycemia)";
+        var btmAnnotationText = "Low Value (Hypoglycemia)";
       }
 
       for (i = 0; i < jsonGluLength; i++) {
