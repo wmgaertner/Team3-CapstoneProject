@@ -17,27 +17,10 @@ function dashboard() {
 
 function registration(){
 
-    
-    var firstnameInput = document.getElementById('firstname');
-    var lastnameInput = document.getElementById('lastname');
-    var emailInput = document.getElementById('email');
-    var ageInput = document.getElementById('age');
-    var diagnosisInput = document.getElementById('diabetic');
-    var diagnosisDiv = document.getElementById('diabeticdiv');
-    var usernameInput = document.getElementById('username');
-    var passwordInput = document.getElementById('password');
-
-
-    var errorfirstname = document.getElementById("errorfirstname");
-    var errorlastname = document.getElementById("errorlastname");
-    var erroremail = document.getElementById("erroremail");
-    var errorage = document.getElementById("errorage");
-    var errordiagnosis = document.getElementById("errordiabetic");
-    var errorusername = document.getElementById("errorusername");
-    var errorpassword = document.getElementById("errorpassword");
-
-    
     //firstname
+    var firstnameInput = document.getElementById('firstname');
+    var errorfirstname = document.getElementById("errorfirstname");
+
     if (firstnameInput.value.length == 0 ){
         event.preventDefault();
         firstnameInput.className = "input is-danger";
@@ -51,6 +34,9 @@ function registration(){
 
     
     //lastname
+    var lastnameInput = document.getElementById('lastname');
+    var errorlastname = document.getElementById("errorlastname");
+
     if (lastnameInput.value.length == 0 ){
         event.preventDefault();
         lastnameInput.className = "input is-danger";
@@ -64,7 +50,10 @@ function registration(){
     }
 
 
+
     //email
+    var emailInput = document.getElementById('email');
+    var erroremail = document.getElementById("erroremail");
     emailregex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if (emailInput.value.length == 0 ){
@@ -83,7 +72,11 @@ function registration(){
     }
 
 
+
     //age
+    var ageInput = document.getElementById('age');
+    var errorage = document.getElementById("errorage");
+
     if (ageInput.value.length == 0 ){
         event.preventDefault();
         ageInput.className = "input is-danger";
@@ -104,7 +97,13 @@ function registration(){
         errorage.innerHTML = '';
     }
 
+
+
     //diagnosis
+    var diagnosisInput = document.getElementById('diabetic');
+    var diagnosisDiv = document.getElementById('diabeticdiv');
+    var errordiagnosis = document.getElementById("errordiabetic");
+
     if (diagnosisInput.selectedIndex == 0){
         event.preventDefault();
         diagnosisDiv.className = "select is-danger";
@@ -115,7 +114,12 @@ function registration(){
         errordiagnosis.innerHTML = '';
     }
 
+
+
     //username 
+    var usernameInput = document.getElementById('username');
+    var errorusername = document.getElementById("errorusername");
+
     if (usernameInput.value.length == 0 ){
         event.preventDefault();
         usernameInput.className = "input is-danger";
@@ -128,7 +132,11 @@ function registration(){
     }
 
     
+
     //password
+    var passwordInput = document.getElementById('password');
+    var errorpassword = document.getElementById("errorpassword");
+
     if(passwordInput.value.length == 0){
         event.preventDefault();
         passwordInput.className = "input is-danger";
@@ -141,21 +149,18 @@ function registration(){
 
 
 
-
-
 }
 
 
 function login(){
 
-    var usernameInput = document.getElementById('username');
-    var passwordInput = document.getElementById('password');
 
     var errorelement = document.getElementById("error");
-    
 
 
     //username 
+    var usernameInput = document.getElementById('username');
+
     if (usernameInput.value.length == 0 ){
         event.preventDefault();
         usernameInput.className = "input is-danger";
@@ -170,6 +175,8 @@ function login(){
 
 
     //password
+    var passwordInput = document.getElementById('password');
+
     if(passwordInput.value.length == 0){
         event.preventDefault();
         passwordInput.className = "input is-danger";
