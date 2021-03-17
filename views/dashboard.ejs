@@ -107,6 +107,14 @@
             display: true,
             text: "Blood Glucose Chart"
           },
+          scales: {
+            yAxes: [{
+              ticks: {
+                suggestedMin: 20,
+                suggestedMax: 200
+              }
+            }]
+          },
           annotation: {
             annotations: [
               {
@@ -121,8 +129,7 @@
                 label: {
                   backgroundColor: "red",
                   content: btmAnnotationText,
-                  enabled: true,
-                  yAdjust: -10
+                  enabled: true
                 }
               }, {
                 id: 'topLine',
@@ -136,8 +143,7 @@
                 label: {
                   backgroundColor: "red",
                   content: topAnnotationText,
-                  enabled: true,
-                  yAdjust: 10
+                  enabled: true
                 }
               }
             ]
