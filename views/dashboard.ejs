@@ -71,11 +71,14 @@
 
       if (jsonObject['diabetic'] == true) {
         var topAnnotation = 180;
+        var sugMax = 200;
         var topAnnotationText = "High Value (Hyperglycemia)";
         var btmAnnotationText = "Low Value (Hypoglycemia)";
+        
       }
       else {
         var topAnnotation = 140;
+        var sugMax = 160;
         var topAnnotationText = "High Value (Hypoglycemia)";
         var btmAnnotationText = "Low Value (Hypoglycemia)";
       }
@@ -111,7 +114,7 @@
             yAxes: [{
               ticks: {
                 suggestedMin: 20,
-                suggestedMax: 200
+                suggestedMax: sugMax
               }
             }]
           },
