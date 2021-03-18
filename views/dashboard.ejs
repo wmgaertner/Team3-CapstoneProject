@@ -11,8 +11,16 @@
     <script src="/chart.js/dist/Chart.min.js"></script>
     <script src="/chartjs-plugin-annotation/chartjs-plugin-annotation.min.js"></script>
     <script src="scripts/formchecks.js"></script>
+
     <script src="scripts/dashboard.js"></script>
     <script> main('<%- JSON.stringify(data, null, 0) %>'); </script>
+
+    <script src="https://platform.fatsecret.com/js?key=9bb1a96ff4e541079791cb0180c7543c"></script>
+    <script> 
+      fatsecret.setContainer("my_container");
+      fatsecret.setCanvas("home");
+    </script>
+
     
 
     <!-- CSS Stylesheets -->
@@ -52,6 +60,9 @@
         </form>
 
         <canvas id="myChart"></canvas>
+        <br>
+        <div id="my_container" class="fatsecret_container"></div>
+
       </div>
     </div>
 
