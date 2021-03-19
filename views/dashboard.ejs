@@ -11,9 +11,11 @@
     <script src="/chart.js/dist/Chart.min.js"></script>
     <script src="/chartjs-plugin-annotation/chartjs-plugin-annotation.min.js"></script>
     <script src="/scripts/formchecks.js"></script>
+    <script src="/scripts/searchbar.js"></script>
 
     <script src="/scripts/dashboard.js"></script>
     <script> main('<%- JSON.stringify(locals.data, null, 0) %>'); </script>
+
 
     
 
@@ -42,13 +44,11 @@
   <body>
     <div class="content is-max-desktop">
       <div class="container" style="width: 50%">
+
         <form action="/dashboard" method="POST" onsubmit="dashboard()">
-          <input
-            class="input"
-            type="text"
-            name="glucoselevel"
-            placeholder="glucoselevel"
-          />
+
+          <input class="input" type="text" name="glucoselevel" placeholder="glucoselevel"/>
+
           <br>
           <br>
           <button class="button" >Submit</button>
@@ -58,22 +58,14 @@
         <br>
         
 
-        <form action="/dashboard/foodresult" method="POST">
-          <input
-            class="input"
-            type="text"
-            name="foodinput"
-            placeholder="food search (work in progress)"
-          />
-          <br>
-          <br>
-          <button class="button" >Submit</button>
-          <br>
-          <br>
-          <textarea id="foodresult"  rows="12" cols="155"><%- JSON.stringify(locals.food, null, 0) %> %></textarea>
+        
 
+        <input class="input" type="text" id="foodinput" placeholder="food search (work in progress)"/>
 
-        </form>
+        <div id = "match-list"></div>
+      
+
+       
 
 
         

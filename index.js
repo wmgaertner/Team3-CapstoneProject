@@ -9,8 +9,9 @@ const express = require("express");
  UserData = require("./models/userdata.js"); //userdata model object
  timestamps = require('./public/scripts/timestamps.js'); 
  emailverification = require('./public/scripts/emailverification.js');
- fatAPI = new (require('fatsecret'))('9bb1a96ff4e541079791cb0180c7543c', 'aed331e5d62f4a08b2c30cb10ba67dc7');
  flash = require('connect-flash');
+ cors = require('cors')
+
  
  
  
@@ -32,6 +33,9 @@ app.use(express.static(__dirname + "/public"));
 app.use(express.static("node_modules"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(flash());
+app.use(cors())
+
+
 
 
 app.use(
@@ -94,34 +98,6 @@ app.post("/dashboard", isLoggedIn, function (req, res) {
   });
 
 });
-
-
-app.post("/dashboard/foodresult", isLoggedIn, function (req, res) {
-
-  var foodinput = req.body.foodinput;
-  
-
-  fatAPI.method('foods.search', {
-    search_expression: foodinput,
-    max_results: 10
-  })
-  .then(function(results) {
-
-    UserData.findById(req.user._id, 
-      function (err,docs) {
-        if (err) {
-          throw new Error("Not found");
-        }
-        res.render("dashboard", { data: docs, username: req.user.username, food: results.foods.food});
-    });  
-  
-
-  })
-  .catch(err => console.error(err));
-
-});
-
-
 
 
 
