@@ -10,9 +10,10 @@ const express = require("express");
  timestamps = require('./public/scripts/timestamps.js'); 
  emailverification = require('./public/scripts/emailverification.js');
  flash = require('connect-flash');
- cors = require('cors')
-
+ fatAPI = new (require('fatsecret'))('9bb1a96ff4e541079791cb0180c7543c', 'aed331e5d62f4a08b2c30cb10ba67dc7');
+  
  
+
  
  
 //global variables
@@ -33,7 +34,7 @@ app.use(express.static(__dirname + "/public"));
 app.use(express.static("node_modules"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(flash());
-app.use(cors())
+
 
 
 
@@ -65,7 +66,7 @@ app.get("/", function (req, res) {
 
 // Showing dashboard page
 app.get("/dashboard", isLoggedIn, function (req, res) {
-  
+
   UserData.findById(req.user._id, 
     function (err,docs) {
       if (err) {
@@ -75,6 +76,26 @@ app.get("/dashboard", isLoggedIn, function (req, res) {
   });  
 
 });
+
+
+app.get("/search", async function(req,res){
+
+  await fatAPI
+  .method('foods.search', {
+    search_expression: req.body.foodinput,
+    max_results: 10
+  })
+  .then(function(results) {
+    console.log(results.foods);
+  })
+  .catch(err => console.error(err));
+
+  
+});
+
+
+
+
 
 //push data to the database
 app.post("/dashboard", isLoggedIn, function (req, res) {
@@ -98,6 +119,8 @@ app.post("/dashboard", isLoggedIn, function (req, res) {
   });
 
 });
+
+
 
 
 
