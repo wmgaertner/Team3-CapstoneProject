@@ -8,10 +8,12 @@ const express = require("express");
  User = require("./models/user.js"); //user model object 
  UserData = require("./models/userdata.js"); //userdata model object
  timestamps = require('./public/scripts/timestamps.js'); 
- emailverification = require('./public/scripts/emailverification');
+ emailverification = require('./public/scripts/emailverification.js');
+ fatAPI = new (require('fatsecret'))('9bb1a96ff4e541079791cb0180c7543c', 'aed331e5d62f4a08b2c30cb10ba67dc7');
  flash = require('connect-flash');
-
-
+ 
+ 
+ 
 //global variables
 var app = express();
 
@@ -89,9 +91,38 @@ app.post("/dashboard", isLoggedIn, function (req, res) {
         }
         console.log("Result: ", docs);
         res.render("dashboard", { data: docs, username: req.user.username });
-    });
+  });
 
 });
+
+
+app.post("/dashboard/foodresult", isLoggedIn, function (req, res) {
+
+  var foodinput = req.body.foodinput;
+  
+
+  fatAPI.method('foods.search', {
+    search_expression: foodinput,
+    max_results: 10
+  })
+  .then(function(results) {
+
+    UserData.findById(req.user._id, 
+      function (err,docs) {
+        if (err) {
+          throw new Error("Not found");
+        }
+        res.render("dashboard", { data: docs, username: req.user.username, food: results.foods.food});
+    });  
+  
+
+  })
+  .catch(err => console.error(err));
+
+});
+
+
+
 
 
 // Showing register form

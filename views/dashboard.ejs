@@ -10,23 +10,18 @@
     <!-- Scripts -->
     <script src="/chart.js/dist/Chart.min.js"></script>
     <script src="/chartjs-plugin-annotation/chartjs-plugin-annotation.min.js"></script>
-    <script src="scripts/formchecks.js"></script>
+    <script src="/scripts/formchecks.js"></script>
 
-    <script src="scripts/dashboard.js"></script>
-    <script> main('<%- JSON.stringify(data, null, 0) %>'); </script>
-
-    <script src="https://platform.fatsecret.com/js?key=9bb1a96ff4e541079791cb0180c7543c"></script>
-    <script> 
-      fatsecret.setContainer("my_container");
-      fatsecret.setCanvas("home");
-    </script>
+    <script src="/scripts/dashboard.js"></script>
+    <script> main('<%- JSON.stringify(locals.data, null, 0) %>'); </script>
 
     
 
     <!-- CSS Stylesheets -->
-    <link href="css/dashboard.css" rel="stylesheet" type="text/css" />
-    <link href="/bulma/css/bulma.css" rel="stylesheet" type="text/css" />
-  
+    <link href="/css/dashboard.css" rel="stylesheet"/>
+    <link href="/bulma/css/bulma.css" rel="stylesheet"/>
+
+    
   
   </head>
   
@@ -34,7 +29,7 @@
     
     <div class="dropdown1">
       
-      <button class="dropbtn1" ><%= username %> </button>
+      <button class="dropbtn1" ><%- locals.username %> </button>
       <div class="dropdown-content1">
           <a href="/logout">Sign Out</a>
           
@@ -50,23 +45,43 @@
         <form action="/dashboard" method="POST" onsubmit="dashboard()">
           <input
             class="input"
-            id="glucoseInput"
             type="text"
             name="glucoselevel"
             placeholder="glucoselevel"
           />
-
+          <br>
+          <br>
           <button class="button" >Submit</button>
         </form>
 
         <canvas id="myChart"></canvas>
         <br>
-        <div id="my_container" class="fatsecret_container"></div>
+        
+
+        <form action="/dashboard/foodresult" method="POST">
+          <input
+            class="input"
+            type="text"
+            name="foodinput"
+            placeholder="food search (work in progress)"
+          />
+          <br>
+          <br>
+          <button class="button" >Submit</button>
+          <br>
+          <br>
+          <textarea id="foodresult"  rows="12" cols="155"><%- JSON.stringify(locals.food, null, 0) %> %></textarea>
+
+
+        </form>
+
+
+        
 
       </div>
     </div>
 
-    <img src="images/BloodDrop.png" />
+    <img src="/images/BloodDrop.png" />
 
 
   </body>
