@@ -78,20 +78,6 @@ app.get("/dashboard", isLoggedIn, function (req, res) {
 });
 
 
-app.get("/search", async function(req,res){
-
-  await fatAPI
-  .method('foods.search', {
-    search_expression: req.body.foodinput,
-    max_results: 10
-  })
-  .then(function(results) {
-    console.log(results.foods);
-  })
-  .catch(err => console.error(err));
-
-  
-});
 
 
 
