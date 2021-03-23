@@ -11,6 +11,7 @@ const express = require("express");
  emailverification = require('./public/scripts/emailverification.js');
  flash = require('connect-flash');
  fatAPI = new (require('fatsecret'))('9bb1a96ff4e541079791cb0180c7543c', 'aed331e5d62f4a08b2c30cb10ba67dc7');
+ i18n = require('i18n');
   
  
 
@@ -28,11 +29,17 @@ mongoose.set("useCreateIndex", true);
 mongoose.set("useUnifiedTopology", true);
 mongoose.connect("mongodb+srv://abc:test123@cluster0.7bifm.mongodb.net/Cluster0?retryWrites=true&w=majority");
 
+i18n.configure({
+  locales: ['en', 'es'], 
+  directory: __dirname + '/locales'
+});
+
 
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(express.static("node_modules"));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(i18n.init);
 app.use(flash());
 
 
@@ -188,6 +195,7 @@ function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) return next();
   res.redirect("/login");
 }
+
 
 
 

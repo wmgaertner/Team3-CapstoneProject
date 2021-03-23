@@ -1,0 +1,18 @@
+{
+	"signup": "Sign Up",
+	"login": "Login",
+	"create_account": "Create Account",
+	"submit": "Submit",
+	"back": "Back",
+	"sign_out": "Sign Out",
+	"diabetic": "Diabetic",
+	"non-diabetic": "Non-Diabetic",
+	"select_diagnosis": "Select Diagnosis",
+	"english": "English",
+    "spanish": "Spanish",
+	"firstname": "First name",
+    "lastname": "Last name",
+	"age": "Age",
+    "username": "Username",
+    "password": "Password"
+}

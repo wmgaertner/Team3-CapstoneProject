@@ -1,0 +1,18 @@
+{
+	"signup": "Inscribirse",
+	"login": "Acceso",
+    "create_account": "Crear una Cuenta",
+    "submit": "Enviar",
+    "back": "Regreso",
+    "sign_out": "Desconectar",
+    "diabetic": "Diabético",
+    "non-diabetic": "No-Diabético",
+    "select_diagnosis": "Seleccionar Diagnóstico",
+    "english": "Inglés",
+    "spanish": "Español",
+    "firstname": "Nomebre de pila",
+    "lastname": "Apellido",
+    "age": "edad",
+    "username": "Nombre de usuario",
+    "password": "Contraseña"
+}
