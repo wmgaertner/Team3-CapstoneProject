@@ -12,9 +12,9 @@ const express = require("express");
  flash = require('connect-flash');
  fatAPI = new (require('fatsecret'))('9bb1a96ff4e541079791cb0180c7543c', 'aed331e5d62f4a08b2c30cb10ba67dc7');
  i18n = require('i18n');
-  
- 
 
+ 
+ 
  
  
 //global variables
@@ -38,9 +38,11 @@ i18n.configure({
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(express.static("node_modules"));
+app.use(express.static(__dirname + "/dist"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(i18n.init);
 app.use(flash());
+
 
 
 
