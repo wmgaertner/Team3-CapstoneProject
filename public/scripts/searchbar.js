@@ -2,6 +2,7 @@
 /*
     apikey1 = 5e89818d38f44b53b8c1391fd53cbb6d
     apikey2 = 8c0c7132fb5a4a12901cc6ba13001aaf
+    apikey3 = ea7131e9dae646cbad57896b902321f9
 
 
 */
@@ -18,8 +19,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchFood = async searchText => {
         
     
-        const res1 = await fetch('https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=5e89818d38f44b53b8c1391fd53cbb6d&includeNutrition=true&metaInformation=true&number=3&query='+ search.value);
-        const res2 = await fetch('https://api.spoonacular.com/food/products/search?apiKey=8c0c7132fb5a4a12901cc6ba13001aaf&includeNutrition=true&number=3&query='+ search.value);
+        const res1 = await fetch('https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=ea7131e9dae646cbad57896b902321f9&includeNutrition=true&metaInformation=true&number=3&query='+ search.value);
+        const res2 = await fetch('https://api.spoonacular.com/food/products/search?apiKey=ea7131e9dae646cbad57896b902321f9&includeNutrition=true&number=3&query='+ search.value);
         
         var ingredients = await res1.json();
         var products = await res2.json();
@@ -76,12 +77,19 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
 
-    
 
+    var searchTimeout;
+    search.onkeypress = function () {
+        if (searchTimeout != undefined) clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(searchFood(search.value), 1000);
 
-    search.addEventListener('input', () => searchFood(search.value) ); 
-    
-
+        if(search.value.length === 0){
+            ingredients = [];
+            products = [];
+            matchList.innerHTML = '';
+        }
+        
+    };     
 
 
 
