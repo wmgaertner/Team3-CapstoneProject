@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchFood = async searchText => {
         
     
-        const res1 = await fetch('https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=5e89818d38f44b53b8c1391fd53cbb6d&includeNutrition=true&metaInformation=true&query='+ search.value);
-        const res2 = await fetch('https://api.spoonacular.com/food/menuItems/search?apiKey=5e89818d38f44b53b8c1391fd53cbb6d&includeNutrition=true&query='+ search.value);
+        const res1 = await fetch('https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=5e89818d38f44b53b8c1391fd53cbb6d&includeNutrition=true&metaInformation=true&number=4&query='+ search.value);
+        const res2 = await fetch('https://api.spoonacular.com/food/menuItems/search?apiKey=5e89818d38f44b53b8c1391fd53cbb6d&includeNutrition=true&number=4&query='+ search.value);
         
         var ingredients = await res1.json();
         var menuItems = await res2.json();
@@ -23,15 +23,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }); 
         
 
-        var foods = ingredients.concat(menuItems.menuItems);
+        var foodlist = ingredients.concat(menuItems.menuItems);
         
-        console.log(foods);
+        console.log(foodlist);
        
 
-        var matches = foods.filter(food =>{
+        var matches = foodlist.filter(food =>{
 
-            const regex = new RegExp(`^${searchText}`,'gi');
-            return food.name.match(regex); 
+            return food;
 
         }); 
 
@@ -47,20 +46,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     const outputHtml = matches =>{
+
         if(matches.length > 0){
             const html = matches
             .map(match => `
-                <div class="card" style="display: inline-block; text-align: left;">
+                <div class="card" >
                     <h4>${match.name} <img src="https://spoonacular.com/cdn/ingredients_100x100/${match.image}"></h4>
                 </div>
 
             `
-             )
-             .join('');
+            ).join('');
 
             matchList.innerHTML = html;
         }
+
     };
+
 
 
     search.addEventListener('input', () => searchFood(search.value) ); 
