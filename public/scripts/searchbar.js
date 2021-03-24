@@ -1,73 +1,67 @@
 
-const fatAPI = new (require('fatsecret'))('9bb1a96ff4e541079791cb0180c7543c', 'aed331e5d62f4a08b2c30cb10ba67dc7');
- 
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
 
-
-
-    const search = document.getElementById('foodinput');
-    const matchList = document.getElementById('match-list');
+  const search = document.getElementById('foodinput');
+  const matchList = document.getElementById('match-list');
 
 
+  //search api for food and filter it
+  const searchFood = async searchText => {
 
 
-    //search api for food and filter it
-    const searchFood = async searchText => {
+    url = 'https://api.nal.usda.gov/fdc/v1/foods/search?api_key=niQ8qRk2FqXYhdvQYRbYHKjtLdWWaH8nbJiSysVw&query=' + search.value;
 
-        
-        fatAPI
-        .method('foods.search', {
-          search_expression: search.value,
-          max_results: 10
-        })
-        .then(function(results) {
-          console.log(results);
-          foodlist = foods.filter(food => {return food});     
+    var res = await fetch(url);
 
-          if(searchText.length === 0){
-            foodlist = [];
-            matchList.innerHTML = '';
-          }
-        
-          outputHTML(foodlist);  
-
-
-        })
-        .catch(err => console.log(err));
-
+    var foods = await res.json();
     
-        
-
-    };
 
 
 
-    function outputHTML(matches){
+    console.log(foods);
 
-        if(matches.length > 0 ){
-            var html = matches
-            .map(match => `
+    foodlist = foods.foods.filter(food => { return food });
+
+    if (searchText.length === 0) {
+      foodlist = [];
+      matchList.innerHTML = '';
+    }
+
+    outputHTML(foodlist);
+
+
+
+  };
+
+
+
+  function outputHTML(matches) {
+
+    if (matches.length > 0) {
+      var html = matches
+        .map(match => `
                 <div class="card" >
 
-                    <h4>${match.name} <img src="https://spoonacular.com/cdn/ingredients_100x100/${match.image}"></h4>
+                    <h4>${match.description} </h4>
+                    <h4>${match.foodNutrients[2].value} Carbs</h4>
 
                 </div>
 
             `
-            ).join('');
+        ).join('');
 
 
 
-            matchList.innerHTML = html 
+      matchList.innerHTML = html
 
-        }
+    }
 
-    };
+  };
 
 
 
-    search.addEventListener('input', () => searchFood(search.value) );
+  search.addEventListener('input', () => searchFood(search.value));
 
 
 
