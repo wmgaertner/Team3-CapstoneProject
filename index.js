@@ -10,7 +10,6 @@ const express = require("express");
  timestamps = require('./public/scripts/timestamps.js'); 
  emailverification = require('./public/scripts/emailverification.js');
  flash = require('connect-flash');
- fatAPI = new (require('fatsecret'))('9bb1a96ff4e541079791cb0180c7543c', 'aed331e5d62f4a08b2c30cb10ba67dc7');
  i18n = require('i18n');
 
  
