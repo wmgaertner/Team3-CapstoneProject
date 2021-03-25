@@ -8,10 +8,14 @@ const express = require("express");
  User = require("./models/user.js"); //user model object 
  UserData = require("./models/userdata.js"); //userdata model object
  timestamps = require('./public/scripts/timestamps.js'); 
- emailverification = require('./public/scripts/emailverification');
+ emailverification = require('./public/scripts/emailverification.js');
  flash = require('connect-flash');
+ i18n = require('i18n');
 
-
+ 
+ 
+ 
+ 
 //global variables
 var app = express();
 
@@ -24,12 +28,23 @@ mongoose.set("useCreateIndex", true);
 mongoose.set("useUnifiedTopology", true);
 mongoose.connect("mongodb+srv://abc:test123@cluster0.7bifm.mongodb.net/Cluster0?retryWrites=true&w=majority");
 
+i18n.configure({
+  locales: ['en', 'es'], 
+  directory: __dirname + '/locales'
+});
+
 
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(express.static("node_modules"));
+app.use(express.static(__dirname + "/dist"));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(i18n.init);
 app.use(flash());
+
+
+
+
 
 
 app.use(
@@ -59,7 +74,7 @@ app.get("/", function (req, res) {
 
 // Showing dashboard page
 app.get("/dashboard", isLoggedIn, function (req, res) {
-  
+
   UserData.findById(req.user._id, 
     function (err,docs) {
       if (err) {
@@ -69,6 +84,12 @@ app.get("/dashboard", isLoggedIn, function (req, res) {
   });  
 
 });
+
+
+
+
+
+
 
 //push data to the database
 app.post("/dashboard", isLoggedIn, function (req, res) {
@@ -89,9 +110,12 @@ app.post("/dashboard", isLoggedIn, function (req, res) {
         }
         console.log("Result: ", docs);
         res.render("dashboard", { data: docs, username: req.user.username });
-    });
+  });
 
 });
+
+
+
 
 
 // Showing register form
@@ -172,6 +196,7 @@ function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) return next();
   res.redirect("/login");
 }
+
 
 
 

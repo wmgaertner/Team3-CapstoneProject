@@ -37,7 +37,7 @@
       <div class="container" style="width: 24%;">
         <form action="/login" method="POST" onsubmit="login()">
           <p class="control has-icons-left">
-            <input class="input" type="text" name="username" id="username" placeholder="Username" />
+            <input class="input" type="text" name="username" id="username" placeholder="<%= __('username') %>" />
             <span class="icon is-left">
               <iconify-icon data-icon="mdi:rename-box"></iconify-icon>
             </span>
@@ -47,28 +47,28 @@
           <br>
 
           <p class="control has-icons-left">
-            <input class="input" type="password" name="password" id="password" placeholder="Password" />
+            <input class="input" type="password" name="password" id="password" placeholder="<%= __('password') %>" />
             <span class="icon is-left">
               <iconify-icon data-icon="mdi:key-variant"></iconify-icon>
             </span>
           </p>
 
-          <p id="error" style="color:red;"><%= locals.error %></p>
+          <p id="error" style="color:red;"><%- locals.error %></p>
 
           <br>
           <br>
-          <button class="button is-primary is-rounded">Login</button>
+          <button class="button is-primary is-rounded"><%= __('login') %></button>
           
         </form>
       </div>
     </div>
 
     <a href="/register">
-      <button class="button" style="height:30px;width:70px;">Sign Up</button>
+      <button class="button" style="height:30px;width:70px;"><%= __('signup') %></button>
     </a>
 
     <a href="/">
-      <button class="button" style="height:30px;width:70px;">Back</button>
+      <button class="button" style="height:30px;width:70px;"><%= __('back') %></button>
     </a>
 
 

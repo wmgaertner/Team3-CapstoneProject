@@ -28,7 +28,7 @@
         <form action="/register" method="POST" onsubmit="registration()"> 
 
           <p class="control has-icons-left">
-            <input class="input" type="text" name="firstname" id="firstname" placeholder="First name"/>
+            <input class="input" type="text" name="firstname" id="firstname" placeholder="<%= __('firstname') %>"/>
             <span class="icon is-left">
               <iconify-icon data-icon="mdi:account-circle"></iconify-icon>
             </span>
@@ -38,7 +38,7 @@
           
 
           <p class="control has-icons-left">
-            <input class="input" type="text" name="lastname" id="lastname" placeholder="Last name"/>
+            <input class="input" type="text" name="lastname" id="lastname" placeholder="<%= __('lastname') %>"/>
             <span class="icon is-left">
               <iconify-icon data-icon="mdi:account-circle-outline"></iconify-icon>
             </span>
@@ -57,7 +57,7 @@
 
 
           <p class="control has-icons-left">
-            <input class="input" type="number" name="age" id="age" placeholder="Age" />
+            <input class="input" type="number" name="age" id="age" placeholder="<%= __('age') %>" />
             <span class="icon is-left">
               <iconify-icon data-icon="mdi:calendar-month"></iconify-icon>
             </span>
@@ -65,20 +65,20 @@
 
           <p id = "errorage" style="color:red;"></p>
           
-          <label class="label" for="diagnosis-dropdown">Select Diagnosis:</label>
+          <label class="label" for="diagnosis-dropdown"><%= __('select_diagnosis') %>:</label>
 
           <div class="select" id="diabeticdiv">
             <select name="diabetic" id="diabetic">
               <option></option>
-              <option value="true">Diabetic</option>
-              <option value="false">Non-Diabetic</option>
+              <option value="true"><%= __('diabetic') %></option>
+              <option value="false"><%= __('non-diabetic') %></option>
             </select>
           </div>
           
           <p id = "errordiabetic" style="color:red;"></p>
           
           <p class="control has-icons-left">
-            <input class="input" type="text" name="username" id="username" placeholder="Username"/>
+            <input class="input" type="text" name="username" id="username" placeholder="<%= __('username') %>"/>
             <span class="icon is-left">
               <iconify-icon data-icon="mdi:rename-box"></iconify-icon>
             </span>
@@ -87,7 +87,7 @@
           <p id = "errorusername" style="color:red;"></p>
           
           <p class="control has-icons-left">
-            <input class="input" type="text" name="password" id="password" placeholder="Password"/>
+            <input class="input" type="text" name="password" id="password" placeholder="<%= __('password') %>"/>
             <span class="icon is-left">
               <iconify-icon data-icon="mdi:key-variant"></iconify-icon>
             </span>
@@ -96,7 +96,7 @@
           <p id = "errorpassword" style="color:red;"></p>
 
           
-          <button class="button is-primary is-rounded">Create Account</button> 
+          <button class="button is-primary is-rounded"><%= __('create_account') %></button> 
 
           <br>
           <br>
@@ -110,8 +110,8 @@
 
 
 
-    <a href="/login"><button class="button">Login</button></a>
-    <a href="/"><button class="button">Back</button></a>
+    <a href="/login"><button class="button"><%= __('login') %></button></a>
+    <a href="/"><button class="button"><%= __('back') %></button></a>
 
 
   
