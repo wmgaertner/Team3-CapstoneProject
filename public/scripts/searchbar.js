@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const searchFood = async searchText => {
 
 
+    matchList.style = 'width:' + search.offsetWidth + '; height: 300px; line-height: 3em; overflow:scroll; border: thin #000 solid; padding: 5px;'
+
     url = 'https://api.nal.usda.gov/fdc/v1/foods/search?api_key=niQ8qRk2FqXYhdvQYRbYHKjtLdWWaH8nbJiSysVw&query=' + search.value;
 
     var res = await fetch(url);
@@ -25,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (searchText.length === 0) {
       foodlist = [];
+      matchList.style = '';
       matchList.innerHTML = '';
     }
 
@@ -39,21 +42,42 @@ document.addEventListener('DOMContentLoaded', function () {
   function outputHTML(matches) {
 
     if (matches.length > 0) {
-      var html = matches
-        .map(match => `
-                <div class="card" >
 
-                    <h4>${match.description} </h4>
-                    <h4>${match.foodNutrients[2].value} Carbs</h4>
+      var html = '';
 
-                </div>
+      matches.map(match => {
+        if (match.brandOwner === undefined){
+          html +=  
+          `
+            <div class="card" >
 
-            `
-        ).join('');
+              <h4>${match.lowercaseDescription} </h4>
+              <h4>${match.foodNutrients[2].value} Carbs</h4>
+
+            </div>
+
+          `
+        }
+        else{
+          html +=  
+          `
+            <div class="card" >
+
+              <h4>${match.lowercaseDescription} - ${match.brandOwner} </h4>
+              <h4>${match.foodNutrients[2].value} Carbs</h4>
+
+            </div>
+
+          `
+
+        }
+
+        matchList.innerHTML = html
+
+      }).join('');
 
 
-
-      matchList.innerHTML = html
+      
 
     }
 
