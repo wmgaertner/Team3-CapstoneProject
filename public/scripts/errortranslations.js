@@ -58,7 +58,7 @@ function translateregister(error) {
     }
 
 
-   }
+   })
 }
 
 function translatelogin(error){
@@ -104,7 +104,7 @@ function translatelogin(error){
         errorelement.innerHTML = "Password or username are incorrect.";
     }
     
-  }
+  })
 
 
 }
