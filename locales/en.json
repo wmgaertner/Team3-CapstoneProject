@@ -14,5 +14,6 @@
     "lastname": "Last name",
 	"age": "Age",
     "username": "Username",
-    "password": "Password"
+    "password": "Password",
+	"choose_language": "Choose Language"
 }

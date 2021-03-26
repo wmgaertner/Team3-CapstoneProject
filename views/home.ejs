@@ -7,6 +7,8 @@
     <link href="/bulma/css/bulma.css" rel="stylesheet" type="text/css" />
     <link href="/css/home.css" rel="stylesheet" type="text/css" />
 
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+
     
 
   </head>
@@ -21,11 +23,21 @@
       <br>
       <!--room for navbar-->
       <br>
-      <div class="select">
-        <select id="language">
-          <option><%= __('english') %></option>
-          <option><%= __('spanish') %></option>
-        </select>
+      <div class="dropdown is-hoverable">
+        <div class="dropdown-trigger">
+          <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+            <span><%= __('choose_language') %></span>
+            <span class="icon is-small">
+              <iconify-icon data-icon="uil:angle-down"></iconify-icon>
+            </span>
+          </button>
+        </div>
+        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+          <div class="dropdown-content">
+            <a href="setLocale/en" class="dropdown-item"><%= __('english') %></a>
+            <a href="setLocale/es" class="dropdown-item"><%= __('spanish') %></a>
+          </div>
+        </div>
       </div>
       
   

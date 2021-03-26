@@ -11,6 +11,7 @@ const express = require("express");
  emailverification = require('./public/scripts/emailverification.js');
  flash = require('connect-flash');
  i18n = require('i18n');
+ cookieParser = require('cookie-parser');
 
  
  
@@ -30,6 +31,7 @@ mongoose.connect("mongodb+srv://abc:test123@cluster0.7bifm.mongodb.net/Cluster0?
 
 i18n.configure({
   locales: ['en', 'es'], 
+  cookie: 'lang',
   directory: __dirname + '/locales'
 });
 
@@ -39,6 +41,7 @@ app.use(express.static(__dirname + "/public"));
 app.use(express.static("node_modules"));
 app.use(express.static(__dirname + "/dist"));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use(i18n.init);
 app.use(flash());
 
@@ -83,6 +86,11 @@ app.get("/dashboard", isLoggedIn, function (req, res) {
       res.render("dashboard", { data: docs, username: req.user.username });
   });  
 
+});
+
+app.get("/setLocale/:locale", function(req, res) {
+  res.cookie('lang', req.params.locale);
+  res.redirect('back');
 });
 
 

@@ -14,5 +14,6 @@
     "lastname": "Apellido",
     "age": "Edad",
     "username": "Nombre de usuario",
-    "password": "Contraseña"
+    "password": "Contraseña",
+    "choose_language": "Elige Lengua"
 }
