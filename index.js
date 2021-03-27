@@ -89,7 +89,7 @@ app.get("/dashboard", isLoggedIn, function (req, res) {
 });
 
 app.get("/setLocale/:locale", function(req, res) {
-  res.cookie('lang', req.params.locale);
+  res.cookie('lang', req.params.locale, {maxAge: 1000*60*60*24*365*5});   // Cookie expires after 5 years
   res.redirect('back');
 });
 
