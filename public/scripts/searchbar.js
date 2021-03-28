@@ -4,6 +4,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const search = document.getElementById('foodinput');
   const matchList = document.getElementById('match-list');
+  const dictionary = document.getElementById('dictionary');
+
+
+  const listoffoods = {};
 
 
   //search api for food and filter it
@@ -49,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (match.brandOwner === undefined){
           html +=  
           `
-            <div class="card" >
+            <div class="card">
 
               <h4>${match.lowercaseDescription} </h4>
               <h4>${match.foodNutrients[2].value} Carbs</h4>
@@ -61,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
         else{
           html +=  
           `
-            <div class="card" >
+            <div class="card">
 
               <h4>${match.lowercaseDescription} - ${match.brandOwner} </h4>
               <h4>${match.foodNutrients[2].value} Carbs</h4>
@@ -74,14 +78,55 @@ document.addEventListener('DOMContentLoaded', function () {
 
         matchList.innerHTML = html
 
+
+        //get the divs inside of the search
+        var divs = matchList.getElementsByTagName('div');
+
+        for (i of divs){
+          
+          i.addEventListener('click', function (event) {
+
+            var food = this.getElementsByTagName('h4')[0].innerHTML;
+            var carbs = this.getElementsByTagName('h4')[1].innerHTML;
+
+            listoffoods[food] = carbs;
+
+            console.log(listoffoods);
+
+            matchList.style = '';
+            matchList.innerHTML = '';
+            search.value = '';
+
+            dictionary.innerHTML += food + "      " + carbs + "<br>";
+
+            
+          });
+
+        } 
+
+        
+  
+
+
       }).join('');
 
 
-      
-
     }
 
+
+
+
+
   };
+
+
+
+
+
+    
+
+
+  
 
 
 
