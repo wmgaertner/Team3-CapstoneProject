@@ -1,5 +1,4 @@
 
-
 document.addEventListener('DOMContentLoaded', function () {
 
   const search = document.getElementById('foodinput');
@@ -7,7 +6,9 @@ document.addEventListener('DOMContentLoaded', function () {
   const dictionary = document.getElementById('dictionary');
 
 
-  const listoffoods = {};
+  var listofcarbs = new Set();
+
+
 
 
   //search api for food and filter it
@@ -76,48 +77,77 @@ document.addEventListener('DOMContentLoaded', function () {
 
         }
 
-        matchList.innerHTML = html
-
-
-        //get the divs inside of the search
-        var divs = matchList.getElementsByTagName('div');
-
-        for (i of divs){
-          
-          i.addEventListener('click', function (event) {
-
-            var food = this.getElementsByTagName('h4')[0].innerHTML;
-            var carbs = this.getElementsByTagName('h4')[1].innerHTML;
-
-            listoffoods[food] = carbs;
-
-            console.log(listoffoods);
-
-            matchList.style = '';
-            matchList.innerHTML = '';
-            search.value = '';
-
-            dictionary.innerHTML += food + "      " + carbs + "<br>";
-
-            
-          });
-
-        } 
-
         
-  
-
 
       }).join('');
+
+
+      matchList.innerHTML = html
+
+      list();
+        
+
 
 
     }
 
 
-
-
-
   };
+
+
+  function list(){
+
+
+    //get the divs inside of the search
+    var divs = matchList.getElementsByTagName('div');
+
+    for (i of divs){
+      
+      i.addEventListener('click', function (event) {
+
+        var food = this.getElementsByTagName('h4')[0].innerHTML;
+        var carbs = this.getElementsByTagName('h4')[1].innerHTML;
+
+        carbs = parseFloat(carbs.match(/[\d\.]+/))
+
+        listofcarbs.add(carbs);
+
+        console.log(listofcarbs);
+
+        matchList.style = '';
+        matchList.innerHTML = '';
+        search.value = '';
+
+        dictionary.innerHTML += `<li name="${carbs}">${food}<span class="close">x</span></li>`
+
+
+        var closebtns = dictionary.getElementsByTagName('li');
+
+        for (i of closebtns){
+          i.addEventListener("click", function() {
+
+          
+            listofcarbs.delete(carbs);
+          
+            console.log(listofcarbs);
+
+            this.remove();
+          });    
+        }
+
+
+        
+      });
+
+    } 
+
+
+
+
+  }
+
+
+
 
 
 
