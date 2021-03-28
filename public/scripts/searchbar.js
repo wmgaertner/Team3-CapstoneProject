@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const dictionary = document.getElementById('dictionary');
 
 
-  var listofcarbs = new Set();
+  var total = 0;
 
 
 
@@ -110,9 +110,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         carbs = parseFloat(carbs.match(/[\d\.]+/))
 
-        listofcarbs.add(carbs);
+        total += carbs;
 
-        console.log(listofcarbs);
+        console.log(total);
 
         matchList.style = '';
         matchList.innerHTML = '';
@@ -127,9 +127,9 @@ document.addEventListener('DOMContentLoaded', function () {
           i.addEventListener("click", function() {
 
           
-            listofcarbs.delete(carbs);
+            total -= carbs;
           
-            console.log(listofcarbs);
+            console.log(total);
 
             this.remove();
           });    
