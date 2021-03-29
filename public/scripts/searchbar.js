@@ -127,8 +127,9 @@ document.addEventListener('DOMContentLoaded', function () {
           i.addEventListener("click", function() {
 
           
-            total -= carbs;
-          
+            total = (total * 10 - parseFloat(this.getAttribute("name")) * 10) / 10;
+            
+
             console.log(total);
 
             this.remove();
