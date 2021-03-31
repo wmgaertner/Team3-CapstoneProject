@@ -16,7 +16,7 @@
     <script src="/scripts/formchecks.js"></script>
 
     <script src="/scripts/dashboard.js"></script>
-    <script> main('<%- JSON.stringify(locals.data, null, 0) %>'); </script>
+    <script> graph('<%- JSON.stringify(locals.data, null, 0) %>'); </script>
 
 
     
@@ -45,15 +45,17 @@
   <br>
   
 
-  <body>
-    <div class="content is-max-desktop" >
-      <div class="container" style="float:left; padding-left: 80px; width: 600px; position: relative;  ">
+  <body onload="clock()">
+    <div class="aspectwrapper" >
+      <div class="content" style="float:left; width: 40%; padding-left: 5%; ">
 
         <form action="/dashboard" method="POST" onsubmit="dashboard()" >
           <br>
           <h4>Create a Task</h4>
           <br>
+          <div id="txt" style="font-weight: bold;">Time:  </div>
           <br>
+          
 
           <input class="input" type="text" name="glucoselevel" placeholder="Blood sugar"/>
           <br>
@@ -74,7 +76,7 @@
 
       </div>
 
-      <div class="container" style="padding-right: 80px; float: right; width: 1100px; position: relative;">
+      <div class="content" style="float:right; width: 55%;  padding-right: 5%;  ">
         
         <canvas  id="myChart"></canvas>
 

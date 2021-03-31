@@ -1,4 +1,4 @@
-function main(data){
+function graph(data){
 
     jsonObject = JSON.parse(data);
     var jsonFirstName = jsonObject['firstname'];
@@ -33,6 +33,7 @@ function main(data){
 
         var ctx = document.getElementById("myChart").getContext("2d");
 
+        
     
         var myChart = new Chart(ctx, {
 
@@ -103,4 +104,22 @@ function main(data){
     });
 
 
+}
+
+
+
+function clock(){
+    var today = new Date();
+    var hours = today.getHours()
+    var minutes = today.getMinutes();
+    hours = hours % 12;
+    hours = hours != 0 ? hours : 12;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    var ampm = hours >= 12 ? 'PM' : 'AM';
+    timestamp = hours.toString() + ':' + minutes.toString() + ' ' + ampm;
+
+
+    document.getElementById('txt').innerHTML +=   timestamp;
+    var t = setTimeout(startTime, 500);
+    
 }
