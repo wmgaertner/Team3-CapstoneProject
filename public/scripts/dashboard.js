@@ -6,6 +6,7 @@ function graph(data){
 
     var jsonGlucose = [];
     var timestamps = [];
+    var carbs = [];
 
     if (jsonObject['diabetic'] == true) {
         var topAnnotation = 180;
@@ -24,6 +25,7 @@ function graph(data){
     for (i = 0; i < jsonGluLength; i++) {
         jsonGlucose.push(parseFloat(jsonObject['glucoselevels'][i]));
         timestamps.push(jsonObject['timestamps'][i]);
+        carbs.push(parseFloat(jsonObject['carbs'][i]))
     }
     //Display chart
 
@@ -48,6 +50,13 @@ function graph(data){
                         fill: false,
                         borderColor: "rgb(255, 99, 132)",
                         data: jsonGlucose,
+                    },
+                    {
+                        label: "Carbs",
+                        fill: false,
+                        borderColor: "rgb(0, 191, 255)",
+                        data: carbs,
+
                     },
                 ],
             },
@@ -116,10 +125,10 @@ function clock(){
     hours = hours != 0 ? hours : 12;
     minutes = minutes < 10 ? '0' + minutes : minutes;
     var ampm = hours >= 12 ? 'PM' : 'AM';
-    timestamp = hours.toString() + ':' + minutes.toString() + ' ' + ampm;
+    timestamp = 'Time: ' + hours.toString() + ':' + minutes.toString() + ' ' + ampm;
 
 
-    document.getElementById('txt').innerHTML +=   timestamp;
-    var t = setTimeout(startTime, 500);
+    document.getElementById('txt').innerHTML = timestamp;
+    var t = setTimeout(clock, 500);
     
 }

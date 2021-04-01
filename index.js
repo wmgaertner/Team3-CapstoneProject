@@ -104,11 +104,13 @@ app.post("/dashboard", isLoggedIn, function (req, res) {
   var userid = req.user._id;
   var glucoselevel = req.body.glucoselevel;
   var timestamp = timestamps.maketimestamp(new Date()); 
+  var carb = req.body.carbs;
 
   UserData.findByIdAndUpdate(userid,{$push: {
     //add data to push to database
     glucoselevels:glucoselevel,
-    timestamps:timestamp
+    timestamps:timestamp,
+    carbs:carb
 
     } },
     { new: true },
@@ -160,6 +162,7 @@ app.post("/register", function (req, res) {
                 email: email,  
                 glucoselevels: [], 
                 timestamps: [],
+                carbs: [],
                 age: age,
                 diabetic: diabetic
               })

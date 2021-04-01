@@ -11,6 +11,7 @@ var UserDataSchema=mongoose.Schema({
     bmi: Number,
     glucoselevels: [Number],
     timestamps: [String],
+    carbs: [Number],
     insulinlevel: Number,
     yearofdiagnosis: Number,
     diabetic: Boolean,

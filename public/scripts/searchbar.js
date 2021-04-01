@@ -1,14 +1,19 @@
 
+
+
+
+
 document.addEventListener('DOMContentLoaded', function () {
+  var total = 0;
+  
+            
 
   const search = document.getElementById('foodinput');
   const matchList = document.getElementById('match-list');
   const dictionary = document.getElementById('dictionary');
+  const hidden = document.getElementById('hiddenInput');
 
-
-  var total = 0;
-
-
+  
 
 
   //search api for food and filter it
@@ -22,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var res = await fetch(url);
 
     var foods = await res.json();
-    
+
 
 
 
@@ -51,9 +56,9 @@ document.addEventListener('DOMContentLoaded', function () {
       var html = '';
 
       matches.map(match => {
-        if (match.brandOwner === undefined){
-          html +=  
-          `
+        if (match.brandOwner === undefined) {
+          html +=
+            `
             <div class="card">
 
               <h4>${match.lowercaseDescription} </h4>
@@ -63,9 +68,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
           `
         }
-        else{
-          html +=  
-          `
+        else {
+          html +=
+            `
             <div class="card">
 
               <h4>${match.lowercaseDescription} - ${match.brandOwner} </h4>
@@ -77,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         }
 
-        
+
 
       }).join('');
 
@@ -85,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
       matchList.innerHTML = html
 
       list();
-        
+
 
 
 
@@ -95,14 +100,14 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
 
-  function list(){
+  function list() {
 
 
     //get the divs inside of the search
     var divs = matchList.getElementsByTagName('div');
 
-    for (i of divs){
-      
+    for (i of divs) {
+
       i.addEventListener('click', function (event) {
 
         var food = this.getElementsByTagName('h4')[0].innerHTML;
@@ -123,27 +128,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
         var closebtns = dictionary.getElementsByTagName('li');
 
-        for (i of closebtns){
-          i.addEventListener("click", function() {
+        for (i of closebtns) {
+          i.addEventListener("click", function () {
 
-          
+
             total = (total * 10 - parseFloat(this.getAttribute("name")) * 10) / 10;
             
-
-            console.log(total);
-
             this.remove();
-          });    
+          });
         }
 
+        hidden.value = total.toString();
 
-        
       });
 
-    } 
+    }
 
 
-
+    
 
   }
 
@@ -154,21 +156,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-    
 
 
-  
+
+
 
 
 
   search.addEventListener('input', () => searchFood(search.value));
 
-
-
-
+ 
 
 
 });
+
+
+
 
 
 
