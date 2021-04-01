@@ -121,10 +121,10 @@ function clock(){
     var today = new Date();
     var hours = today.getHours()
     var minutes = today.getMinutes();
+    var ampm = hours >= 12 ? 'PM' : 'AM';
     hours = hours % 12;
     hours = hours != 0 ? hours : 12;
     minutes = minutes < 10 ? '0' + minutes : minutes;
-    var ampm = hours >= 12 ? 'PM' : 'AM';
     timestamp = 'Time: ' + hours.toString() + ':' + minutes.toString() + ' ' + ampm;
 
 
