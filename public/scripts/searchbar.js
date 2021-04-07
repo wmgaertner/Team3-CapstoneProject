@@ -4,49 +4,36 @@
 
 
 document.addEventListener('DOMContentLoaded', function () {
+
   var total = 0;
   
-            
-
+          
   const search = document.getElementById('foodinput');
   const matchList = document.getElementById('match-list');
   const dictionary = document.getElementById('dictionary');
   const hidden = document.getElementById('hiddenInput');
 
-  
 
 
-  //search api for food and filter it
-  const searchFood = async searchText => {
-
-
-    matchList.style = 'width:' + search.offsetWidth + '; height: 300px; line-height: 3em; overflow:scroll; border: thin #000 solid; padding: 5px;'
+   //calling api
+  var myEfficientFn = debounce( async function() {
 
     url = 'https://api.nal.usda.gov/fdc/v1/foods/search?api_key=niQ8qRk2FqXYhdvQYRbYHKjtLdWWaH8nbJiSysVw&query=' + search.value;
-
+  
     var res = await fetch(url);
-
+  
     var foods = await res.json();
-
-
-
 
     console.log(foods);
 
     foodlist = foods.foods.filter(food => { return food });
 
-    if (searchText.length === 0) {
-      foodlist = [];
-      matchList.style = '';
-      matchList.innerHTML = '';
-    }
-
     outputHTML(foodlist);
 
+  }, 350, false);
 
 
-  };
-
+  
 
 
   function outputHTML(matches) {
@@ -123,18 +110,21 @@ document.addEventListener('DOMContentLoaded', function () {
         matchList.innerHTML = '';
         search.value = '';
 
-        dictionary.innerHTML += `<li name="${carbs}">${food}<span class="close">x</span></li>`
+        dictionary.innerHTML += `<li name="${carbs}">${food}<span class="delete is-medium">x</span></li>`
 
 
-        var closebtns = dictionary.getElementsByTagName('li');
+        var closebtns = dictionary.getElementsByClassName('delete is-medium');
 
         for (i of closebtns) {
           i.addEventListener("click", function () {
 
+            total = (total * 10 - parseFloat(this.parentNode.getAttribute("name")) * 10) / 10;
 
-            total = (total * 10 - parseFloat(this.getAttribute("name")) * 10) / 10;
+
+            this.parentNode.remove();
+
+            console.log(total)
             
-            this.remove();
           });
         }
 
@@ -152,19 +142,51 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+  function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+      var context = this, args = arguments;
+      var later = function() {
+        timeout = null;
+        if (!immediate) func.apply(context, args);
+      };
+      var callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) func.apply(context, args);
+    };
+  };
 
 
 
 
 
 
+  
+  search.addEventListener('input', function(){
+
+    matchList.style = 'width:' + search.offsetWidth + '; height: 300px; line-height: 3em; overflow:scroll; border: thin #000 solid; padding: 5px;'
+
+    search.addEventListener('keypress',myEfficientFn);
+
+    if (search.value.length === 0) {
+      foodlist = [];
+      matchList.style = '';
+      matchList.innerHTML = '';
+    }
+
+  });
+
+
+  
+ 
 
 
 
+  
 
 
-  search.addEventListener('input', () => searchFood(search.value));
-
+  
  
 
 
