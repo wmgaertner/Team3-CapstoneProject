@@ -45,11 +45,11 @@ document.addEventListener('DOMContentLoaded', function () {
       matches.map(match => {
         if (match.brandOwner === undefined) {
           html +=
-            `
-            <div class="card">
+          `
+            <div class="box">
 
-              <h4>${match.lowercaseDescription} </h4>
-              <h4>${match.foodNutrients[2].value} Carbs</h4>
+              <h1 style = "font-size: 20px;">${match.lowercaseDescription} </h1>
+              <p>${match.foodNutrients[2].value} Carbs</p>
 
             </div>
 
@@ -57,11 +57,11 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         else {
           html +=
-            `
-            <div class="card">
+          `
+            <div class="box">
 
-              <h4>${match.lowercaseDescription} - ${match.brandOwner} </h4>
-              <h4>${match.foodNutrients[2].value} Carbs</h4>
+              <h1 style = "font-size: 20px;">${match.lowercaseDescription} - ${match.brandOwner} </h1>
+              <p>${match.foodNutrients[2].value} Carbs</p>
 
             </div>
 
@@ -95,10 +95,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
     for (i of divs) {
 
+      i.addEventListener("mouseover", function( event ) {
+        // highlight the mouseover target
+        this.style.background = "LightBlue";
+      
+      });
+
+      i.addEventListener("mouseout", function( event ) {
+        // highlight the mouseover target
+        this.style.background = "";
+      });
+
       i.addEventListener('click', function (event) {
 
-        var food = this.getElementsByTagName('h4')[0].innerHTML;
-        var carbs = this.getElementsByTagName('h4')[1].innerHTML;
+        var food = this.getElementsByTagName('h1')[0].innerHTML;
+        var carbs = this.getElementsByTagName('p')[0].innerHTML;
 
         carbs = parseFloat(carbs.match(/[\d\.]+/))
 
@@ -110,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
         matchList.innerHTML = '';
         search.value = '';
 
-        dictionary.innerHTML += `<li name="${carbs}">${food}<span class="delete is-medium">x</span></li>`
+        dictionary.innerHTML += `<li class="tag is-info" name="${carbs}">${food} - ${carbs}g <span class="delete is-medium">x</span></li> `
 
 
         var closebtns = dictionary.getElementsByClassName('delete is-medium');
@@ -165,21 +176,18 @@ document.addEventListener('DOMContentLoaded', function () {
   
   search.addEventListener('input', function(){
 
+    
     matchList.style = 'width:' + search.offsetWidth + '; height: 300px; line-height: 3em; overflow:scroll; border: thin #000 solid; padding: 5px;'
 
-    search.addEventListener('keypress',myEfficientFn);
-
     if (search.value.length === 0) {
-      foodlist = [];
       matchList.style = '';
       matchList.innerHTML = '';
     }
 
   });
 
-
   
- 
+  search.addEventListener('keypress',myEfficientFn);
 
 
 

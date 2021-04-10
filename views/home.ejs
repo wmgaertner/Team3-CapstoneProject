@@ -9,9 +9,23 @@
 
     <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
 
-    
-
   </head>
+
+
+
+  <div class="navbar1">
+    
+    <div class="dropdown1">
+      
+      <button class="dropbtn1" ><%= __('choose_language') %> </button>
+      
+      <div class="dropdown-content1">
+        <a href="setLocale/en" class="dropdown-item"><%= __('english') %></a>
+        <a href="setLocale/es" class="dropdown-item"><%= __('spanish') %></a>
+      </div>
+
+    </div>
+  </div>
 
 
 
@@ -21,26 +35,10 @@
   
       <br>
       <br>
-      <!--room for navbar-->
       <br>
-      <div class="dropdown is-hoverable">
-        <div class="dropdown-trigger">
-          <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-            <span><%= __('choose_language') %></span>
-            <span class="icon is-small">
-              <iconify-icon data-icon="uil:angle-down"></iconify-icon>
-            </span>
-          </button>
-        </div>
-        <div class="dropdown-menu" id="dropdown-menu" role="menu">
-          <div class="dropdown-content">
-            <a href="setLocale/en" class="dropdown-item"><%= __('english') %></a>
-            <a href="setLocale/es" class="dropdown-item"><%= __('spanish') %></a>
-          </div>
-        </div>
-      </div>
       
-  
+      
+
       <div class="imgbox">
         <img class="center-fit" src='/images/BloodDrop.png'>
       </div>
