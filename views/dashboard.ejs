@@ -18,16 +18,13 @@
     <script src="/scripts/dashboard.js"></script>
     <script> graph('<%- JSON.stringify(locals.data, null, 0) %>'); </script>
 
-    <!-- Variables -->
-    <input type="hidden" name="carbs" id="hiddenInput" />
     
-
+  
     <!-- CSS Stylesheets -->
     <link href="/css/dashboard.css" rel="stylesheet"/>
     <link href="/bulma/css/bulma.css" rel="stylesheet"/>
 
     
-  
   </head>
   
   <div class="navbar1">
@@ -47,10 +44,17 @@
   
 
   <body onload="clock()">
+
+
+
+
     <div class="aspectwrapper" >
       <div class="content" style="float:left; width: 40%; padding-left: 5%; ">
 
         <form action="/dashboard" method="POST" onsubmit="dashboard()" >
+          <!-- Variables *these must be in the form*-->
+          <input type="hidden" name="carbs" id="hiddenInput" value="0" />
+
           <br>
           <h4>Create a Task</h4>
           <br>
@@ -58,7 +62,7 @@
           <br>
           
 
-          <input class="input" type="text" name="glucoselevel" placeholder="Blood sugar"/>
+          <input class="input" type="number" name="glucoselevel" id="glucoseInput" placeholder="Blood sugar" /> 
           <br>
           <br>
 

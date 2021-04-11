@@ -6,14 +6,14 @@
 document.addEventListener('DOMContentLoaded', function () {
 
   var total = 0;
-  
-          
+
   const search = document.getElementById('foodinput');
   const matchList = document.getElementById('match-list');
   const dictionary = document.getElementById('dictionary');
   const hidden = document.getElementById('hiddenInput');
 
-
+  
+ 
 
    //calling api
   var myEfficientFn = debounce( async function() {
