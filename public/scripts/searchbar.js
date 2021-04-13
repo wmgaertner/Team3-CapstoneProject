@@ -121,10 +121,18 @@ document.addEventListener('DOMContentLoaded', function () {
         matchList.innerHTML = '';
         search.value = '';
 
-        dictionary.innerHTML += `<li class="tag is-info" name="${carbs}">${food} - ${carbs}g <span class="delete is-medium">x</span></li> `
+        dictionary.innerHTML += `
+                                  <div class="control">
+                                    <div class="tags has-addons" name="${carbs}"> 
+                                      <a class="tag is-info">${food} - ${carbs}g</a>
+                                      <a class="tag is-delete"> </a> 
+                                    </div>
+                                  </div>
+
+                                `
 
 
-        var closebtns = dictionary.getElementsByClassName('delete is-medium');
+        var closebtns = dictionary.getElementsByClassName('tag is-delete');
 
         for (i of closebtns) {
           i.addEventListener("click", function () {
