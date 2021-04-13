@@ -10,8 +10,8 @@ body, html {
 }
   
 .center-fit {
-    max-width: 80%;
-    max-height: 80vh;
+    max-width: 55%;
+    max-height: 55vh;
     margin: auto;
 }
 
