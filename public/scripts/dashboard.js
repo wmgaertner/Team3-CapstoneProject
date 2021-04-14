@@ -62,8 +62,6 @@ function graph(data){
             },
             // Configuration options go here
             options: {
-                responsive: false,
-                maintainAspectRatio: false,
                 
                 title: {
                     display: true,
