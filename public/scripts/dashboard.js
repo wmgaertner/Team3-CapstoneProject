@@ -133,3 +133,53 @@ function clock(){
     var t = setTimeout(clock, 500);
     
 }
+
+
+function notifications(data){
+
+    jsonObject = JSON.parse(data);
+
+    document.addEventListener('DOMContentLoaded', function() {
+
+
+        
+
+
+
+
+        const notification = document.getElementById('notification');
+        
+
+
+        notification.innerHTML += 
+                                `
+                                    <div class="notification">
+                                        <button class="delete"></button>
+                                        test
+                                            
+                                    </div>
+
+                                `
+
+        var closebtns = notification.getElementsByClassName('delete');
+
+        for (i of closebtns) {
+                i.addEventListener("click", function () {
+                        
+                this.parentNode.remove();
+                        
+                                    
+            });
+        }
+
+
+
+    
+
+    })
+
+
+
+
+
+}
