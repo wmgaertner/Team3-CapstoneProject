@@ -15,5 +15,6 @@
     "age": "Edad",
     "username": "Nombre de usuario",
     "password": "Contraseña",
-    "choose_language": "Elige Lengua"
+    "choose_language": "Elige Lengua",
+    "create_task": "Crear una Tarea"
 }

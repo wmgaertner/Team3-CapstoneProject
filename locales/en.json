@@ -15,5 +15,6 @@
 	"age": "Age",
     "username": "Username",
     "password": "Password",
-	"choose_language": "Choose Language"
+	"choose_language": "Choose Language",
+	"create_task": "Create a Task"
 }
