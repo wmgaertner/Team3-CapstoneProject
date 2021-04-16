@@ -139,27 +139,196 @@ function notifications(data){
 
     jsonObject = JSON.parse(data);
 
+    var jsonGluLength = jsonObject['glucoselevels'].length;
+    var jsonGlucose = [];
+
+    for (i = 0; i < jsonGluLength; i++) {
+        jsonGlucose.push(parseFloat(jsonObject['glucoselevels'][i]));
+    }
+
+
+    const diabetic = jsonObject['diabetic'];
+    const glucoselevel = jsonGlucose.slice(-1)[0];
+
+    const low = [
+        "Monitor blood sugar levels before & after exercise to increase awareness of how exercise affects blood sugar levels.",
+        "Alcohol can make hypoglycemic medications less effective, take extra care when drinking",
+        "When drinking, monitor your blood glucose as alcohol can interfere with diabetes medication & insulin",
+        "Fasting may not be suitable for those on antidiabetic medications associated with hypoglycemia.",
+        "Skipping meals can lead to immediately dangerous blood sugar swings.",
+        "Drinking alcohol on an empty stomach can lead to hypoglycemia, especially if you take medications for hypoglycemia.",
+        "Exercise increases insulin sensitivity &amp; helps muscles use glucose effectively, which can lead to reduced blood sugar levels.",
+        "Not getting enough carbohydrates can lead to hypoglycemia.",
+        "Eating foods with less carbohydrate than usual without adjusting insulin intake can lead to hypoglycemia.",
+        "Time your insulin based on whether your carbs are from liquids or solids. Liquids are absorbed much faster than solids, which can affect blood sugar levels.",
+        "Eating or drink 15 to 20 grams of fast-acting carbohydrates, such as glucose tablets, fruit juice, regular soda, honey, or sugary candy to get your blood sugar up.",
+        "Having a snack or meal once your blood sugar is normal, can help stabilize it and replenish your body's glycogen stores.",
+        "When trying to raise blood sugar, avoid high fiber or high fat carbs, as fiber & fat slow down the absorption of sugar.",
+        "Check your blood sugar often when lows are more likely, such as when the weather is hot or when you travel.",
+        "Carry supplies for treating low blood sugar at all times, such as glucose tablets, hard candy, juice boxes or regular soda, or fruit.",
+        "Wear a medical ID just in case you pass out or are otherwise unable to self-administer solutions for low blood sugar.",
+        "Make sure family and friends are aware of your condition and know how to help in case of an emergency.",
+        "Stay hydrated. Drinking enough water may help you keep your blood sugar levels within healthy limits.",
+        "Eating foods rich in chromium and magnesium regularly can help prevent deficiencies and reduce the risk of blood sugar problems.",
+        "Try to maintain a regular meal schedule in order to help your body regulate blood sugar levels."
+    ]
+
+    const normal = [
+        "Stay hydrated! Drinking enough water may help you keep your blood sugar levels within healthy limits.",
+        "Remember to eat foods rich in chromium & magnesium regularly to help prevent deficiencies & reduce the risk of blood sugar problems.",
+        "Avoid processed foods & stick to a diet full of fresh fruits & vegetables, complex carbohydrates, healthy fats, high-fiber foods & healthy proteins.",
+        "Maintaining a healthy weight is essential to managing your blood sugar levels.",
+        "More weight around your abdomen is closely linked to insulin resistance.",
+        "Watch out for added sugars in the foods you consume.",
+        "Try to limit your consumption of processed meats & red meats.",
+        "Try to limit refined carbohydrates like white bread, pasta, & rice, as well as soda, candy, packaged meals, & snack foods.",
+        "High-fiber complex carbohydrates are digested more slowly, thus preventing your body from producing too much insulin.",
+        "Don’t underestimate the calories & carbs in alcoholic drinks, including beer & wine.",
+        "Starting your day off with a good breakfast will provide energy as well as steady blood sugar levels.",
+        "Try to keep your calorie intake the same on a daily basis to regulate blood sugar levels.",
+        "Try keeping a food diary for easier weight management, increasing your nutritional knowledge.",
+        "Try reducing your use of artificial sweeteners.",
+        "Try to find non-food related ways to reduce stress, which increases insulin sensitivity, such as exercise, meditation or deep breathing.",
+        "Try to maintain a regular meal schedule in order to help your body regulate blood sugar levels.",
+        "Get some rest! Lack of sleep can increase stress and lower insulin, thus raising blood sugar.",
+        "Exercise increases insulin sensitivity and helps your muscles use glucose effectively.",
+        "Check your blood sugar levels regularly to increase your awareness."
+    ]
+
+    const high = [
+        "Avoid processed foods & stick to a diet full of fresh fruits & vegetables, complex carbohydrates, healthy fats, high-fiber foods &amp; healthy proteins.",
+        "Maintaining a healthy weight is essential to managing your blood sugar levels.",
+        "More weight around your abdomen is closely linked to insulin resistance.",
+        "Watch out for added sugars in the foods you consume.",
+        "Try to limit your consumption of processed meats & red meats.",
+        "Try to limit refined carbohydrates like white bread, pasta, & rice, as well as soda, candy, packaged meals, & snack foods.",
+        "High-fiber complex carbohydrates are digested more slowly, thus preventing your body from producing too much insulin.",
+        "If you are planning on eating dessert, cut back on the carbs in your main meal.",
+        "Don’t underestimate the calories & carbs in alcoholic drinks, including beer & wine.",
+        "When drinking, monitor your blood glucose as alcohol can interfere with diabetes medication & insulin.",
+        "Starting your day off with a good breakfast will provide energy as well as steady blood sugar levels.",
+        "Try to keep your calorie intake the same on a daily basis to regulate blood sugar levels.",
+        "Try keeping a food diary for easier weight management, increasing your nutritional knowledge.",
+        "Exercise can help you manage your weight and may improve insulin sensitivity.",
+        "Try reducing your use of artificial sweeteners.",
+        "Try to find non-food related ways to reduce stress, which increases insulin sensitivity, such as exercise, meditation or deep breathing.",
+        "Try to maintain a regular meal schedule in order to help your body regulate blood sugar levels.",
+        "Get some rest! Lack of sleep can increase stress and lower insulin, thus raising blood sugar.",
+        "Stay hydrated. Drinking enough water may help you keep your blood sugar levels within healthy limits.",
+        "Eating foods rich in chromium and magnesium regularly can help prevent deficiencies and reduce the risk of blood sugar problems."
+    ]
+
+
+
     document.addEventListener('DOMContentLoaded', function() {
 
-
         
-
-
 
 
         const notification = document.getElementById('notification');
+
+        
+        
+        
+        if (diabetic === true){
+
+            //high
+            if (glucoselevel >= 200) {
+                notification.innerHTML = 
+                        `
+                            <div class="notification">
+                                <button class="delete"></button>
+                                Login tip: <br>
+                                ${high[Math.floor(Math.random()*high.length)]}   
+                                            
+                            </div>
+
+                        `
+            }
+
+            //normal
+            else if (glucoselevel >= 127) {
+                notification.innerHTML = 
+                        `
+                            <div class="notification">
+                                <button class="delete"></button>
+                                Login tip: <br>
+                                ${normal[Math.floor(Math.random()*normal.length)]}   
+                                            
+                            </div>
+
+                        `
+            }
+
+            //low
+            else if (glucoselevel <= 126) {
+                notification.innerHTML = 
+                        `
+                            <div class="notification">
+                                <button class="delete"></button>
+                                Login tip: <br>
+                                ${low[Math.floor(Math.random()*low.length)]}   
+                                            
+                            </div>
+
+                        `
+            }
+
+
+
+        }
+
+        else if (diabetic === false){
+
+
+            //high
+            if (glucoselevel >= 140) {
+                notification.innerHTML = 
+                        `
+                            <div class="notification">
+                                <button class="delete"></button>
+                                Login tip: <br>
+                                ${high[Math.floor(Math.random()*high.length)]}   
+                                            
+                            </div>
+
+                        `
+            }
+
+            //normal
+            else if (glucoselevel >= 81) {
+                notification.innerHTML = 
+                        `
+                            <div class="notification">
+                                <button class="delete"></button>
+                                Login tip: <br>
+                                ${normal[Math.floor(Math.random()*normal.length)]}   
+                                            
+                            </div>
+
+                        `
+            }
+
+            //low
+            else if (glucoselevel <= 80) {
+                notification.innerHTML = 
+                        `
+                            <div class="notification">
+                                <button class="delete"></button>
+                                Login tip: <br>
+                                ${low[Math.floor(Math.random()*low.length)]}   
+                                            
+                            </div>
+
+                        `
+            }
+
+
+        }
         
 
-
-        notification.innerHTML += 
-                                `
-                                    <div class="notification">
-                                        <button class="delete"></button>
-                                        test
-                                            
-                                    </div>
-
-                                `
+        
+                               
 
         var closebtns = notification.getElementsByClassName('delete');
 
