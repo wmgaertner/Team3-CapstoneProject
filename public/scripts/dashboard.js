@@ -196,7 +196,7 @@ function notifications(data){
     ]
 
     const high = [
-        "Avoid processed foods & stick to a diet full of fresh fruits & vegetables, complex carbohydrates, healthy fats, high-fiber foods &amp; healthy proteins.",
+        "Avoid processed foods & stick to a diet full of fresh fruits & vegetables, complex carbohydrates, healthy fats, high-fiber foods & healthy proteins.",
         "Maintaining a healthy weight is essential to managing your blood sugar levels.",
         "More weight around your abdomen is closely linked to insulin resistance.",
         "Watch out for added sugars in the foods you consume.",
