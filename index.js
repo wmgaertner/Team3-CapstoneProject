@@ -77,14 +77,30 @@ app.get("/", function (req, res) {
 
 // Showing dashboard page
 app.get("/dashboard", isLoggedIn, function (req, res) {
+  
+  if (req.session.firsttime == true){
+    UserData.findById(req.user._id, 
+      function (err,docs) {
+        if (err) {
+          throw new Error("Not found");
+        }
+        res.render("dashboard", { data: docs, username: req.user.username, firsttime: true});
+    });  
 
-  UserData.findById(req.user._id, 
-    function (err,docs) {
-      if (err) {
-        throw new Error("Not found");
-      }
-      res.render("dashboard", { data: docs, username: req.user.username });
-  });  
+    req.session.firsttime = false;
+
+  }
+  else {
+    UserData.findById(req.user._id, 
+      function (err,docs) {
+        if (err) {
+          throw new Error("Not found");
+        }
+        res.render("dashboard", { data: docs, username: req.user.username, firsttime: false});
+    });  
+
+  }
+  
 
 });
 
@@ -119,7 +135,7 @@ app.post("/dashboard", isLoggedIn, function (req, res) {
         console.log(err);
         }
         console.log("Result: ", docs);
-        res.render("dashboard", { data: docs, username: req.user.username });
+        res.render("dashboard", { data: docs, username: req.user.username, firsttime: false });
   });
 
 });
@@ -193,6 +209,7 @@ app.get("/login", function (req, res) {
 //Handling user login
 app.post('/login', passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), 
 function(req, res) {
+  req.session.firsttime = true;
   res.redirect('/dashboard');
 });
 
