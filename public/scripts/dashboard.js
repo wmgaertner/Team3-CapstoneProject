@@ -1,8 +1,25 @@
+var date = new Date();
+dateFormat = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+console.log("date: ", dateFormat);
+
+
 function graph(data) {
 
     jsonObject = JSON.parse(data);
+
+    //! not ideal
+    var index = -1
+    for (i in jsonObject['dates']) {
+        if (jsonObject['dates'][i]['date'] == dateFormat) {
+            index = i;
+        }
+    };
+    if (index == -1) {
+        throw "Something went wrong getting Date";
+    };
+
     var jsonFirstName = jsonObject['firstname'];
-    var jsonGluLength = jsonObject['glucoselevels'].length;
+    var jsonGluLength = jsonObject['dates'][index]['glucosedata'].length;
 
     var jsonGlucose = [];
     var timestamps = [];
@@ -23,9 +40,9 @@ function graph(data) {
     }
 
     for (i = 0; i < jsonGluLength; i++) {
-        jsonGlucose.push(parseFloat(jsonObject['glucoselevels'][i]));
-        timestamps.push(jsonObject['timestamps'][i]);
-        carbs.push(parseFloat(jsonObject['carbs'][i]))
+        jsonGlucose.push(parseFloat(jsonObject['dates'][index]['glucosedata'][i]['glucoselevels']));
+        timestamps.push(jsonObject['dates'][index]['glucosedata'][i]['timestamps']);
+        carbs.push(parseFloat(jsonObject['dates'][index]['glucosedata'][i]['carbs']));
     }
     //Display chart
 
@@ -111,6 +128,50 @@ function graph(data) {
             },
         });
 
+        document.getElementById('dateCalendar').addEventListener("change", function() {
+            var dateControl = document.getElementById('dateCalendar');
+            console.log("calendar date selected: ", dateControl.value);
+            dateFormat = dateControl.value.toString();
+            dateFormat = dateFormat.split(/-/);
+            dateFormat = dateFormat[0] + "-" + parseInt(dateFormat[1]).toString() + "-" + dateFormat[2]; // remove leading zero from month
+
+            var updatedIndex = -1;
+            for (j in jsonObject['dates']) {
+                if (jsonObject['dates'][j]['date'] == dateFormat) {
+                    updatedIndex = j;
+                }
+                console.log(jsonObject['dates'][j]['date'], " versus ", dateFormat);
+            };
+
+            console.log("Updated Index: ", updatedIndex);
+            
+
+            jsonGlucose.length = 0;
+            timestamps.length = 0;
+            carbs.length = 0;
+
+            if (updatedIndex == -1){
+                myChart.data.labels = timestamps;
+                myChart.data.datasets[0].data = jsonGlucose;
+                myChart.data.datasets[1].data = carbs;
+            }
+            else {
+                jsonGluLength = jsonObject['dates'][updatedIndex]['glucosedata'].length;
+
+                for (i = 0; i < jsonGluLength; i++) {
+                    jsonGlucose.push(parseFloat(jsonObject['dates'][updatedIndex]['glucosedata'][i]['glucoselevels']));
+                    timestamps.push(jsonObject['dates'][updatedIndex]['glucosedata'][i]['timestamps']);
+                    carbs.push(parseFloat(jsonObject['dates'][updatedIndex]['glucosedata'][i]['carbs']));
+                }
+    
+                myChart.data.labels = timestamps;
+                myChart.data.datasets[0].data = jsonGlucose;
+                myChart.data.datasets[1].data = carbs;
+            }
+
+            myChart.update();
+        })
+
     });
 
 
@@ -137,19 +198,28 @@ function clock() {
 
 function notifications(data, firsttime) {
 
-    
+
+
 
     if (firsttime == "true") {
 
         jsonObject = JSON.parse(data);
 
-        var jsonGluLength = jsonObject['glucoselevels'].length;
+        //TODO Add index for date value
+        //TODO Currently just testing
+        var index = -1
+        for (i in jsonObject['dates']) {
+            if (jsonObject['dates'][i]['date'] == dateFormat) {
+                index = i;
+            }
+        };
+
+        var jsonGluLength = jsonObject['dates'][index]['glucosedata'].length;
         var jsonGlucose = [];
 
         for (i = 0; i < jsonGluLength; i++) {
-            jsonGlucose.push(parseFloat(jsonObject['glucoselevels'][i]));
+            jsonGlucose.push(parseFloat(jsonObject['dates'][index]['glucosedata'][i]['glucoselevels']));
         }
-
 
         const diabetic = jsonObject['diabetic'];
         const glucoselevel = jsonGlucose.slice(-1)[0];
@@ -328,34 +398,15 @@ function notifications(data, firsttime) {
 
                         `
                 }
-
-
             }
-
-
-
-
 
             var closebtns = notification.getElementsByClassName('delete');
 
             for (i of closebtns) {
                 i.addEventListener("click", function () {
-
                     this.parentNode.remove();
-                    
-
-
                 });
             }
-
-
-
-
-
         })
-
     }
-
-
-
 }

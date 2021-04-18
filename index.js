@@ -1,5 +1,6 @@
 //global constants
 const express = require("express");
+const { MongooseDocument } = require("mongoose");
  mongoose = require("mongoose");
  passport = require("passport");
  bodyParser = require("body-parser");
@@ -27,7 +28,8 @@ mongoose.set("useNewUrlParser", true);
 mongoose.set("useFindAndModify", false);
 mongoose.set("useCreateIndex", true);
 mongoose.set("useUnifiedTopology", true);
-mongoose.connect("mongodb+srv://abc:test123@cluster0.7bifm.mongodb.net/Cluster0?retryWrites=true&w=majority");
+// mongoose.connect("mongodb+srv://abc:test123@cluster0.7bifm.mongodb.net/Cluster0?retryWrites=true&w=majority");
+mongoose.connect("mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false");
 
 i18n.configure({
   locales: ['en', 'es'], 
@@ -117,19 +119,46 @@ app.get("/setLocale/:locale", function(req, res) {
 
 //push data to the database
 app.post("/dashboard", isLoggedIn, function (req, res) {
+  var date = new Date();
+  
   var userid = req.user._id;
+  var currentDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
   var glucoselevel = req.body.glucoselevel;
   var timestamp = timestamps.maketimestamp(new Date()); 
   var carb = req.body.carbs;
 
-  UserData.findByIdAndUpdate(userid,{$push: {
-    //add data to push to database
-    glucoselevels:glucoselevel,
-    timestamps:timestamp,
-    carbs:carb
+  UserData.findOneAndUpdate(
+    {
+      '_id': userid,
+      'dates.date': {$ne: currentDate}
+    },
+    {$addToSet: {
+      dates: {
+        date: currentDate,
+      }
+    }},
+    function(err) {
+      console.log(err);
+    }
+  );
 
+  UserData.findOneAndUpdate(
+    {
+      '_id': userid,
+      'dates.date': currentDate
+    },
+    {$push: {
+    //add data to push to database
+      'dates.$.glucosedata': {
+        glucoselevels : glucoselevel,
+        timestamps : timestamp,
+        carbs : carb,
+      }
+    
     } },
-    { new: true },
+    { 
+      new: true,
+    },
     function (err,docs){
       if (err) {
         console.log(err);
@@ -176,9 +205,7 @@ app.post("/register", function (req, res) {
                 firstname: firstname,
                 lastname: lastname, 
                 email: email,  
-                glucoselevels: [], 
-                timestamps: [],
-                carbs: [],
+                dates: [],
                 age: age,
                 diabetic: diabetic
               })
@@ -194,7 +221,6 @@ app.post("/register", function (req, res) {
     else{
       res.render("register",{error: "Email is taken."});
     }
-
   })
   
 
