@@ -206,6 +206,10 @@ function notifications(data, firsttime) {
             }
         };
 
+        if (index == -1){
+            return;
+        }
+
         var jsonGluLength = jsonObject['dates'][index]['glucosedata'].length;
         var jsonGlucose = [];
 
