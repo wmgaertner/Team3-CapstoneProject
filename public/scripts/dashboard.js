@@ -7,23 +7,26 @@ function graph(data) {
 
     jsonObject = JSON.parse(data);
 
-    //! not ideal
     var index = -1
     for (i in jsonObject['dates']) {
         if (jsonObject['dates'][i]['date'] == dateFormat) {
             index = i;
         }
     };
-    if (index == -1) {
-        throw "Something went wrong getting Date";
-    };
-
-    var jsonFirstName = jsonObject['firstname'];
-    var jsonGluLength = jsonObject['dates'][index]['glucosedata'].length;
 
     var jsonGlucose = [];
     var timestamps = [];
     var carbs = [];
+
+    if (index != -1) {
+        var jsonGluLength = jsonObject['dates'][index]['glucosedata'].length;
+        
+        for (i = 0; i < jsonGluLength; i++) {
+            jsonGlucose.push(parseFloat(jsonObject['dates'][index]['glucosedata'][i]['glucoselevels']));
+            timestamps.push(jsonObject['dates'][index]['glucosedata'][i]['timestamps']);
+            carbs.push(parseFloat(jsonObject['dates'][index]['glucosedata'][i]['carbs']));
+        }
+    }
 
     if (jsonObject['diabetic'] == true) {
         var topAnnotation = 180;
@@ -39,11 +42,7 @@ function graph(data) {
         var btmAnnotationText = "Low Value (Hypoglycemia)";
     }
 
-    for (i = 0; i < jsonGluLength; i++) {
-        jsonGlucose.push(parseFloat(jsonObject['dates'][index]['glucosedata'][i]['glucoselevels']));
-        timestamps.push(jsonObject['dates'][index]['glucosedata'][i]['timestamps']);
-        carbs.push(parseFloat(jsonObject['dates'][index]['glucosedata'][i]['carbs']));
-    }
+    
     //Display chart
 
     document.addEventListener('DOMContentLoaded', function () {
@@ -171,10 +170,7 @@ function graph(data) {
 
             myChart.update();
         })
-
     });
-
-
 }
 
 
@@ -195,11 +191,7 @@ function clock() {
 
 }
 
-
 function notifications(data, firsttime) {
-
-
-
 
     if (firsttime == "true") {
 
@@ -297,8 +289,6 @@ function notifications(data, firsttime) {
         document.addEventListener('DOMContentLoaded', function () {
 
 
-
-
             const notification = document.getElementById('notification');
 
             var divclass = "notification is-info is-light";
@@ -349,14 +339,9 @@ function notifications(data, firsttime) {
 
                         `
                 }
-
-
-
             }
 
             else if (diabetic === false) {
-
-
                 //high
                 if (glucoselevel >= 140) {
                     notification.innerHTML =
