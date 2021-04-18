@@ -1,17 +1,32 @@
 const express = require("express");
-const mongoose = require("mongoose");
-const passport = require("passport");
-const bodyParser = require("body-parser");
-const LocalStrategy = require("passport-local"),
-  passportLocalMongoose = require("passport-local-mongoose");
-const User = require("./models/user.js"); //model object 
-const main = require('./public/scripts/main.js'); 
+const { MongooseDocument } = require("mongoose");
+ mongoose = require("mongoose");
+ passport = require("passport");
+ bodyParser = require("body-parser");
+ LocalStrategy = require("passport-local"),
+ passportLocalMongoose = require("passport-local-mongoose");
+ User = require("./models/user.js"); //user model object 
+ UserData = require("./models/userdata.js"); //userdata model object
+ timestamps = require('./public/scripts/timestamps.js'); 
+ emailverification = require('./public/scripts/emailverification.js');
+ flash = require('connect-flash');
+ i18n = require('i18n');
+ cookieParser = require('cookie-parser');
+
+ 
+ 
+ 
+ 
+//global variables
+var app = express();
+
 
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useFindAndModify", false);
 mongoose.set("useCreateIndex", true);
 mongoose.set("useUnifiedTopology", true);
-mongoose.connect("mongodb+srv://abc:test123@cluster0.7bifm.mongodb.net/Cluster0?retryWrites=true&w=majority");
+// mongoose.connect("mongodb+srv://abc:test123@cluster0.7bifm.mongodb.net/Cluster0?retryWrites=true&w=majority");
+mongoose.connect("mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false");
 
 
 var app = express();
@@ -63,17 +78,48 @@ app.get("/secret", isLoggedIn, function (req, res) {
 });
 
 //push data to the database
-app.post("/secret", isLoggedIn, function (req, res) {
-  var glocuselevel = req.body.glucoselevel;
-  var username = req.user.username;
-  var timestamp = main.maketimestamp(); 
+app.post("/dashboard", isLoggedIn, function (req, res) {
+  var date = new Date();
   
-  // maybe a function on moogoose that allows you to update multiple variables on one user?
-  User.findOneAndUpdate(
-    { username: username },
-    { $push: { glucoselevels: glocuselevel } },
-    null,
-    function (err, docs) {
+  var userid = req.user._id;
+  var currentDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+  var glucoselevel = req.body.glucoselevel;
+  var timestamp = timestamps.maketimestamp(new Date()); 
+  var carb = req.body.carbs;
+
+  UserData.findOneAndUpdate(
+    {
+      '_id': userid,
+      'dates.date': {$ne: currentDate}
+    },
+    {$addToSet: {
+      dates: {
+        date: currentDate,
+      }
+    }},
+    function(err) {
+      console.log(err);
+    }
+  );
+
+  UserData.findOneAndUpdate(
+    {
+      '_id': userid,
+      'dates.date': currentDate
+    },
+    {$push: {
+    //add data to push to database
+      'dates.$.glucosedata': {
+        glucoselevels : glucoselevel,
+        timestamps : timestamp,
+        carbs : carb,
+      }
+    
+    } },
+    { 
+      new: true,
+    },
+    function (err,docs){
       if (err) {
         throw new Error("Error finding and updating")
       }
@@ -118,33 +164,38 @@ app.post("/register", function (req, res) {
   var lastname = req.body.lastname;
   var email = req.body.email;
   
-  User.register(
-    new User({
-      firstname: firstname,
-      lastname: lastname,
-      email: email,
-      glucoselevel: [0],
-      timestamps: undefined,
-      username: username,
-    }),
-    password,
-    function (err, user) {
-      if (err) {
-        console.log(err);
-        return res.render("register");
-      } else {
-        passport.authenticate("local")(req, res, function () {
-          db.collection("users")
-          .findOne({ username: req.user.username })
-          .then(function (result) {
-            if (!result) {
-              throw new Error("Not found");
-            }
-            console.log("Result: ", result);
-            res.render("secret", { data: result });
-          });
-        });
-      }
+  UserData.exists({email: email}).then(answer => {
+    if (answer == false){
+      
+      User.register(
+        new User({username: username}),password, 
+        function (err, user) {
+          if (err) {
+            console.log(err);
+            res.render("register",{error: err});
+          } else {
+            passport.authenticate("local")(req, res, function () {
+    
+              var Data = new UserData({
+                _id: req.user._id,
+                firstname: firstname,
+                lastname: lastname, 
+                email: email,  
+                dates: [],
+                age: age,
+                diabetic: diabetic
+              })
+              Data.save();
+              res.render("login");
+    
+            });
+          }
+        }
+      );
+    }
+
+    else{
+      res.render("register",{error: "Email is taken."});
     }
   );
 });
