@@ -1,7 +1,5 @@
 var date = new Date();
 dateFormat = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-console.log("date: ", dateFormat);
-
 
 function graph(data) {
 
@@ -129,7 +127,6 @@ function graph(data) {
 
         document.getElementById('dateCalendar').addEventListener("change", function() {
             var dateControl = document.getElementById('dateCalendar');
-            console.log("calendar date selected: ", dateControl.value);
             dateFormat = dateControl.value.toString();
             dateFormat = dateFormat.split(/-/);
             dateFormat = dateFormat[0] + "-" + parseInt(dateFormat[1]).toString() + "-" + dateFormat[2]; // remove leading zero from month
@@ -139,11 +136,7 @@ function graph(data) {
                 if (jsonObject['dates'][j]['date'] == dateFormat) {
                     updatedIndex = j;
                 }
-                console.log(jsonObject['dates'][j]['date'], " versus ", dateFormat);
             };
-
-            console.log("Updated Index: ", updatedIndex);
-            
 
             jsonGlucose.length = 0;
             timestamps.length = 0;
