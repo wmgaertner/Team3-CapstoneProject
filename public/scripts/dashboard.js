@@ -1,55 +1,84 @@
-var date = new Date();
-dateFormat = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+
 
 function graph(data) {
 
-    jsonObject = JSON.parse(data);
-
-    var index = -1
-    for (i in jsonObject['dates']) {
-        if (jsonObject['dates'][i]['date'] == dateFormat) {
-            index = i;
-        }
-    };
-
-    var jsonGlucose = [];
-    var timestamps = [];
-    var carbs = [];
-
-    if (index != -1) {
-        var jsonGluLength = jsonObject['dates'][index]['glucosedata'].length;
-        
-        for (i = 0; i < jsonGluLength; i++) {
-            jsonGlucose.push(parseFloat(jsonObject['dates'][index]['glucosedata'][i]['glucoselevels']));
-            timestamps.push(jsonObject['dates'][index]['glucosedata'][i]['timestamps']);
-            carbs.push(parseFloat(jsonObject['dates'][index]['glucosedata'][i]['carbs']));
-        }
-    }
-
-    if (jsonObject['diabetic'] == true) {
-        var topAnnotation = 180;
-        var sugMax = 200;
-        var topAnnotationText = "High Value (Hyperglycemia)";
-        var btmAnnotationText = "Low Value (Hypoglycemia)";
-
-    }
-    else {
-        var topAnnotation = 140;
-        var sugMax = 160;
-        var topAnnotationText = "High Value (Hypoglycemia)";
-        var btmAnnotationText = "Low Value (Hypoglycemia)";
-    }
-
-    
-    //Display chart
-
     document.addEventListener('DOMContentLoaded', function () {
 
+        jsonObject = JSON.parse(data);
 
+        var date = new Date();
+        dateFormat = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+
+        var dateControl = document.getElementById('dateCalendar');
 
         var ctx = document.getElementById("myChart").getContext("2d");
 
+        var historylist = document.getElementById("history-list");
 
+        dateControl.placeholder = dateFormat.toString();
+
+
+        
+
+        var index = -1
+        for (i in jsonObject['dates']) {
+            if (jsonObject['dates'][i]['date'] == dateFormat) {
+                index = i;
+            }
+        };
+
+        var jsonGlucose = [];
+        var timestamps = [];
+        var carbs = [];
+
+        if (index != -1) {
+            var jsonGluLength = jsonObject['dates'][index]['glucosedata'].length;
+        
+            for (i = 0; i < jsonGluLength; i++) {
+                jsonGlucose.push(parseFloat(jsonObject['dates'][index]['glucosedata'][i]['glucoselevels']));
+                timestamps.push(jsonObject['dates'][index]['glucosedata'][i]['timestamps']);
+                carbs.push(parseFloat(jsonObject['dates'][index]['glucosedata'][i]['carbs']));
+            }
+        }
+
+        if (jsonObject['diabetic'] == true) {
+            var topAnnotation = 180;
+            var sugMax = 200;
+            var topAnnotationText = "High Value (Hyperglycemia)";
+            var btmAnnotationText = "Low Value (Hypoglycemia)";
+
+        }
+        else {
+            var topAnnotation = 140;
+            var sugMax = 160;
+            var topAnnotationText = "High Value (Hypoglycemia)";
+            var btmAnnotationText = "Low Value (Hypoglycemia)";
+        }
+
+    
+    
+
+
+
+        var html = '';
+
+    
+        jsonObject['dates'][index]['glucosedata'].map(match => {
+    
+            html +=
+            `
+            <div class="box">
+                <h4>Glucose Level: ${match.glucoselevels}  <p style="text-align: center;" >Carbs ${match.carbs}</p>  </h4> 
+                <h>${match.timestamps} </h>
+        
+            </div>
+
+            `
+    
+        }).join('');
+        
+
+        historylist.innerHTML = html
 
         var myChart = new Chart(ctx, {
 
@@ -125,8 +154,9 @@ function graph(data) {
             },
         });
 
+        
         document.getElementById('dateCalendar').addEventListener("change", function() {
-            var dateControl = document.getElementById('dateCalendar');
+            
             dateFormat = dateControl.value.toString();
             dateFormat = dateFormat.split(/-/);
             dateFormat = dateFormat[0] + "-" + parseInt(dateFormat[1]).toString() + "-" + dateFormat[2]; // remove leading zero from month
@@ -137,6 +167,28 @@ function graph(data) {
                     updatedIndex = j;
                 }
             };
+
+
+            var html = '';
+
+    
+            jsonObject['dates'][updatedIndex]['glucosedata'].map(match => {
+    
+            html +=
+            `
+            <div class="box">
+                <h4>Glucose Level: ${match.glucoselevels}  <p style="text-align: center;" >Carbs ${match.carbs}</p>  </h4> 
+                <h>${match.timestamps} </h>
+        
+            </div>
+
+            `
+    
+            }).join('');
+        
+
+            historylist.innerHTML = html
+
 
             jsonGlucose.length = 0;
             timestamps.length = 0;
@@ -163,8 +215,11 @@ function graph(data) {
 
             myChart.update();
         })
+
     });
 }
+
+
 
 
 

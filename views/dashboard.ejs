@@ -19,9 +19,7 @@
 
     <script> 
       graph('<%- JSON.stringify(locals.data, null, 0) %>'); 
-      notifications('<%- JSON.stringify(locals.data, null, 0) %>','<%- locals.firsttime %>');
-
-
+      notifications('<%- JSON.stringify(locals.data, null, 0) %>','<%- locals.firsttime %>');  
     </script>
 
     
@@ -29,6 +27,7 @@
     <!-- CSS Stylesheets -->
     <link href="/css/dashboard.css" rel="stylesheet"/>
     <link href="/bulma/css/bulma.css" rel="stylesheet"/>
+    
     
 
     
@@ -60,7 +59,6 @@
   
     <div class="aspectwrapper" >
 
-      
       <div class="content" style="float:left; width: 40%; padding-left: 5%; ">
 
         <form action="/dashboard" method="POST" onsubmit="dashboard()" >
@@ -72,13 +70,15 @@
           <br>
           <div id="txt" style="font-weight: bold;"> </div>
           <br>
+          <br>
           
 
-          <input class="input is-info" type="number" name="glucoselevel" id="glucoseInput" placeholder="Blood sugar" /> 
+          <input class="input is-info" type="number" name="glucoselevel" id="glucoseInput" placeholder="Blood sugar" style="width: 30%" /> 
           <br>
           <br>
+          
 
-          <input class="input is-info" type="text" name='foodinput' id="foodinput" placeholder="Food search "/>
+          <input class="input is-info" type="text" name='foodinput' id="foodinput" placeholder="Food search " style="width: 55%"/>
           <div id = "match-list"></div>
           <br> 
 
@@ -87,28 +87,58 @@
           <div class="field is-grouped is-grouped-multiline" id = "dictionary"></div>
 
           <br>
+          <br>
+          <br>
           
-          <button class="button" ><%= __('submit') %></button>
+          
+          <button class="button is-info" ><%= __('submit') %></button>
         </form>
 
         <br>
 
       </div>
 
-      <div class="content" style="float:right; width: 55%;  padding-right: 5%;">
+      <div class="content" style="float:right; width:55%; ">
 
         <div id="notification" style=" opacity: 0.8;"></div>
         <br>
 
-        <input id="dateCalendar" class="input" type="date" />
         
-        <canvas style="height:400px" id="myChart"></canvas>
+        <canvas id="myChart" style="padding-right:5%;"></canvas>
 
+        <br>
+
+         
+        
 
       </div>
 
 
+      <div class="content" style=" position: relative; float:left; width:100%; padding-left:5%; padding-right:6%;">
+
+        
+        <input id="dateCalendar"  class="input is-info"  type="text" onfocus="(this.type='date')" onblur="(this.type='text')" style="float:right;  width:20%;"/>
+        <br>
+        <br>
+        <br>
+
+        <div id = "history-list" ></div>
+
+        
+      </div>
+
+      
+ 
+
     </div>
+
+
+   
+
+
+    
+
+    
 
     
     
