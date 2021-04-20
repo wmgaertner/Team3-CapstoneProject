@@ -194,10 +194,11 @@ function notifications(data, firsttime) {
         //TODO Currently just testing
         var index = -1
         for (i in jsonObject['dates']) {
-            if (jsonObject['dates'][i]['date'] == dateFormat) {
+            if (!jsonObject['dates'][i]['glucosedata'].length == 0){
                 index = i;
             }
-        };
+        }
+
 
         if (index == -1){
             return;
@@ -212,6 +213,7 @@ function notifications(data, firsttime) {
 
         const diabetic = jsonObject['diabetic'];
         const glucoselevel = jsonGlucose.slice(-1)[0];
+
 
         const low = [
             "Monitor blood sugar levels before & after exercise to increase awareness of how exercise affects blood sugar levels.",
@@ -290,7 +292,7 @@ function notifications(data, firsttime) {
 
             var divclass = "notification is-info is-light";
 
-            var message = "<u>Login tip:</u> <br>"
+            var message = "<u>FeedBack tip:</u> <br>"
 
 
             if (diabetic === true) {
