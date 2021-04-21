@@ -10,6 +10,7 @@
 
     <!-- CSS Stylesheet -->
     <link href="/bulma/css/bulma.css" rel="stylesheet" type="text/css" />
+    <link href="/css/register.css" rel="stylesheet" type="text/css" />
 
     <!-- Scripts -->
     <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
@@ -20,9 +21,24 @@
 
   </head>
 
+  <div class="navbar1">
+    
+    <div class="dropdown1">
+      
+      <button class="dropbtn1" ><%= __('choose_language') %> </button>
+      
+      <div class="dropdown-content1">
+        <a href="setLocale/en" class="dropdown-item"><%= __('english') %></a>
+        <a href="setLocale/es" class="dropdown-item"><%= __('spanish') %></a>
+      </div>
+
+    </div>
+  </div>
+
   <body>
     <center>
     <div class="content is-max-desktop">
+      <br>
       <h1>Sign up Form</h1>
       <br>
       <div class="box" style="width: 50%; ">
@@ -67,15 +83,20 @@
 
           <p id = "errorage" style="color:red;"></p>
           
-          <label class="label" for="diagnosis-dropdown"><%= __('select_diagnosis') %>:</label>
+          <label class="label" style = "float:left" for="diagnosis-dropdown"><%= __('select_diagnosis') %>:</label> 
+          <br> 
+          <br>
 
-          <div class="select" id="diabeticdiv">
+          <div style="float:left;" class="select" id="diabeticdiv">
             <select name="diabetic" id="diabetic">
               <option></option>
               <option value="true"><%= __('diabetic') %></option>
               <option value="false"><%= __('non-diabetic') %></option>
             </select>
           </div>
+
+          <br>
+          <br>
           
           <p id = "errordiabetic" style="color:red;"></p>
           
@@ -98,7 +119,7 @@
           <p id = "errorpassword" style="color:red;"></p>
 
           
-          <button class="button is-primary is-rounded"><%= __('create_account') %></button> 
+          <button class="button is-info is-rounded"><%= __('create_account') %></button> 
 
           <br>
           <br>
