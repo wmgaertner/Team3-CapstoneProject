@@ -39,6 +39,30 @@ function graph(data) {
                 timestamps.push(jsonObject['dates'][index]['glucosedata'][i]['timestamps']);
                 carbs.push(parseFloat(jsonObject['dates'][index]['glucosedata'][i]['carbs']));
             }
+
+
+
+            var html = '';
+
+        
+            jsonObject['dates'][index]['glucosedata'].map(match => {
+    
+            html +=
+                `
+                <div class="box">
+                    <h4>Glucose Level: ${match.glucoselevels}  <p style="text-align: center;" >Carbs ${match.carbs}</p>  </h4> 
+                    <h>${match.timestamps} </h>
+        
+                </div>
+
+                `
+    
+            }).join('');
+        
+
+            historylist.innerHTML = html
+
+
         }
 
         if (jsonObject['diabetic'] == true) {
@@ -56,29 +80,7 @@ function graph(data) {
         }
 
     
-    
-
-
-
-        var html = '';
-
-    
-        jsonObject['dates'][index]['glucosedata'].map(match => {
-    
-            html +=
-            `
-            <div class="box">
-                <h4>Glucose Level: ${match.glucoselevels}  <p style="text-align: center;" >Carbs ${match.carbs}</p>  </h4> 
-                <h>${match.timestamps} </h>
         
-            </div>
-
-            `
-    
-        }).join('');
-        
-
-        historylist.innerHTML = html
 
         var myChart = new Chart(ctx, {
 
@@ -168,28 +170,7 @@ function graph(data) {
                 }
             };
 
-
-            var html = '';
-
-    
-            jsonObject['dates'][updatedIndex]['glucosedata'].map(match => {
-    
-            html +=
-            `
-            <div class="box">
-                <h4>Glucose Level: ${match.glucoselevels}  <p style="text-align: center;" >Carbs ${match.carbs}</p>  </h4> 
-                <h>${match.timestamps} </h>
-        
-            </div>
-
-            `
-    
-            }).join('');
-        
-
-            historylist.innerHTML = html
-
-
+            
             jsonGlucose.length = 0;
             timestamps.length = 0;
             carbs.length = 0;
@@ -211,6 +192,29 @@ function graph(data) {
                 myChart.data.labels = timestamps;
                 myChart.data.datasets[0].data = jsonGlucose;
                 myChart.data.datasets[1].data = carbs;
+
+
+                var html = '';
+
+    
+                jsonObject['dates'][updatedIndex]['glucosedata'].map(match => {
+    
+                    html +=
+                        `
+                        <div class="box">
+                            <h4>Glucose Level: ${match.glucoselevels}  <p style="text-align: center;" >Carbs ${match.carbs}</p>  </h4> 
+                            <h>${match.timestamps} </h>
+        
+                        </div>
+
+                        `
+    
+                }).join('');
+        
+
+                historylist.innerHTML = html
+                
+
             }
 
             myChart.update();
