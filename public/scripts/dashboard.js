@@ -161,7 +161,7 @@ function graph(data) {
             
             dateFormat = dateControl.value.toString();
             dateFormat = dateFormat.split(/-/);
-            dateFormat = dateFormat[0] + "-" + parseInt(dateFormat[1]).toString() + "-" + dateFormat[2]; // remove leading zero from month
+            dateFormat = parseInt(dateFormat[1]).toString() + "/" + dateFormat[2] + "/" + dateFormat[0]; // remove leading zero from month
 
             var updatedIndex = -1;
             for (j in jsonObject['dates']) {
