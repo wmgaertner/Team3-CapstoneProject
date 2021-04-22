@@ -7,7 +7,7 @@ function graph(data) {
         jsonObject = JSON.parse(data);
 
         var date = new Date();
-        dateFormat = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+        dateFormat = (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
 
         var dateControl = document.getElementById('dateCalendar');
 
