@@ -7,7 +7,7 @@ function graph(data) {
         jsonObject = JSON.parse(data);
 
         var date = new Date();
-        dateFormat = (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
+        dateFormat = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
 
         var dateControl = document.getElementById('dateCalendar');
 
@@ -160,9 +160,9 @@ function graph(data) {
         document.getElementById('dateCalendar').addEventListener("change", function() {
             
             dateFormat = dateControl.value.toString();
-            dateFormat = dateFormat.split(/[/]/);
-            dateFormat = parseInt(dateFormat[1]).toString() + "/" + dateFormat[2] + "/" + dateFormat[0]; // remove leading zero from month
-
+            dateFormat = dateFormat.split(/-/);
+            dateFormat = dateFormat[0] + "-" + parseInt(dateFormat[1]).toString() + "-" + dateFormat[2]; // remove leading zero from month
+            dateControl.placeholder = dateFormat.toString();
             var updatedIndex = -1;
             for (j in jsonObject['dates']) {
                 if (jsonObject['dates'][j]['date'] == dateFormat) {
