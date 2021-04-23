@@ -159,6 +159,7 @@ function graph(data) {
         
         document.getElementById('dateCalendar').addEventListener("change", function() {
             
+            historylist.innerHTML = '';
             dateFormat = dateControl.value.toString();
             dateFormat = dateFormat.split(/-/);
             dateFormat = dateFormat[0] + "-" + parseInt(dateFormat[1]).toString() + "-" + dateFormat[2]; // remove leading zero from month
@@ -193,6 +194,8 @@ function graph(data) {
                 myChart.data.datasets[0].data = jsonGlucose;
                 myChart.data.datasets[1].data = carbs;
 
+                
+                
 
                 var html = '';
 
