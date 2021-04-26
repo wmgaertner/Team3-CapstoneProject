@@ -122,7 +122,7 @@ app.post("/dashboard", isLoggedIn, function (req, res) {
   var date = new Date();
   
   var userid = req.user._id;
-  var currentDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+  var currentDate = date.getFullYear() + "-" + ('0' + (date.getMonth() + 1)).slice(-2) + "-" + date.getDate();
   var glucoselevel = req.body.glucoselevel;
   var timestamp = timestamps.maketimestamp(new Date()); 
   var carb = req.body.carbs;
