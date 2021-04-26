@@ -7,7 +7,7 @@ function graph(data) {
         jsonObject = JSON.parse(data);
 
         var date = new Date();
-        dateFormat = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+        dateFormat = date.getFullYear() + "-" + ('0' + (date.getMonth() + 1)).slice(-2) + "-" + date.getDate();
 
         var dateControl = document.getElementById('dateCalendar');
 
@@ -17,14 +17,21 @@ function graph(data) {
 
         dateControl.placeholder = dateFormat.toString();
 
-
+        dateControl.setAttribute('min', dateFormat)
         
+        dateControl.setAttribute('max', dateFormat);
+
 
         var index = -1
         for (i in jsonObject['dates']) {
+
             if (jsonObject['dates'][i]['date'] == dateFormat) {
                 index = i;
+
             }
+
+           
+
         };
 
         var jsonGlucose = [];
@@ -32,6 +39,9 @@ function graph(data) {
         var carbs = [];
 
         if (index != -1) {
+
+            dateControl.setAttribute('min', jsonObject['dates'][0]['date'] )
+
             var jsonGluLength = jsonObject['dates'][index]['glucosedata'].length;
         
             for (i = 0; i < jsonGluLength; i++) {
@@ -157,7 +167,7 @@ function graph(data) {
         });
 
         
-        document.getElementById('dateCalendar').addEventListener("change", function() {
+        dateControl.addEventListener("change", function() {
             
             historylist.innerHTML = '';
             dateFormat = dateControl.value.toString();
@@ -245,6 +255,7 @@ function clock() {
     var t = setTimeout(clock, 500);
 
 }
+
 
 function notifications(data, firsttime) {
 
