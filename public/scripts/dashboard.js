@@ -19,7 +19,7 @@ function graph(data) {
 
         dateControl.value = dateFormat;
 
-        
+        dateControl.setAttribute('min', dateFormat)
         
         dateControl.setAttribute('max', dateFormat);
 
