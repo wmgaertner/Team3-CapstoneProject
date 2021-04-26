@@ -15,7 +15,9 @@ function graph(data) {
 
         var historylist = document.getElementById("history-list");
 
-        dateControl.placeholder = dateFormat.toString();
+        
+
+        dateControl.value = dateFormat;
 
         dateControl.setAttribute('min', dateFormat)
         
