@@ -92,16 +92,7 @@ app.get("/dashboard", isLoggedIn, function (req, res) {
     req.session.firsttime = false;
 
   }
-  else {
-    UserData.findById(req.user._id, 
-      function (err,docs) {
-        if (err) {
-          throw new Error("Not found");
-        }
-        res.render("dashboard", { data: docs, username: req.user.username, firsttime: false});
-    });  
-
-  }
+  
   
 
 });
