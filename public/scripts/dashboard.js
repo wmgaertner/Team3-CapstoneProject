@@ -16,11 +16,9 @@ function graph(data) {
         var historylist = document.getElementById("history-list");
 
         
-
         dateControl.value = dateFormat;
 
-        dateControl.setAttribute('min', dateFormat)
-        
+        dateControl.setAttribute('min', jsonObject['dates'][0]['date'])
         dateControl.setAttribute('max', dateFormat);
 
 
@@ -42,8 +40,6 @@ function graph(data) {
 
         if (index != -1) {
 
-            dateControl.setAttribute('min', jsonObject['dates'][0]['date'] )
-
             var jsonGluLength = jsonObject['dates'][index]['glucosedata'].length;
         
             for (i = 0; i < jsonGluLength; i++) {
@@ -52,8 +48,7 @@ function graph(data) {
                 carbs.push(parseFloat(jsonObject['dates'][index]['glucosedata'][i]['carbs']));
             }
 
-
-
+            
             var html = '';
 
         
@@ -174,8 +169,9 @@ function graph(data) {
             historylist.innerHTML = '';
             dateFormat = dateControl.value.toString();
             dateFormat = dateFormat.split(/-/);
-            dateFormat = dateFormat[0] + "-" + parseInt(dateFormat[1]).toString() + "-" + dateFormat[2]; // remove leading zero from month
-            dateControl.placeholder = dateFormat.toString();
+            dateFormat = dateFormat[0] + "-" + ('0' + parseInt(dateFormat[1]).toString()).slice(-2) + "-" + dateFormat[2]; // remove leading zero from month
+            
+            
             var updatedIndex = -1;
             for (j in jsonObject['dates']) {
                 if (jsonObject['dates'][j]['date'] == dateFormat) {
