@@ -5,19 +5,15 @@
   <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- CSS Stylesheets -->
-  <link href="/css/login.css" rel="stylesheet" type="text/css" />
   <link href="/bulma/css/bulma.css" rel="stylesheet" type="text/css" />
 
-  <!-- Scripts -->
-  <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
-  <script src="scripts/formchecks.js"></script>
-  <script src="scripts/errortranslations.js"></script>
-  <script> translatelogin('<%- locals.error %>'); </script>
-
+  
 </head>
 
 
 <body>
+
+    
     <h1>F.A.Q.</h1>
     
     <h2>How to navigate the registration process</h2>
@@ -88,6 +84,13 @@
 
     
 </body>
+
+<br>
+<br>
+
+<a href="/">
+    <button class="button" style="height:30px;width:70px;"><%= __('back') %></button>
+</a>
 
 
 </html>

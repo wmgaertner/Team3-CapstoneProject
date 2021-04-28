@@ -11,7 +11,7 @@ body, html {
   
 .center-fit {
     max-width: 55%;
-    max-height: 55vh;
+    max-height: 50vh;
     margin: auto;
 }
 

@@ -253,6 +253,18 @@ function isLoggedIn(req, res, next) {
 }
 
 
+//Showing about page
+app.get("/about", function (req, res) {
+  res.render('about');
+});
+
+//Showing faq page
+app.get("/faq", function (req, res) {
+  res.render('faq');
+});
+
+
+
 
 
 var port = process.env.PORT || 3000;
