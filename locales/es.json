@@ -19,5 +19,7 @@
 	"create_task": "Crear una Tarea",
 	"F.A.Q": "F.A.Q",
 	"about": "Acerca de",
-	"signuptitle": "Formulario de Registro"
+	"signuptitle": "Formulario de Registro",
+    "bloodsugar": "Azúcar en la sangre",
+    "foodsearch": "Búsqueda de comida"
 }
