@@ -82,7 +82,7 @@ function graph(data) {
         else {
             var topAnnotation = 140;
             var sugMax = 160;
-            var topAnnotationText = "High Value (Hypoglycemia)";
+            var topAnnotationText = "High Value (Hyperglycemia)";
             var btmAnnotationText = "Low Value (Hypoglycemia)";
         }
 
