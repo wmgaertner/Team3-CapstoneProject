@@ -1,4 +1,5 @@
 body {
+    font-size: medium;
     margin-top: 25px;
     margin-bottom: 25px;
     margin-left: 25px;
@@ -7,7 +8,7 @@ body {
 }
 
 h1 {
-    font-size: 50px;
+    font-size: xx-large;
     color: rgb(7, 170, 219);
     font-family: 'Marck Script', cursive;
     font-weight: 700;
