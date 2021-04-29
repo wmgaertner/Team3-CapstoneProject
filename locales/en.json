@@ -17,5 +17,7 @@
 	"password": "Password",
 	"choose_language": "Choose Language",
 	"create_task": "Create a Task",
-	"F.A.Q": "F.A.Q"
+	"F.A.Q": "F.A.Q",
+	"about": "About",
+	"signuptitle": "Sign Up Form"
 }
