@@ -1,0 +1,21 @@
+body {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    margin-left: 25px;
+    margin-right: 25px;
+
+}
+
+h1 {
+    font-size: 50px;
+    color: rgb(7, 170, 219);
+    font-family: 'Marck Script', cursive;
+    font-weight: 700;
+
+    text-align: left;
+    line-height: 59px;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 25px;
+}
