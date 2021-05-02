@@ -1,5 +1,7 @@
 body {
     font-size: medium;
+    text-align: left;
+    line-height: normal;
     margin-top: 25px;
     margin-bottom: 25px;
     margin-left: 25px;
@@ -8,9 +10,9 @@ body {
 }
 
 h1 {
-    font-size: xx-large;
+
     color: rgb(7, 170, 219);
-    font-family: 'Marck Script', cursive;
+    font-family: 'Italianno', cursive;
     font-weight: 700;
 
     text-align: left;
