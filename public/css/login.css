@@ -1,5 +1,4 @@
 
-
 body, html {
   background-color: white; 
   
@@ -18,15 +17,15 @@ body, html {
 
 /* Styling for GlucoCheck title */
 h1 {
-  color: rgb(7, 170, 219);
-  font-family: 'Italianno', cursive;
-  font-weight: 700;
-  text-align: center;
-  line-height: 40px;
-  margin-top: 25px;
-  margin-bottom: 1px;
-  margin-left: 10px;
-  margin-right: 25px;
+    color:  rgb(7, 170, 219);
+    font-family: 'Italianno', cursive;
+    font-weight: 700;
+    text-align: center;
+    line-height: 40px;
+    margin-top: 25px;
+    margin-bottom: 1px;
+    margin-left: 10px;
+    margin-right: 25px;
 }
 
 /* Not currently in use!*/
