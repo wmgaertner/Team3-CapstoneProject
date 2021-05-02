@@ -16,6 +16,7 @@
     <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
     <script src="scripts/formchecks.js"></script>
     <script src="scripts/errortranslations.js"></script>
+    <script src="scripts/showpassword.js"></script>
     <script> translateregister('<%- locals.error %>'); </script>
 
 
@@ -118,6 +119,10 @@
 
           <p id = "errorpassword" style="color:red;"></p>
 
+          <label class="checkbox" style="float:left;">
+            <input  type="checkbox" onclick="start()"> Show Password
+          </label>
+          <br>
           
           <button class="button is-info is-rounded"><%= __('create_account') %></button> 
 
