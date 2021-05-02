@@ -11,8 +11,34 @@ body, html {
   
 .center-fit {
     max-width: 55%;
-    max-height: 50vh;
+    max-height: 35vh;
     margin: auto;
+}
+
+/* Styling for GlucoCheck title */
+h1 {
+    color: rgb(7, 170, 219);
+    font-family: 'Italianno', cursive;
+    font-weight: 700;
+    text-align: center;
+    line-height: 40px;
+    margin-top: 25px;
+    margin-bottom: 1px;
+    margin-left: 10px;
+    margin-right: 25px;
+}
+
+/* Styling for GlucoCheck tagline...Be well, know your BGL! */
+h4 {
+    color: rgb(7, 170, 219);
+    font-family: 'Italianno', cursive;
+    font-weight: 700;
+    text-align: center;
+    line-height: 30px;
+    margin-top: 15px;
+    margin-bottom: 1px;
+    margin-left: 10px;
+    margin-right: 25px;
 }
 
 /* Navbar container */
@@ -99,4 +125,3 @@ body, html {
     right: 0;
     
 }
-          
