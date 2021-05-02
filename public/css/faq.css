@@ -11,9 +11,9 @@ body {
 }
 
 h1 {
-    font-size: xx-large;
+
     color: rgb(7, 170, 219);
-    font-family: 'Marck Script', cursive;
+    font-family: 'Italianno', cursive;
     font-weight: 700;
 
     text-align: left;
@@ -25,7 +25,7 @@ h1 {
 }
 
 h2 {
-    font-size: large;
+
     font-weight: bold;
     
 
@@ -38,10 +38,9 @@ h2 {
 }
 
 h3 {
-    font-size: medium;
     font-weight: bold;
     color: rgb(7, 170, 219);
-    font-family: 'Marck Script', cursive;
+    font-family: 'Italianno', cursive;
 
     text-align: left;
     line-height: normal;
