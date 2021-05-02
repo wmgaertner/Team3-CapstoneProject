@@ -9,9 +9,10 @@ body, html {
     display: grid;
 }
 
+/* Styling for Logo...slightly smaller than on home page. */
 .center-fit {
     max-width: 55%;
-    max-height: 35vh;
+    max-height: 30vh;
     margin: auto;
 }
 
@@ -21,7 +22,7 @@ h1 {
     font-family: 'Italianno', cursive;
     font-weight: 700;
     text-align: center;
-    line-height: 40px;
+    line-height: 10px;
     margin-top: 25px;
     margin-bottom: 1px;
     margin-left: 10px;
@@ -37,7 +38,7 @@ h4 {
   text-align: center;
   line-height: 30px;
   margin-top: 15px;
-  margin-bottom: 1px;
+  margin-bottom: 20px;
   margin-left: 10px;
   margin-right: 25px;
 }
