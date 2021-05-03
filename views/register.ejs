@@ -12,6 +12,7 @@
     <!-- CSS Stylesheet -->
     <link href="/bulma/css/bulma.css" rel="stylesheet" type="text/css" />
     <link href="/css/register.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Italianno&display=swap" rel="stylesheet"/>
 
     <!-- Scripts -->
     <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
@@ -23,27 +24,73 @@
 
   </head>
 
-  <div class="navbar1">
+  <nav class="navbar" role="navigation" aria-label="main navigation">
     
-    <div class="dropdown1">
+    <div class="navbar-brand">
       
-      <button class="dropbtn1" ><%= __('choose_language') %> </button>
+      <a class="navbar-item" href="/">
+        <h1><span style="font-size:2.1vw; color: rgb(7, 170, 219); ">GlucoCheck</span></h1>
+      </a>
       
-      <div class="dropdown-content1">
-        <a href="setLocale/en" class="dropdown-item"><%= __('english') %></a>
-        <a href="setLocale/es" class="dropdown-item"><%= __('spanish') %></a>
-      </div>
 
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+      
     </div>
-  </div>
+  
+    <div id="navbarBasicExample" class="navbar-end" style="font-weight: 400; font-size: large; padding-right: 3%;">
+      <div class="navbar-start">
+      
+
+  
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            Select a language
+          </a>
+  
+          <div class="navbar-dropdown">
+
+
+
+            <a href="setLocale/en" class="navbar-item"><%= __('english') %></a>
+            <a href="setLocale/es" class="navbar-item"><%= __('spanish') %></a>
+            
+            
+            
+          </div>
+        </div>
+
+
+
+        <a href="/about" class="navbar-item">
+          About us
+        </a>
+
+        <a href="/faq" class="navbar-item">
+          FAQ
+        </a>
+
+      </div>
+    </div>
+
+  </nav>
+
 
   <body>
     <center>
     <div class="content is-max-desktop">
       <br>
-      <h1><%= __('signuptitle') %></h1>
       <br>
-      <div class="box" style="width: 50%; ">
+
+
+      <div class="box" style="width: 50%; box-shadow: inset 0 -3em 3em rgba(0,0,0,0.1), 0.3em 0.3em 1em rgba(0,0,0,0.3); ">
+
+
+        <h1><%= __('signuptitle') %></h1>
+        <br>
 
         <form action="/register" method="POST" onsubmit="registration()"> 
 
@@ -124,14 +171,20 @@
             <input  type="checkbox" onclick="start()"> Show Password
           </label>
           <br>
+          <br>
+          <button class="button is-danger is-rounded"><%= __('create_account') %></button> 
+
+          <br>
+          <br>
           
-          <button class="button is-info is-rounded"><%= __('create_account') %></button> 
 
-          <br>
-          <br>
-
+      
           
         </form>
+
+        <a href="/login"><button class="button is-info is-light"><%= __('login') %></button></a>
+        <a href="/"><button class="button is-info is-light"><%= __('back') %></button></a>
+
       </div>
     </div>
 
@@ -139,8 +192,6 @@
 
 
 
-    <a href="/login"><button class="button"><%= __('login') %></button></a>
-    <a href="/"><button class="button"><%= __('back') %></button></a>
 
 
   

@@ -1,24 +1,35 @@
-body {
-    font-size: medium;
-    text-align: left;
-    line-height: normal;
-    margin-top: 25px;
-    margin-bottom: 25px;
-    margin-left: 25px;
-    margin-right: 25px;
-
-}
-
-h1 {
-
+body, html {
+    background-color: lightblue;    
+  }
+  
+  .imgbox {
+    display: grid;
+  }
+  
+  .center-fit {
+    max-width: 55%;
+    max-height: 40vh;
+    margin: auto;
+  }
+  
+  /* Styling for GlucoCheck title */
+  h1 {
     color: rgb(7, 170, 219);
     font-family: 'Italianno', cursive;
     font-weight: 700;
-
-    text-align: left;
-    line-height: 59px;
-    margin-top: 25px;
-    margin-bottom: 10px;
-    margin-left: 10px;
-    margin-right: 25px;
-}
+    text-align: center;
+    line-height: 10px;
+   
+  }
+  
+  /* Not currently in use!*/
+  /* Styling for GlucoCheck tagline...Be well, know your BGL! */
+  h4 {
+    color: rgb(7, 170, 219);
+    font-family: 'Italianno', cursive;
+    font-weight: 700;
+    text-align: center;
+    line-height: 30px;
+   
+  }
+  

@@ -7,7 +7,7 @@ function graph(data) {
         jsonObject = JSON.parse(data);
 
         var date = new Date();
-        dateFormat = date.getFullYear() + "-" + ('0' + (date.getMonth() + 1)).slice(-2) + "-" + date.getDate();
+        dateFormat = date.getFullYear() + "-" + ('0' + (date.getMonth() + 1)).slice(-2) + "-" + ('0' + date.getDate()).slice(-2);
 
         var dateControl = document.getElementById('dateCalendar');
 
@@ -169,7 +169,7 @@ function graph(data) {
             historylist.innerHTML = '';
             dateFormat = dateControl.value.toString();
             dateFormat = dateFormat.split(/-/);
-            dateFormat = dateFormat[0] + "-" + ('0' + parseInt(dateFormat[1]).toString()).slice(-2) + "-" + dateFormat[2]; // remove leading zero from month
+            dateFormat = dateFormat[0] + "-" + ('0' + parseInt(dateFormat[1]).toString()).slice(-2) + "-" + ('0' +  dateFormat[2].toString()).slice(-2); // remove leading zero from month
             
             
             var updatedIndex = -1;
@@ -361,7 +361,7 @@ function notifications(data, firsttime) {
 
             const notification = document.getElementById('notification');
 
-            var divclass = "notification is-info is-light";
+            var divclass = "notification is-danger is-light";
 
             var message = "<u>FeedBack tip:</u> <br>"
 

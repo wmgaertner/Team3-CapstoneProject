@@ -25,32 +25,95 @@
 
     
   
-    <!-- CSS Stylesheets -->
+    <!-- CSS Stylesheets and Fonts -->
     <link href="/css/dashboard.css" rel="stylesheet"/>
     <link href="/bulma/css/bulma.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Italianno&display=swap" rel="stylesheet"/>
     
     
 
     
   </head>
 
-  
-  
-  <div class="navbar1">
-    
-  
-    <div class="dropdown1">
 
+
+
+
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+  
+      <a class="navbar-item" href="/">
+        <h1><span style="font-size:2.1vw; color: rgb(7, 170, 219); ">GlucoCheck</span></h1>
+      </a>
       
-    
-      <button class="dropbtn1" ><%- locals.username %> </button>
-      <div class="dropdown-content1">
-          <a href="/logout"><%= __('sign_out') %></a>
-          
+  
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+      
+    </div>
+  
+    <div id="navbarBasicExample" class="navbar-end" style="font-weight: 400; font-size: large; padding-right: 3%;">
+      <div class="navbar-start">
+
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            Select a language
+          </a>
+  
+          <div class="navbar-dropdown">
+  
+  
+  
+            <a href="setLocale/en" class="navbar-item"><%= __('english') %></a>
+            <a href="setLocale/es" class="navbar-item"><%= __('spanish') %></a>
+            
+            
+            
+          </div>
+        </div>
+  
+       
+  
+  
+        
+      
+  
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            <%- locals.username %>
+          </a>
+  
+          <div class="navbar-dropdown">
+  
+  
+            <a href="/logout"><%= __('sign_out') %></a>
+            
+            
+            
+            
+          </div>
+        </div>
+  
+        
+  
       </div>
     </div>
-  </div>
+  
+  </nav>
+  
+  
 
+
+
+
+
+
+
+          
   
   <br>
   
@@ -67,7 +130,7 @@
           <input type="hidden" name="carbs" id="hiddenInput" value="0" />
 
           <br>
-          <h4><%= __('create_task') %></h4>
+          <h4 style="font-size: xx-large;"><%= __('create_task') %></h4>
           <br>
           <div id="txt" style="font-weight: bold;"> </div>
           <br>
@@ -92,7 +155,7 @@
           <br>
           
           
-          <button class="button is-info is-rounded" ><%= __('submit') %></button>
+          <button class="button is-danger is-rounded" ><%= __('submit') %></button>
         </form>
 
         <br>

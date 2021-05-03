@@ -8,8 +8,8 @@ body, html {
 }
   
 .center-fit {
-    max-width: 55%;
-    max-height: 35vh;
+    max-width: auto;
+    max-height: 40vh;
     margin: auto;
 }
 
@@ -50,3 +50,4 @@ h4 {
    /*outline: thin dashed green;            just so you can see the box */
  }
  
+

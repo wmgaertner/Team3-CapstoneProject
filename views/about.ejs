@@ -15,41 +15,120 @@
   href="https://fonts.googleapis.com/css2?family=Italianno&display=swap" 
   rel="stylesheet"
   /> 
-
-
-
-  
 </head>
 
 
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+
+    <a class="navbar-item" href="/">
+      <h1><span style="font-size:2.1vw; color: rgb(7, 170, 219); ">GlucoCheck</span></h1>
+    </a>
+    
+
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+    
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-end" style="font-weight: 400; font-size: large; padding-right: 3%;">
+    <div class="navbar-start">
+     
+    
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Select a language
+        </a>
+
+        <div class="navbar-dropdown">
+
+
+
+          <a href="setLocale/en" class="navbar-item"><%= __('english') %></a>
+          <a href="setLocale/es" class="navbar-item"><%= __('spanish') %></a>
+          
+          
+          
+        </div>
+      </div>
+
+      <a href="/about" class="navbar-item">
+        About us
+      </a>
+
+
+      <a href="/faq" class="navbar-item">
+        FAQ
+      </a>
+
+    </div>
+  </div>
+
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <body>
-  <h1><span style="font-size:5vw;">About</span></h1>
+  <br><br>
+  
+  <center>
+    
+  <div class ="box" style="box-shadow: inset 0 -3em 3em rgba(0,0,0,0.1), 0.3em 0.3em 1em rgba(0,0,0,0.3);">
 
-  <p style="font-size:1.5vw;">
-    Hi! We are Team3 and this is our capstone programming project.
-    <br>
-    <br>
-    Tasked with creating a simple, easy to use app to track blood-glucose, for our capstone programming project 
-    at Wake Technical Community College, we dove in to create the simplest, easiest tracker around. 
-    Many individuals still struggle with the use of technology. Our goal here was to create an 
-    application that functioned as simply as possible to reduce the barriers to these individuals.
-    GlucoCheck is free, simple and has no intrusive features.
-    Managing your blood-glucose levels is hard enough. Give GlucoCheck a try! Be well, know your BGL!
+    
+      <br>
+      <br>
+      <h1><span style="font-size:3vw;">About</span></h1>
+      <br>
 
-  </p>
+      <p style="font-size:1vw; ">
+        Hi! We are Team3 and this is our capstone programming project.
+        <br>
+        <br>
+        Tasked with creating a simple, easy to use app to track blood-glucose, for our capstone programming project 
+        at Wake Technical Community College, we dove in to create the simplest, easiest tracker around. 
+        Many individuals still struggle with the use of technology. Our goal here was to create an 
+        application that functioned as simply as possible to reduce the barriers to these individuals.
+        GlucoCheck is free, simple and has no intrusive features.
+        Managing your blood-glucose levels is hard enough. Give GlucoCheck a try! Be well, know your BGL!
+
+      </p>
+  
+      <br><br><br>
+  
+  
+      <h1><span style="font-size:1.6vw;">Contact Us</span></h1>
+
+
+      <a href="mailto:GlucoHelp@outlook.com">GlucoHelp@outlook.com</a>
+      <br>
+      <br>
+      <a href="/">
+        <button class="button" style="height:30px;width:70px;"><%= __('back') %></button>
+      </a>
+
+      
+  </div>
   
 
-  
-  
-  <h1><span style="font-size:5vw;">Contact Us</span></h1>
-
-
-  <a href="mailto:GlucoHelp@outlook.com">GlucoHelp@outlook.com</a>
-  <br>
-  <br>
-  <a href="/">
-    <button class="button" style="height:30px;width:70px;"><%= __('back') %></button>
-  </a>
 
   <br>
   <br>
