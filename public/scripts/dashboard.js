@@ -294,8 +294,6 @@ function clock() {
 
 function notifications(data, firsttime, translatedPhrases) {
     var phrases = JSON.parse(translatedPhrases);
-    console.log(phrases[5]);
-    console.log(phrases[24]);
     if (firsttime == "true") {
 
         
