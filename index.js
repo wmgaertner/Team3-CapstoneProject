@@ -88,6 +88,7 @@ for (j = 1; j <= 19; j++){
 for (k = 1; k <= 20; k++){
   dashboardPhrasesToTranslate.push("high" + k.toString());
 };
+dashboardPhrasesToTranslate.push("notifTitle");
 
 // Showing dashboard page
 app.get("/dashboard", isLoggedIn, function (req, res) {

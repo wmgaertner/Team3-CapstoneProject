@@ -2,7 +2,7 @@
 //     "translateThis": ["about", "signuptitle", "back", "time", "blood_glucose_chart"]
 // };
 
-var time = " ";
+var time = "Time";
 
 function translate(translatedPhrases){
     var phrases = JSON.parse(translatedPhrases);
@@ -294,6 +294,7 @@ function clock() {
 
 function notifications(data, firsttime, translatedPhrases) {
     var phrases = JSON.parse(translatedPhrases);
+    var notifTitle = phrases[64];
     if (firsttime == "true") {
 
         
@@ -349,7 +350,7 @@ function notifications(data, firsttime, translatedPhrases) {
 
             var divclass = "notification is-danger is-light";
 
-            var message = "<u>FeedBack tip:</u> <br>"
+            var message = "<u>" + notifTitle + ":</u> <br>";
 
 
             if (diabetic === true) {
