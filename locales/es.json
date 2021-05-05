@@ -88,6 +88,8 @@
 	"high20": "Comer alimentos ricos en cromo y magnesio con regularidad puede ayudar a prevenir deficiencias y reducir el riesgo de problemas de azúcar en sangre.",
 	"notifTitle": "Realimentación",
 	"revealPass": "Mostrar Contraseña",
-	"aboutUs": "Sobre Nosotros"
-
+	"aboutUs": "Sobre Nosotros",
+	"aboutBodyp1": "¡Hola! Somos Team3 y este es nuestro proyecto de programación culminante.",
+	"aboutBodyp2": "Con la tarea de crear una aplicación simple y fácil de usar para rastrear la glucosa en sangre, para nuestro proyecto de programación final en Wake Technical Community College, nos sumergimos para crear el rastreador más simple y fácil que existe. Muchas personas todavía luchan con el uso de la tecnología. Nuestro objetivo aquí era crear una aplicación que funcionara de la manera más sencilla posible para reducir las barreras para estas personas. GlucoCheck es gratuito, sencillo y no tiene funciones intrusivas. Controlar sus niveles de glucosa en sangre ya es bastante difícil. ¡Prueba GlucoCheck! ¡Esté bien, conozca su BGL!",
+	"contact": "Contacta con Nosotros"
 }
