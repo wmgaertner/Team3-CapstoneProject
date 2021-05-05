@@ -342,7 +342,6 @@ function notifications(data, firsttime, translatedPhrases) {
         }
 
 
-
         document.addEventListener('DOMContentLoaded', function () {
 
 

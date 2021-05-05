@@ -91,5 +91,21 @@
 	"aboutUs": "About Us",
 	"aboutBodyp1": "Hi! We are Team3 and this is our capstone programming project.",
 	"aboutBodyp2": "Tasked with creating a simple, easy to use app to track blood-glucose, for our capstone programming project at Wake Technical Community College, we dove in to create the simplest, easiest tracker around. Many individuals still struggle with the use of technology. Our goal here was to create an application that functioned as simply as possible to reduce the barriers to these individuals. GlucoCheck is free, simple and has no intrusive features. Managing your blood-glucose levels is hard enough. Give GlucoCheck a try! Be well, know your BGL!",
-	"contact": "Contact Us"
+	"contact": "Contact Us",
+	"FAQp1": "Frequently Asked Questions",
+	"FAQp2": "How to navigate the registration process",
+	"FAQp3": "The following are steps to register an account with GlucoCheck:",
+	"FAQp4": "1.  Navigate to the Sign-Up Form.\n 2.  Enter your first name.\n 3.  Enter your last name.\n 4.  Enter your email address.\n 5.  Enter your age.\n6.  Use the drop-down menu to select your diagnosis.\n7.  Enter a username.\n8.  Enter a password.\n9.  Click \u201CCreate Account\u201D.\n10.  The previous step will take you to the login screen.",
+	"FAQp5": "How to navigate the login screen",
+	"FAQp6": "The following are steps to login to GlucoCheck:",
+	"FAQp7": "1.Enter your username.\n2.Enter your password.\n3.Click “Login”.\n4.The previous step will take you to the dashboard.",
+	"FAQp8": "How to log your glucose levels",
+	"FAQp9": "The following are steps to log your glucose levels:",
+	"FAQp10": "1.Enter your glucose level in the designated location.\n2.Click “Submit”.\n3.Your glucose level is now logged on the tracker and shows at the bottom of the calendar.",
+	"FAQp11": "How to log your carb intake in addition to your glucose level",
+	"FAQp12": "The following are steps to log your carb intake in addition to your glucose level:",
+	"FAQp13": "1.Enter the name of the food(s) consumed in the food search bar.\n2.Select the item that best matches your entry.\n3.Your entry will be logged on the screen under the food search bar.\n4.Should you enter a food mistakenly, simply hit the “x” by the food to remove the selection.\n5.Enter your glucose level in the designated location.\n6.Click “Submit”.\n7.Your glucose level and carb intake are now logged on the tracker and shows at the bottom of the calendar.",
+	"FAQp14": "How to access the multilingual function to view the application in Spanish",
+	"FAQp15": "The following are steps to access the multilingual function to view the application in Spanish:",
+	"FAQp16": "1.At the top of the Sign Up/Login page, hover your mouse over “Choose Language”.\n2.Choose “Spanish” from the drop-down menu that appears.\n3.Once you click on “Spanish”, you will be taken to the Spanish version of the application.\n4.Once here, simply follow the previous instructions for account creation, login and tracking data."
 }
