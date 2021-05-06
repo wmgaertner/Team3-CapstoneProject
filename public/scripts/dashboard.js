@@ -55,7 +55,10 @@ function graph(data, translatedPhrases) {
         
         dateControl.value = dateFormat;
 
-        dateControl.setAttribute('min', jsonObject['dates'][0]['date'])
+        if (jsonObject.dates[0] != undefined){
+
+            dateControl.setAttribute('min', jsonObject.dates[0].date)
+        }
         dateControl.setAttribute('max', dateFormat);
 
 
