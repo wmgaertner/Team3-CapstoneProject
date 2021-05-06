@@ -296,13 +296,13 @@ function clock() {
 
 
 function notifications(data, firsttime, translatedPhrases) {
-    var phrases = JSON.parse(translatedPhrases);
-    var notifTitle = phrases[64];
-
     
 
-
     if (firsttime == "true") {
+
+        var phrases = JSON.parse(translatedPhrases);
+
+        var notifTitle = phrases[64];
 
         
         jsonObject = JSON.parse(data);
@@ -331,29 +331,42 @@ function notifications(data, firsttime, translatedPhrases) {
         const diabetic = jsonObject['diabetic'];
         const glucoselevel = jsonGlucose.slice(-1)[0];
 
-        if (glucoselevel != undefined){
 
         
+
+        var low = [];
+        var normal = [];
+        var high = [];
+
+        phrases.forEach((phrase,phraseindex) => {
+
+            if (phraseindex >= 5 && phraseindex <= 24){
+                low.push(phrase);
+            }
+            else if (phraseindex >= 25 && phraseindex <= 43){
+                normal.push(phrase);
+            }
+            else if (phraseindex >= 44 && phraseindex <= 63){
+                high.push(phrase);
+            }
+
+            
+        });
+
+
+        console.log(low);
+        console.log(normal);
+        console.log(high);
+        
+        
+
+        if (glucoselevel != undefined){
+
+            
     
-            var low = [];
-            for (i = 5; i <= 24; i++) {
-                low.push(phrases[i]);
-            }
-
-
-            var normal = [];
-            for (j = 25; j <=43; j++){
-                low.push(phrases[j]);
-            }
-
-            var high = [];
-            for (k = 44; k <=63; k++){
-                high.push(phrases[k]);
-            }
-
-
             document.addEventListener('DOMContentLoaded', function () {
 
+                
 
                 const notification = document.getElementById('notification');
 
