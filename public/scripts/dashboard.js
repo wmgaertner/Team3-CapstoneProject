@@ -295,6 +295,10 @@ function clock() {
 function notifications(data, firsttime, translatedPhrases) {
     var phrases = JSON.parse(translatedPhrases);
     var notifTitle = phrases[64];
+
+    
+
+
     if (firsttime == "true") {
 
         
@@ -324,131 +328,141 @@ function notifications(data, firsttime, translatedPhrases) {
         const diabetic = jsonObject['diabetic'];
         const glucoselevel = jsonGlucose.slice(-1)[0];
 
+        if (glucoselevel != undefined){
 
-        var low = [];
-        for (i = 5; i <= 24; i++) {
-            low.push(phrases[i]);
-        }
-
-
-        var normal = [];
-        for (j = 25; j <=43; j++){
-            low.push(phrases[j]);
-        }
-
-        var high = [];
-        for (k = 44; k <=63; k++){
-            high.push(phrases[k]);
-        }
+        
+        
 
 
-        document.addEventListener('DOMContentLoaded', function () {
-
-
-            const notification = document.getElementById('notification');
-
-            var divclass = "notification is-danger is-light";
-
-            var message = "<u>" + notifTitle + ":</u> <br>";
-
-
-            if (diabetic === true) {
-
-                //high
-                if (glucoselevel >= 200) {
-                    notification.innerHTML =
-                        `
-                            <div class="${divclass}">
-                                <button class="delete"></button>
-                                ${message}
-                                ${high[Math.floor(Math.random() * high.length)]}   
-                                            
-                            </div>
-
-                        `
-                }
-
-                //normal
-                else if (glucoselevel >= 127) {
-                    notification.innerHTML =
-                        `
-                            <div class="${divclass}">
-                                <button class="delete"></button>
-                                ${message}
-                                ${normal[Math.floor(Math.random() * normal.length)]}   
-                                            
-                            </div>
-
-                        `
-                }
-
-                //low
-                else if (glucoselevel <= 126) {
-                    notification.innerHTML =
-                        `
-                            <div class="${divclass}">
-                                <button class="delete"></button>
-                                ${message}
-                                ${low[Math.floor(Math.random() * low.length)]}   
-                                            
-                            </div>
-
-                        `
-                }
+            var low = [];
+            for (i = 5; i <= 24; i++) {
+                low.push(phrases[i]);
             }
 
-            else if (diabetic === false) {
-                //high
-                if (glucoselevel >= 140) {
-                    notification.innerHTML =
-                        `
-                            <div class="${divclass}">
-                                <button class="delete"></button>
-                                ${message}
-                                ${high[Math.floor(Math.random() * high.length)]}   
-                                            
-                            </div>
 
-                        `
-                }
-
-                //normal
-                else if (glucoselevel >= 81) {
-                    notification.innerHTML =
-                        `
-                            <div class="${divclass}">
-                                <button class="delete"></button>
-                                ${message}
-                                ${normal[Math.floor(Math.random() * normal.length)]}   
-                                            
-                            </div>
-
-                        `
-                }
-
-                //low
-                else if (glucoselevel <= 80) {
-                    notification.innerHTML =
-                        `
-                            <div class="${divclass}">
-                                <button class="delete"></button>
-                                ${message}
-                                ${low[Math.floor(Math.random() * low.length)]}   
-                                            
-                            </div>
-
-                        `
-                }
+            var normal = [];
+            for (j = 25; j <=43; j++){
+                low.push(phrases[j]);
             }
 
-            var closebtns = notification.getElementsByClassName('delete');
-
-            for (i of closebtns) {
-                i.addEventListener("click", function () {
-                    this.parentNode.remove();
-                });
+            var high = [];
+            for (k = 44; k <=63; k++){
+                high.push(phrases[k]);
             }
-        })
+
+
+            document.addEventListener('DOMContentLoaded', function () {
+
+
+                const notification = document.getElementById('notification');
+
+                var divclass = "notification is-danger is-light";
+
+                var message = "<u>" + notifTitle + ":</u> <br>";
+
+
+                if (diabetic === true) {
+
+                    //high
+                    if (glucoselevel >= 200) {
+                        notification.innerHTML =
+                            `
+                                <div class="${divclass}">
+                                    <button class="delete"></button>
+                                    ${message}
+                                    ${high[Math.floor(Math.random() * high.length)]}   
+                                                
+                                </div>
+
+                            `
+                    }
+
+                    //normal
+                    else if (glucoselevel >= 127) {
+                        notification.innerHTML =
+                            `
+                                <div class="${divclass}">
+                                    <button class="delete"></button>
+                                    ${message}
+                                    ${normal[Math.floor(Math.random() * normal.length)]}   
+                                                
+                                </div>
+
+                            `
+                    }
+
+                    //low
+                    else if (glucoselevel <= 126) {
+                        notification.innerHTML =
+                            `
+                                <div class="${divclass}">
+                                    <button class="delete"></button>
+                                    ${message}
+                                    ${low[Math.floor(Math.random() * low.length)]}   
+                                                
+                                </div>
+
+                            `
+                    }
+                }
+
+                else if (diabetic === false) {
+                    //high
+                    if (glucoselevel >= 140) {
+                        notification.innerHTML =
+                            `
+                                <div class="${divclass}">
+                                    <button class="delete"></button>
+                                    ${message}
+                                    ${high[Math.floor(Math.random() * high.length)]}   
+                                                
+                                </div>
+
+                            `
+                    }
+
+                    //normal
+                    else if (glucoselevel >= 81) {
+                        notification.innerHTML =
+                            `
+                                <div class="${divclass}">
+                                    <button class="delete"></button>
+                                    ${message}
+                                    ${normal[Math.floor(Math.random() * normal.length)]}   
+                                                
+                                </div>
+
+                            `
+                    }
+
+                    //low
+                    else if (glucoselevel <= 80) {
+                        notification.innerHTML =
+                            `
+                                <div class="${divclass}">
+                                    <button class="delete"></button>
+                                    ${message}
+                                    ${low[Math.floor(Math.random() * low.length)]}   
+                                                
+                                </div>
+
+                            `
+                    }
+                }
+
+                var closebtns = notification.getElementsByClassName('delete');
+
+                for (i of closebtns) {
+                    i.addEventListener("click", function () {
+                        this.parentNode.remove();
+                    });
+                }
+
+            })
+
+
+        }
+
     }
 };
 
