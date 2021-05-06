@@ -334,9 +334,7 @@ function notifications(data, firsttime, translatedPhrases) {
         if (glucoselevel != undefined){
 
         
-        
-
-
+    
             var low = [];
             for (i = 5; i <= 24; i++) {
                 low.push(phrases[i]);
