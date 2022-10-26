@@ -1,5 +1,6 @@
 //global constants
 const express = require("express");
+require('dotenv').config();
 const { MongooseDocument } = require("mongoose");
  mongoose = require("mongoose");
  passport = require("passport");
@@ -21,14 +22,13 @@ const { MongooseDocument } = require("mongoose");
 //global variables
 var app = express();
 
-
 //middleware
 //==========================================================
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useFindAndModify", false);
 mongoose.set("useCreateIndex", true);
 mongoose.set("useUnifiedTopology", true);
-mongoose.connect("mongodb+srv://abc:test123@cluster0.7bifm.mongodb.net/Cluster0?retryWrites=true&w=majority");
+mongoose.connect(process.env.DATABASE_URL);
 
 
 i18n.configure({
